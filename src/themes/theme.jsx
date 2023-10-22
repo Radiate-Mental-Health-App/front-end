@@ -108,7 +108,7 @@ const globalStyles = extendTheme({
     global: (props) => ({
       body: {
         overflowX: "hidden",
-        bg: mode("#fff", "navy.900")(props),
+        bg: mode("gray.50", "navy.900")(props),
         fontFamily: "Inter",
         letterSpacing: "wide",
       },
