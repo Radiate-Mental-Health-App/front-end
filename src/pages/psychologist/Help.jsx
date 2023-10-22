@@ -3,13 +3,13 @@ import {
   Heading,
 } from '@chakra-ui/react'
 
-function PageB() {
+function Help() {
   
   return (
     <Center w='100%' h='100%'>
-      <Heading size='xl' color='gray.400'>PageB</Heading>
+      <Heading size='xl' color='gray.400'>Help</Heading>
     </Center>
   )
 }
 
-export default PageB
+export default Help

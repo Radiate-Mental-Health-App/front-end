@@ -1,13 +1,13 @@
 import { Center, Heading } from "@chakra-ui/react";
 
-function AdminDashboard() {
+function Schedule() {
   return (
     <Center w="100%" h="100%">
       <Heading size="xl" color="gray.400">
-        Admin Home
+        Schedule
       </Heading>
     </Center>
   );
 }
 
-export default AdminDashboard;
+export default Schedule;

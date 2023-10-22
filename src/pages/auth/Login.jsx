@@ -4,32 +4,32 @@ import {
   Button,
   FormControl,
   Input,
+  Image,
   Text,
   VStack,
 } from "@chakra-ui/react";
-// import Logo from "../assets/Long.png";
+
+import Logo from "../../assets/radiate-logo.png";
 
 import { userState } from "../../features/user-auth/AuthAtoms";
 import { useRecoilState } from "recoil";
-import { redirect } from "react-router-dom";
+
+import { useForm } from "react-hook-form";
+import { redirect } from "react-router";
 
 const Login = () => {
+  const { register, handleSubmit } = useForm();
+
   const [user, setUser] = useRecoilState(userState);
-  const [loggedIn, setLoggedIn] = useState(false);
 
-  const loginHandler = () => {
+  const onSubmit = (data) => {
     setUser({
-      id: 1,
-      name: "Umar",
+      email: data.email,
+      password: data.password,
     });
-
     console.log(user);
-    setLoggedIn(true);
+    redirect("/u");
   };
-
-  if (loggedIn) {
-    return redirect("/u");
-  }
 
   return (
     <div className="login">
@@ -42,49 +42,58 @@ const Login = () => {
       >
         <Box
           w={["full", "md"]}
-          p={[8, 10]}
+          p="50px 50px"
           bg="neutralW"
           borderRadius="20"
-          boxShadow="base"
+          boxShadow="lg"
         >
-          <VStack spacing={1} align="flex-start" w="full">
-            <VStack spacing={1} align={["flex-start", " center"]} w="full">
-              {/* <Image src={Logo} mb="24px" /> */}
-              <Text fontSize="30px" as="b">
-                Sign In
-              </Text>
-              <Text> Enter your email and password to login</Text>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <VStack spacing={1} align="flex-start" w="full">
+              <VStack spacing={1} align={["flex-start", " center"]} w="full">
+                <Image src={Logo} height="60px" mb="48px" />
+                <Text fontSize="30px" as="b">
+                  Sign In
+                </Text>
+                <Text> Enter your email and password to login</Text>
+              </VStack>
             </VStack>
-          </VStack>
 
-          <FormControl mb="20px" mt="32px">
-            <Input
-              type="email"
-              variant="outline"
-              rounded="10"
-              placeholder="Email Address"
-            />
-          </FormControl>
+            <FormControl mb="20px" mt="32px">
+              <Input
+                type="email"
+                variant="outline"
+                rounded="10"
+                placeholder="Email Address"
+                {...register("email", {
+                  required: true,
+                  pattern: /^\S+@\S+$/i,
+                })}
+              />
+            </FormControl>
 
-          <FormControl mb="16px">
-            <Input
-              type="password"
-              variant="outline"
-              rounded="10"
-              placeholder="Password"
-            />
-          </FormControl>
+            <FormControl mb="16px">
+              <Input
+                type="password"
+                variant="outline"
+                rounded="10"
+                placeholder="Password"
+                {...register("password", {
+                  required: true,
+                })}
+              />
+            </FormControl>
 
-          <Button
-            w="full"
-            mt="20px"
-            colorScheme="orange"
-            bgColor="orange2"
-            mb="10px"
-            onClick={loginHandler}
-          >
-            Login
-          </Button>
+            <Button
+              type="submit"
+              w="full"
+              mt="20px"
+              colorScheme="orange"
+              bgColor="orange2"
+              mb="10px"
+            >
+              Login
+            </Button>
+          </form>
         </Box>
       </Box>
     </div>

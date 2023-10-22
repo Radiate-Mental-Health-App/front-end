@@ -1,4 +1,3 @@
-
 import { Outlet } from "react-router-dom";
 
 import Sidebar from "../components/sidebar";
@@ -8,10 +7,10 @@ import "../themes/stylesheet.css";
 
 import { Flex } from "@chakra-ui/react";
 
-function SidebarLayout() {
+function SidebarLayout({ menu }) {
   return (
     <Flex flexDirection="row">
-      <Sidebar />
+      <Sidebar menu={menu} />
       <Flex flexDirection="column" w="100%">
         <Navbar />
         <Outlet />

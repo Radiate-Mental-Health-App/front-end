@@ -6,14 +6,9 @@ import { useRecoilState } from "recoil";
 const PrivateRoute = (Component) => {
   const [user, setUser] = useRecoilState(userState);
 
-  setUser({
-    id: 1,
-    name: "Umar",
-  });
-
   console.log("Tes: " + user);
 
-  if (!user) {
+  if (user) {
     return <Component />;
   }
 

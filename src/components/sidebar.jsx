@@ -1,23 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { Icon } from "@chakra-ui/react";
 import RadiateLogo from "../assets/radiate-logo-white.png";
-import * as Icons from "../assets/icons";
 
 import { Flex, Box, List, ListItem, Center, HStack } from "@chakra-ui/react";
 
-const Menus = [
-  { title: "Home", link: "/u/", icon: Icons.HomeIcon },
-  { title: "Mood Tracker", link: "/u/mood-tracker", icon: Icons.MoodIcon },
-  { title: "Journal", link: "/u/journal", icon: Icons.JournalIcon },
-  { title: "Counseling ", link: "/u/counseling", icon: Icons.CounselingIcon },
-  {
-    title: "Wellness Center",
-    link: "/u/wellness-center",
-    icon: Icons.WellnessIcon,
-  },
-];
-
-function Sidebar() {
+function Sidebar({ menu }) {
   return (
     <>
       <Flex color="white" className="sidebar">
@@ -26,7 +13,7 @@ function Sidebar() {
             <img src={RadiateLogo} alt="Radiate Logo" />
           </Center>
           <List spacing={2}>
-            {Menus.map((Menu, index) => {
+            {menu.map((Menu, index) => {
               return (
                 <ListItem
                   key={index}

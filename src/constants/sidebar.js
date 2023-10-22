@@ -1,17 +1,27 @@
-import * as Icons from '../assets/icons';
+import * as Icons from "../assets/icons";
 
 export const USER_MENU = [
-  { title: "Home", link: "/", icon: Icons.HomeIcon },
-  { title: "Mood Tracker", link: "/mood-tracker", icon: Icons.MoodIcon },
-  { title: "Journal", link: "/journal", icon: Icons.JournalIcon },
-  { title: "Counseling ", link: "/counseling", icon: Icons.CounselingIcon  },
-  { title: "Wellness Center", link: "/wellness-center", icon: Icons.WellnessIcon },
-]
+  { title: "Home", link: "/u", icon: Icons.HomeIcon },
+  { title: "Mood Tracker", link: "/u/mood-tracker", icon: Icons.MoodIcon },
+  { title: "Journal", link: "/u/journal", icon: Icons.JournalIcon },
+  { title: "Counseling ", link: "/u/counseling", icon: Icons.CounselingIcon },
+  {
+    title: "Wellness Center",
+    link: "/u/wellness-center",
+    icon: Icons.WellnessIcon,
+  },
+];
 
-export const PSYCHOLOGIST_MENUS =[
-  
-]
+export const PSYCHOLOGIST_MENU = [
+  { title: "Home", link: "/p", icon: Icons.HomeIcon },
+  { title: "Schedule", link: "/p/schedules", icon: Icons.ScheduleIcon },
+  { title: "Appointment", link: "/p/appointments", icon: Icons.AppoinmentIcon },
+  { title: "Profile", link: "/p/profile", icon: Icons.ProfileIcon },
+  { title: "Help", link: "/p/help", icon: Icons.HelpIcon },
+];
 
-export const ADMIN_MENUS = [
-
-]
+export const ADMIN_MENU = [
+  { title: "Home", link: "/a", icon: Icons.HomeIcon },
+  { title: "Users", link: "/a/users", icon: Icons.UsersIcon },
+  { title: "Resources", link: "/a/resources", icon: Icons.ResourcesIcon },
+];
