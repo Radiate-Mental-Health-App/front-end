@@ -11,7 +11,7 @@ import {
 
 import Logo from "../../assets/radiate-logo.png";
 
-import { userState } from "../../features/user-auth/AuthAtoms";
+import { userState } from "../../components/PrivateRoutes/AuthAtoms";
 import { useRecoilState } from "recoil";
 
 import { useForm } from "react-hook-form";

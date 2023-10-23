@@ -5,30 +5,31 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 
-import UserDashboard from "../pages/user/MoodTracker.jsx";
-import MoodTracker from "../pages/user/MoodTracker.jsx";
-import Journal from "../pages/user/Journal.jsx";
-import Counseling from "../pages/user/Counseling.jsx";
-import WellnessCenter from "../pages/user/WellnessCenter.jsx";
+import UserDashboard from "@/pages/user/mood-tracker/MoodTracker.jsx";
+import MoodTracker from "@/pages/user/mood-tracker/MoodTracker.jsx";
+import Journal from "@/pages/user/journal/Journal.jsx";
+import Counseling from "@/pages/user/counseling/Counseling.jsx";
+import WellnessCenter from "@/pages/user/wellness-center/WellnessCenter.jsx";
 
-import PsychologistDashboard from "../pages/psychologist/PsychologistDashboard.jsx";
-import Appointment from "../pages/psychologist/Appointment.jsx";
-import Schedule from "../pages/psychologist/Schedule.jsx";
-import Profile from "../pages/psychologist/Profile.jsx";
-import Help from "../pages/psychologist/Help.jsx";
+import PsychologistDashboard from "@/pages/psychologist/default";
+import Schedule from "@/pages/psychologist/marketplace";
+import Appointment from "@/pages/psychologist/dataTables";
+import Profile from "@/pages/psychologist/Profile.jsx";
+import Help from "@/pages/psychologist/Help.jsx";
 
-import AdminDashboard from "../pages/admin/AdminDashboard.jsx";
-import User from "../pages/admin/User.jsx";
-import Resource from "../pages/admin/Resource.jsx";
+import AdminDashboard from "@/pages/admin/home/Home";
+import User from "@/pages/admin/list/List";
+import Resource from "@/pages/admin/Resource.jsx";
 
-import SidebarLayout from "../layouts/SidebarLayout.jsx";
-import PrivateRoute from "../components/PrivateRoute.jsx";
-import Login from "../pages/auth/Login.jsx";
+import SidebarLayout from "@/layouts/SidebarLayout.jsx";
+import PrivateRoute from "@/components/PrivateRoutes/PrivateRoute.jsx";
+import Login from "@/pages/auth/Login.jsx";
+
 import {
   ADMIN_MENU,
   PSYCHOLOGIST_MENU,
   USER_MENU,
-} from "../constants/sidebar.js";
+} from "@/constants/sidebar.js";
 
 const routes = createRoutesFromElements(
   <>
