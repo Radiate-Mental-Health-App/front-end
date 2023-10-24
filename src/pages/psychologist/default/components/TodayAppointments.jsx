@@ -5,8 +5,7 @@ import {
     CardBody,
     CardHeader,
     HStack,
-    Heading,
-    Stack
+    Heading
 } from "@chakra-ui/react";
 
 // Custom components import Card from "@/components/card/Card.jsx";

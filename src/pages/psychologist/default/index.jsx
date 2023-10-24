@@ -24,7 +24,7 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 
 // Custom components
-import TotalSpent from "./components/TotalSpent";
+import TotalSessions from "./components/TotalSessions";
 import AppointmentsTable from "../dataTables/components/AppointmentsTable";
 import { columnsDataComplex } from "./variables/columnsData";
 import tableDataComplex from "./variables/tableDataComplex.json";
@@ -49,7 +49,7 @@ export default function UserReports() {
         mb="20px"
       >
         <TodayAppointments />
-        <TotalSpent />
+        <TotalSessions />
       </SimpleGrid>
 
       <Box>
