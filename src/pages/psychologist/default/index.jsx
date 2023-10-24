@@ -24,7 +24,6 @@
 import { Box, SimpleGrid } from "@chakra-ui/react";
 
 // Custom components
-import React from "react";
 import TotalSpent from "./components/TotalSpent";
 import AppointmentsTable from "../dataTables/components/AppointmentsTable";
 import { columnsDataComplex } from "./variables/columnsData";
