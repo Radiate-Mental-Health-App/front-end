@@ -1,4 +1,6 @@
 import {
+  Card,
+  CardBody,
   Flex,
   Table,
   Icon,
@@ -9,6 +11,8 @@ import {
   Thead,
   Tr,
   useColorModeValue,
+  CardHeader,
+  Heading,
 } from "@chakra-ui/react";
 import React, { useMemo } from "react";
 
@@ -20,7 +24,6 @@ import {
 } from "react-table";
 
 // Custom components
-import Card from "@/components/card/Card";
 import Menu from "@/components/menu/MainMenu";
 
 // Assets
@@ -60,18 +63,11 @@ export default function ColumnsTable(props) {
       px="0px"
       overflowX={{ sm: "scroll", lg: "hidden" }}
     >
-      <Flex px="25px" justify="space-between" mb="10px" align="center">
-        <Text
-          color={textColor}
-          fontSize="22px"
-          fontWeight="700"
-          AGE
-          lineHeight="100%"
-        >
-          Appointments
-        </Text>
-        <Menu />
-      </Flex>
+      <CardHeader>
+      <Heading size='md'>Appointments</Heading>
+      </CardHeader>
+      
+      <CardBody>
       <Table {...getTableProps()} variant="simple" color="gray.500" mb="24px">
         <Thead>
           {headerGroups.map((headerGroup, index) => (
@@ -190,6 +186,7 @@ export default function ColumnsTable(props) {
           })}
         </Tbody>
       </Table>
+      </CardBody>
     </Card>
   );
 }

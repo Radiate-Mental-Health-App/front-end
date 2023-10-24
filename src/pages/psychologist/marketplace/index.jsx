@@ -27,7 +27,7 @@ import { Stack, Container, VStack } from "@chakra-ui/react";
 
 // Assets
 import EventCalendar from "@/components/calendar/MiniCalendar";
-import TodayAppointments from "../default/components/TodayAppointments";
+import TodayAppointments from "../default/components/TodaySessions";
 import Schedule from "../default/components/Schedule";
 
 export default function Marketplace() {

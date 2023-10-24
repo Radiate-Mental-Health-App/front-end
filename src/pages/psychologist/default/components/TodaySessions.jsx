@@ -20,7 +20,7 @@ export default function TodaySessions(props) {
         <Card justifyContent="center" align="left" w="100%" mb="0px" {...rest}>
             <CardHeader>
                 <HStack justifyContent={"space-between"}>
-                    <Heading size='lg'>Today Sessions</Heading>
+                    <Heading size='md'>Today Sessions</Heading>
                     <Button fontWeight={500} size="sm" variant="outline">
                         View all
                     </Button>

@@ -28,7 +28,7 @@ import TotalSessions from "./components/TotalSessions";
 import AppointmentsTable from "../dataTables/components/AppointmentsTable";
 import { columnsDataComplex } from "./variables/columnsData";
 import tableDataComplex from "./variables/tableDataComplex.json";
-import TodayAppointments from "./components/TodayAppointments";
+import TodaySessions from "./components/TodaySessions";
 
 export default function UserReports() {
   return (
@@ -48,7 +48,7 @@ export default function UserReports() {
         gap="20px"
         mb="20px"
       >
-        <TodayAppointments />
+        <TodaySessions />
         <TotalSessions />
       </SimpleGrid>
 
