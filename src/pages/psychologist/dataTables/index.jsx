@@ -21,29 +21,20 @@
 */
 
 // Chakra imports
-import { Box } from "@chakra-ui/react";
+import {Box} from "@chakra-ui/react";
 import AppointmentsTable from "@/pages/psychologist/dataTables/components/AppointmentsTable";
-import { columnsDataComplex } from "@/pages/psychologist/default/variables/columnsData";
+import {columnsDataComplex} from "@/pages/psychologist/default/variables/columnsData";
 import tableDataComplex from "@/pages/psychologist/default/variables/tableDataComplex.json";
 
-import React from "react";
-
 export default function Settings() {
-  // Chakra Color Mode
-  return (
-    <Box
-      pt={{
-        base: "130px",
-        md: "80px",
-        xl: "80px",
-      }}
-    >
-      <Box>
-        <AppointmentsTable
-          columnsData={columnsDataComplex}
-          tableData={tableDataComplex}
-        />
-      </Box>
-    </Box>
-  );
+    // Chakra Color Mode
+    return (
+        <Box p={"32px"}>
+            <Box>
+                <AppointmentsTable
+                    columnsData={columnsDataComplex}
+                    tableData={tableDataComplex}/>
+            </Box>
+        </Box>
+    );
 }

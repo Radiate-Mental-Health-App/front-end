@@ -33,11 +33,7 @@ import TodaySessions from "./components/TodaySessions";
 export default function UserReports() {
   return (
     <Box
-      pt={{
-        base: "130px",
-        md: "80px",
-        xl: "80px",
-      }}
+      p="32px"
     >
       <SimpleGrid
         columns={{

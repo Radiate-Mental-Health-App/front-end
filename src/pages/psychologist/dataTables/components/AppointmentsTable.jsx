@@ -14,7 +14,7 @@ import {
   CardHeader,
   Heading,
 } from "@chakra-ui/react";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import {
   useGlobalFilter,
@@ -22,9 +22,6 @@ import {
   useSortBy,
   useTable,
 } from "react-table";
-
-// Custom components
-import Menu from "@/components/menu/MainMenu";
 
 // Assets
 import { MdCheckCircle, MdCancel, MdOutlineError } from "react-icons/md";

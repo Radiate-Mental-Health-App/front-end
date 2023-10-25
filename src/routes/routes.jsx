@@ -12,7 +12,7 @@ import Counseling from "@/pages/user/counseling/Counseling.jsx";
 import WellnessCenter from "@/pages/user/wellness-center/WellnessCenter.jsx";
 
 import PsychologistDashboard from "@/pages/psychologist/default";
-import Schedule from "@/pages/psychologist/marketplace";
+import Schedule from "@/pages/psychologist/schedules";
 import Appointment from "@/pages/psychologist/dataTables";
 import Profile from "@/pages/psychologist/Profile.jsx";
 import Help from "@/pages/psychologist/Help.jsx";
@@ -22,7 +22,6 @@ import User from "@/pages/admin/list/List";
 import Resource from "@/pages/admin/Resource.jsx";
 
 import SidebarLayout from "@/layouts/SidebarLayout.jsx";
-import PrivateRoute from "@/components/PrivateRoutes/PrivateRoute.jsx";
 import Login from "@/pages/auth/Login.jsx";
 
 import {

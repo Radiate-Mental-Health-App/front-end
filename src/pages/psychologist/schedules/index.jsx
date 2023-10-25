@@ -20,34 +20,24 @@
 
 */
 
-import React from "react";
-
 // Chakra imports
-import { Stack, Container, VStack } from "@chakra-ui/react";
+import {Stack, VStack} from "@chakra-ui/react";
 
 // Assets
 import EventCalendar from "@/components/calendar/MiniCalendar";
 import TodayAppointments from "../default/components/TodaySessions";
 import Schedule from "../default/components/Schedule";
 
-export default function Marketplace() {
-  return (
-    <Stack
-      pt={{
-        base: "180px",
-        md: "80px",
-        xl: "80px",
-      }}
-    >
-      <Stack direction={"row"}>
-        <VStack spacing={4} align="stretch">
-          <EventCalendar />
-          <TodayAppointments />
-        </VStack>
-        <Container>
-          <Schedule />
-        </Container>
-      </Stack>
-    </Stack>
-  );
+export default function Schedules() {
+    return (
+        <Stack p={"32px"}>
+            <Stack direction={"row"} spacing={8}>
+                <VStack spacing={8} alignItems="stretch">
+                    <EventCalendar/>
+                    <TodayAppointments/>
+                </VStack>
+                <Schedule/>
+            </Stack>
+        </Stack>
+    );
 }
