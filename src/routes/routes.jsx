@@ -14,7 +14,7 @@ import WellnessCenter from "@/pages/user/wellness-center/WellnessCenter.jsx";
 import PsychologistDashboard from "@/pages/psychologist/default";
 import Schedule from "@/pages/psychologist/schedules";
 import Appointment from "@/pages/psychologist/dataTables";
-import Profile from "@/pages/psychologist/Profile.jsx";
+import Profile from "@/pages/psychologist/profile";
 import Help from "@/pages/psychologist/Help.jsx";
 
 import AdminDashboard from "@/pages/admin/home/Home";
