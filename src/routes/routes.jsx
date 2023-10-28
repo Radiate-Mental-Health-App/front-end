@@ -18,7 +18,8 @@ import Profile from "../pages/psychologist/Profile.jsx";
 import Help from "../pages/psychologist/Help.jsx";
 
 import AdminDashboard from "../pages/admin/AdminDashboard.jsx";
-import User from "../pages/admin/User.jsx";
+import User from "../pages/admin/user/UserList.jsx";
+import UserDetail from "../pages/admin/user/UserDetail.jsx";
 import Resource from "../pages/admin/Resource.jsx";
 
 import SidebarLayout from "../layouts/SidebarLayout.jsx";
@@ -49,6 +50,7 @@ const routes = createRoutesFromElements(
     <Route path="/a" element={<SidebarLayout menu={ADMIN_MENU} />}>
       <Route index element={<AdminDashboard />}></Route>
       <Route path="users" element={<User />}></Route>
+      <Route path=":id" element={<UserDetail />}></Route>
       <Route path="resources" element={<Resource />}></Route>
     </Route>
     <Route path="/login" element={<Login />}></Route>
