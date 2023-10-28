@@ -34,11 +34,8 @@ import avatar from "@/assets/img/avatars/avatar4.png";
 export default function Overview() {
     return (
         <Box
-            pt={{
-            base: "130px",
-            md: "80px",
-            xl: "80px"
-        }}>
+            padding={"32px"}
+        >
             {/* Main Fields */}
             <Grid
                 templateColumns={{
@@ -67,8 +64,7 @@ export default function Overview() {
                     base: "2 / 1 / 3 / 2",
                     lg: "1 / 2 / 2 / 3"
                 }}
-                    minH='365px'
-                    pe='20px'/>
+                    minH='365px'/>
             </Grid>
 
         </Box>

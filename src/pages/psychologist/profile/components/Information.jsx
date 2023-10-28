@@ -1,5 +1,5 @@
 // Chakra imports
-import { Box, Card, Text, useColorModeValue } from "@chakra-ui/react";
+import { Box, Card, CardBody, Text, useColorModeValue } from "@chakra-ui/react";
 
 export default function Information(props) {
   // eslint-disable-next-line react/prop-types
@@ -10,6 +10,7 @@ export default function Information(props) {
   const bg = useColorModeValue("white", "navy.700");
   return (
     <Card bg={bg} {...rest}>
+      <CardBody>
       <Box>
         <Text fontWeight='500' color={textColorSecondary} fontSize='sm'>
           {title}
@@ -18,6 +19,7 @@ export default function Information(props) {
           {value}
         </Text>
       </Box>
+      </CardBody>
     </Card>
   );
 }
