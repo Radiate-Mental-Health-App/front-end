@@ -20,12 +20,12 @@ import WonderfulIcon from "@/assets/mood-icons/5_wonderful.png";
 import { useDisclosure } from "@chakra-ui/react";
 
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 function MoodTracker() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
-  if (!token) navigate("/");
-  
+
   const moodLog = [
     {
       moodValue: "terrible",
@@ -86,6 +86,15 @@ function MoodTracker() {
   ];
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    if (!token) {
+      console.log("tidak ada token");
+      navigate("/");
+    } else {
+      console.log("ada token");
+    }
+  });
 
   return (
     <Flex p="32px" direction={"column"}>

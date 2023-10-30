@@ -19,6 +19,8 @@ import { useNavigate } from "react-router";
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  if (token) navigate("/u");
 
   // const [user, setUser] = useRecoilState(userState);
 

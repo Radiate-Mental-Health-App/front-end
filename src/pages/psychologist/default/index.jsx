@@ -29,12 +29,24 @@ import AppointmentsTable from "../dataTables/components/AppointmentsTable";
 import { columnsDataComplex } from "./variables/columnsData";
 import tableDataComplex from "./variables/tableDataComplex.json";
 import TodaySessions from "./components/TodaySessions";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 export default function UserReports() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if (!token) {
+      console.log("tidak ada token");
+      navigate("/");
+    } else {
+      console.log("ada token");
+    }
+  });
+  
   return (
-    <Box
-      p="32px"
-    >
+    <Box p="32px">
       <SimpleGrid
         columns={{
           base: 1,
