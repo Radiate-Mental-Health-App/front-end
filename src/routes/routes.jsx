@@ -52,7 +52,7 @@ const routes = createRoutesFromElements(
       <Route path="resources" element={<Resource />}></Route>
     </Route>
     <Route path="/login" element={<Login />}></Route>
-    <Route path="/" element={<Navigate to="/u" />}></Route>
+    <Route path="/" element={<Navigate to="/login" />}></Route>
   </>
 );
 

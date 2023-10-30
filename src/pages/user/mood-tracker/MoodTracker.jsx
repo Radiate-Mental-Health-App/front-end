@@ -19,7 +19,13 @@ import WonderfulIcon from "@/assets/mood-icons/5_wonderful.png";
 
 import { useDisclosure } from "@chakra-ui/react";
 
+import { useNavigate } from "react-router";
+
 function MoodTracker() {
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  if (!token) navigate("/");
+  
   const moodLog = [
     {
       moodValue: "terrible",
