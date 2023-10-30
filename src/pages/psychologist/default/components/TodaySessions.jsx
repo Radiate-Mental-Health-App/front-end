@@ -27,7 +27,11 @@ export default function TodaySessions(props) {
                 </HStack>
             </CardHeader>
 
-            <CardBody>
+            <CardBody  maxH="50vh"  overflowY="auto">
+                <Appointment/>
+                <Appointment/>
+                <Appointment/>
+                <Appointment/>
                 <Appointment/>
                 <Appointment/>
             </CardBody>
