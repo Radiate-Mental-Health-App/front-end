@@ -15,12 +15,12 @@ import Logo from "../../assets/radiate-logo.png";
 
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
-  if (token) navigate("/u");
+  const roles = localStorage.getItem("roles");
 
   // const [user, setUser] = useRecoilState(userState);
 
@@ -60,6 +60,18 @@ const Login = () => {
     // console.log(user);
     // redirect("/u");
   };
+
+  useEffect(() => {
+    if (roles == "user") {
+      navigate("/u");
+    } else if (roles == "psychologist") {
+      navigate("/p");
+    } else if (roles == "admin") {
+      navigate("/a");
+    } else {
+      console.log("sesi login habis");
+    }
+  });
 
   return (
     <div className="login">

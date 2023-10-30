@@ -25,6 +25,7 @@ import { useEffect } from "react";
 function MoodTracker() {
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
+  const roles = localStorage.getItem("roles");
 
   const moodLog = [
     {
@@ -92,9 +93,17 @@ function MoodTracker() {
       console.log("tidak ada token");
       navigate("/");
     } else {
-      console.log("ada token");
+      if (roles == "user") {
+        navigate("/u");
+      } else if (roles == "psychologist") {
+        navigate("/p");
+      } else if (roles == "admin") {
+        navigate("/a");
+      } else {
+        console.log("tidak ada role");
+      }
     }
-  });
+  }, []);
 
   return (
     <Flex p="32px" direction={"column"}>
