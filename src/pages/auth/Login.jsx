@@ -25,7 +25,7 @@ const Login = () => {
   // const [user, setUser] = useRecoilState(userState);
 
   const onSubmit = async (data) => {
-    const user = {
+    const dataForm = {
       email: data.email,
       password: data.password,
     };
@@ -34,7 +34,7 @@ const Login = () => {
       const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(user),
+        body: JSON.stringify(dataForm),
       });
 
       const data = await response.json();
@@ -136,6 +136,10 @@ const Login = () => {
               Login
             </Button>
           </form>
+
+          <Button colorScheme="blue" onClick={() => navigate("/register")}>
+            ke halaman register
+          </Button>
         </Box>
       </Box>
     </div>
