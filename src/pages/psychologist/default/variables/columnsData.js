@@ -8,8 +8,8 @@ export const columnsDataComplex = [
     accessor: "age",
   },
   {
-    Header: "METHOD",
-    accessor: "method",
+    Header: "PROBLEMS",
+    accessor: "problems",
   },
   {
     Header: "DATE",
@@ -20,29 +20,15 @@ export const columnsDataComplex = [
     accessor: "time",
   },
   {
-    Header: "TOPIC",
-    accessor: "topic",
-  },
-  {
-    Header: "STATUS",
-    accessor: "status",
-  },
-];
-export const columnsDataCheck = [
-  {
-    Header: "NAME",
-    accessor: "name",
+    Header: "METHOD",
+    accessor: "method",
   },
   {
     Header: "STATUS",
     accessor: "status",
   },
   {
-    Header: "DATE",
-    accessor: "date",
-  },
-  {
-    Header: "PROGRESS",
-    accessor: "progress",
-  },
+    Header: "ACTION",
+    accessor: "action",
+  }
 ];
