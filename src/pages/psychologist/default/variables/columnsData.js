@@ -20,8 +20,8 @@ export const columnsDataComplex = [
     accessor: "time",
   },
   {
-    Header: "METHOD",
-    accessor: "method",
+    Header: "PACKAGE",
+    accessor: "package",
   },
   {
     Header: "STATUS",

@@ -13,8 +13,6 @@ import {
   useColorModeValue,
   CardHeader,
   Heading,
-  Button,
-  Stack,
   IconButton,
   HStack,
   Badge,
@@ -30,8 +28,7 @@ import {
 
 // Assets
 import { MdCheckCircle, MdCancel, MdOutlineError } from "react-icons/md";
-import { IoInformation, IoInformationOutline } from "react-icons/io5";
-import { EditIcon, SearchIcon, ViewIcon } from "@chakra-ui/icons";
+import { EditIcon, InfoIcon } from "@chakra-ui/icons";
 
 export default function ColumnsTable(props) {
   const { columnsData, tableData } = props;
@@ -134,7 +131,7 @@ export default function ColumnsTable(props) {
                         {problem}
                       </Badge>
                     ));
-                  } else if (cell.column.Header === "METHOD") {
+                  } else if (cell.column.Header === "PACKAGE") {
                     data = (
                       <Text color={textColor} fontSize="sm">
                         {cell.value}
@@ -179,7 +176,7 @@ export default function ColumnsTable(props) {
                         colorScheme="green"
                         aria-label="Search database"
                         borderRadius="10px"
-                        icon={<ViewIcon />}
+                        icon={<InfoIcon />}
                       />
                       <IconButton
                         colorScheme="orange"
