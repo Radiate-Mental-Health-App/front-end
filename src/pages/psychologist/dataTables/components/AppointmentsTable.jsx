@@ -13,6 +13,11 @@ import {
   useColorModeValue,
   CardHeader,
   Heading,
+  Button,
+  Stack,
+  IconButton,
+  HStack,
+  Badge,
 } from "@chakra-ui/react";
 import { useMemo } from "react";
 
@@ -25,6 +30,9 @@ import {
 
 // Assets
 import { MdCheckCircle, MdCancel, MdOutlineError } from "react-icons/md";
+import { IoInformation, IoInformationOutline } from "react-icons/io5";
+import { EditIcon, SearchIcon, ViewIcon } from "@chakra-ui/icons";
+
 export default function ColumnsTable(props) {
   const { columnsData, tableData } = props;
 
@@ -108,12 +116,6 @@ export default function ColumnsTable(props) {
                         {cell.value}
                       </Text>
                     );
-                  } else if (cell.column.Header === "METHOD") {
-                    data = (
-                      <Text color={textColor} fontSize="sm">
-                        {cell.value}
-                      </Text>
-                    );
                   } else if (cell.column.Header === "DATE") {
                     data = (
                       <Text color={textColor} fontSize="sm">
@@ -126,7 +128,13 @@ export default function ColumnsTable(props) {
                         {cell.value}
                       </Text>
                     );
-                  } else if (cell.column.Header === "TOPIC") {
+                  } else if (cell.column.Header === "PROBLEMS") {
+                    data = cell.value.map((problem, problemIndex) => (
+                      <Badge key={problemIndex} colorScheme="green" mr="2" mt="2">
+                        {problem}
+                      </Badge>
+                    ));
+                  } else if (cell.column.Header === "METHOD") {
                     data = (
                       <Text color={textColor} fontSize="sm">
                         {cell.value}
@@ -162,6 +170,24 @@ export default function ColumnsTable(props) {
                           {cell.value}
                         </Text>
                       </Flex>
+                    );
+                  }
+                  else if (cell.column.Header === "ACTION") {
+                    data = (
+                      <HStack>
+                        <IconButton
+                        colorScheme="green"
+                        aria-label="Search database"
+                        borderRadius="10px"
+                        icon={<ViewIcon />}
+                      />
+                      <IconButton
+                        colorScheme="orange"
+                        aria-label="Search database"
+                        borderRadius="10px"
+                        icon={<EditIcon />}
+                      />
+                      </HStack>
                     );
                   }
                   return (

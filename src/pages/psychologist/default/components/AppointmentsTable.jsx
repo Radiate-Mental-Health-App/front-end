@@ -1,195 +1,197 @@
 import {
-  Flex,
-  Table,
-  Icon,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
-  useColorModeValue,
+Card,
+CardBody,
+Flex,
+Table,
+Icon,
+Tbody,
+Td,
+Text,
+Th,
+Thead,
+Tr,
+useColorModeValue,
+CardHeader,
+Heading,
+Button,
 } from "@chakra-ui/react";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 
 import {
-  useGlobalFilter,
-  usePagination,
-  useSortBy,
-  useTable,
+useGlobalFilter,
+usePagination,
+useSortBy,
+useTable,
 } from "react-table";
-
-// Custom components
-import Card from "@/components/card/Card";
-import Menu from "@/components/menu/MainMenu";
 
 // Assets
 import { MdCheckCircle, MdCancel, MdOutlineError } from "react-icons/md";
 export default function ColumnsTable(props) {
-  const { columnsData, tableData } = props;
+const { columnsData, tableData } = props;
 
-  const columns = useMemo(() => columnsData, [columnsData]);
-  const data = useMemo(() => tableData, [tableData]);
+const columns = useMemo(() => columnsData, [columnsData]);
+const data = useMemo(() => tableData, [tableData]);
 
-  const tableInstance = useTable(
+const tableInstance = useTable(
     {
-      columns,
-      data,
+    columns,
+    data,
     },
     useGlobalFilter,
     useSortBy,
     usePagination
-  );
+);
 
-  const {
+const {
     getTableProps,
     getTableBodyProps,
     headerGroups,
     page,
     prepareRow,
     initialState,
-  } = tableInstance;
-  initialState.pageSize = 5;
+} = tableInstance;
+initialState.pageSize = 5;
 
-  const textColor = useColorModeValue("black.500", "white");
-  const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
-  return (
+const textColor = useColorModeValue("black.500", "white");
+const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
+return (
     <Card
-      direction="column"
-      w="100%"
-      px="0px"
-      overflowX={{ sm: "scroll", lg: "hidden" }}
+    direction="column"
+    w="100%"
+    px="0px"
+    overflowX={{ sm: "scroll", lg: "hidden" }}
     >
-      <Flex px="25px" justify="space-between" mb="10px" align="center">
-        <Text
-          color={textColor}
-          fontSize="22px"
-          fontWeight="700"
-          AGE
-          lineHeight="100%"
-        >
-          Appointments
-        </Text>
-        <Menu />
-      </Flex>
-      <Table {...getTableProps()} variant="simple" color="gray.500" mb="24px">
+    <CardHeader>
+    <Heading size='md'>Appointments</Heading>
+    </CardHeader>
+    
+    <CardBody>
+    <Table {...getTableProps()} variant="simple" color="gray.500" mb="24px">
         <Thead>
-          {headerGroups.map((headerGroup, index) => (
+        {headerGroups.map((headerGroup, index) => (
             <Tr {...headerGroup.getHeaderGroupProps()} key={index}>
-              {headerGroup.headers.map((column, index) => (
+            {headerGroup.headers.map((column, index) => (
                 <Th
-                  {...column.getHeaderProps(column.getSortByToggleProps())}
-                  pe="10px"
-                  key={index}
-                  borderColor={borderColor}
+                {...column.getHeaderProps(column.getSortByToggleProps())}
+                pe="10px"
+                key={index}
+                borderColor={borderColor}
                 >
-                  <Flex
+                <Flex
                     justify="space-between"
                     align="center"
                     fontSize={{ sm: "10px", lg: "12px" }}
                     color="gray.400"
-                  >
+                >
                     {column.render("Header")}
-                  </Flex>
+                </Flex>
                 </Th>
-              ))}
+            ))}
             </Tr>
-          ))}
+        ))}
         </Thead>
         <Tbody {...getTableBodyProps()}>
-          {page.map((row, index) => {
+        {page.map((row, index) => {
             prepareRow(row);
             return (
-              <Tr {...row.getRowProps()} key={index}>
+            <Tr {...row.getRowProps()} key={index}>
                 {row.cells.map((cell, index) => {
-                  let data = "";
-                  if (cell.column.Header === "NAME") {
+                let data = "";
+                if (cell.column.Header === "NAME") {
                     data = (
-                      <Text color={textColor} fontSize="sm">
+                    <Text color={textColor} fontSize="sm">
                         {cell.value}
-                      </Text>
+                    </Text>
                     );
-                  } else if (cell.column.Header === "AGE") {
+                } else if (cell.column.Header === "AGE") {
                     data = (
-                      <Text color={textColor} fontSize="sm">
+                    <Text color={textColor} fontSize="sm">
                         {cell.value}
-                      </Text>
+                    </Text>
                     );
-                  } else if (cell.column.Header === "METHOD") {
+                } else if (cell.column.Header === "DATE") {
                     data = (
-                      <Text color={textColor} fontSize="sm">
+                    <Text color={textColor} fontSize="sm">
                         {cell.value}
-                      </Text>
+                    </Text>
                     );
-                  } else if (cell.column.Header === "DATE") {
+                } else if (cell.column.Header === "TIME") {
                     data = (
-                      <Text color={textColor} fontSize="sm">
+                    <Text color={textColor} fontSize="sm">
                         {cell.value}
-                      </Text>
+                    </Text>
                     );
-                  } else if (cell.column.Header === "TIME") {
+                } else if (cell.column.Header === "PROBLEMS") {
                     data = (
-                      <Text color={textColor} fontSize="sm">
+                    <Text color={textColor} fontSize="sm">
                         {cell.value}
-                      </Text>
+                    </Text>
                     );
-                  } else if (cell.column.Header === "TOPIC") {
+                } else if (cell.column.Header === "METHOD") {
                     data = (
-                      <Text color={textColor} fontSize="sm">
+                    <Text color={textColor} fontSize="sm">
                         {cell.value}
-                      </Text>
+                    </Text>
                     );
-                  } else if (cell.column.Header === "STATUS") {
+                } else if (cell.column.Header === "STATUS") {
                     data = (
-                      <Flex align="center">
+                    <Flex align="center">
                         <Icon
-                          w="24px"
-                          h="24px"
-                          me="5px"
-                          color={
+                        w="24px"
+                        h="24px"
+                        me="5px"
+                        color={
                             cell.value === "Confirmed"
-                              ? "green.500"
-                              : cell.value === "Declined"
-                              ? "red.500"
-                              : cell.value === "Waiting confirmation"
-                              ? "orange.500"
-                              : null
-                          }
-                          as={
+                            ? "green.500"
+                            : cell.value === "Declined"
+                            ? "red.500"
+                            : cell.value === "Waiting confirmation"
+                            ? "orange.500"
+                            : null
+                        }
+                        as={
                             cell.value === "Confirmed"
-                              ? MdCheckCircle
-                              : cell.value === "Declined"
-                              ? MdCancel
-                              : cell.value === "Waiting confirmation"
-                              ? MdOutlineError
-                              : null
-                          }
+                            ? MdCheckCircle
+                            : cell.value === "Declined"
+                            ? MdCancel
+                            : cell.value === "Waiting confirmation"
+                            ? MdOutlineError
+                            : null
+                        }
                         />
                         <Text color={textColor} fontSize="sm" fontWeight="700">
-                          {cell.value}
+                        {cell.value}
                         </Text>
-                      </Flex>
+                    </Flex>
                     );
-                  }
-                  return (
+                }
+                else if (cell.column.Header === "ACTION") {
+                    data = (
+                    <Button color={"green"} fontSize="sm">
+                        Edit
+                    </Button>
+                    );
+                }
+                return (
                     <Td
-                      {...cell.getCellProps()}
-                      key={index}
-                      fontSize={{ sm: "14px" }}
-                      maxH="30px !important"
-                      py="8px"
-                      minW={{ sm: "150px", md: "200px", lg: "auto" }}
-                      borderColor="transparent"
+                    {...cell.getCellProps()}
+                    key={index}
+                    fontSize={{ sm: "14px" }}
+                    maxH="30px !important"
+                    py="8px"
+                    minW={{ sm: "150px", md: "200px", lg: "auto" }}
+                    borderColor="transparent"
                     >
-                      {data}
+                    {data}
                     </Td>
-                  );
+                );
                 })}
-              </Tr>
+            </Tr>
             );
-          })}
+        })}
         </Tbody>
-      </Table>
+    </Table>
+    </CardBody>
     </Card>
-  );
+);
 }
