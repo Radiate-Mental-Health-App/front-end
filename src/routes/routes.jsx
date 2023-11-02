@@ -19,8 +19,12 @@ import Help from "../pages/psychologist/Help.jsx";
 
 import AdminDashboard from "../pages/admin/AdminDashboard.jsx";
 import User from "../pages/admin/user/UserList.jsx";
-import UserDetail from "../pages/admin/user/UserDetail.jsx";
+import Edit from "../pages/admin/user/Edit.jsx";
+import Add from "../pages/admin/user/Add.jsx";
 import Resource from "../pages/admin/Resource.jsx";
+import UserDetail from "../pages/admin/user/UserDetail.jsx";
+import List from "../pages/admin/psycologist/List.jsx";
+import Detail from "../pages/admin/psycologist/Detail.jsx";
 
 import SidebarLayout from "../layouts/SidebarLayout.jsx";
 import PrivateRoute from "../components/PrivateRoute.jsx";
@@ -30,6 +34,7 @@ import {
   PSYCHOLOGIST_MENU,
   USER_MENU,
 } from "../constants/sidebar.js";
+
 
 const routes = createRoutesFromElements(
   <>
@@ -48,10 +53,18 @@ const routes = createRoutesFromElements(
       <Route path="help" element={<Help />}></Route>
     </Route>
     <Route path="/a" element={<SidebarLayout menu={ADMIN_MENU} />}>
-      <Route index element={<AdminDashboard />}></Route>
-      <Route path="users" element={<User />}></Route>
-      <Route path=":id" element={<UserDetail />}></Route>
-      <Route path="resources" element={<Resource />}></Route>
+      <Route index element={<AdminDashboard />} />
+      <Route path="add-user" element={<Add />} />
+      <Route path="users">
+        <Route index element={<User />} />
+        <Route path=":id" element={<UserDetail />} />
+        <Route path="edit/:id" element={<Edit />} />
+      </Route>
+      <Route path="psychologist">
+        <Route index element={<List />} />
+        <Route path=":id" element={<Detail />} />
+      </Route>
+      <Route path="resources" element={<Resource />}/>
     </Route>
     <Route path="/login" element={<Login />}></Route>
     <Route path="/" element={<Navigate to="/u" />}></Route>
