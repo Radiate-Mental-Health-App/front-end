@@ -27,6 +27,8 @@ export default function GeneralInformation(props) {
 
     return (
         <Card
+            padding="20px"
+            borderRadius='20px'
         //     mb={{
         //     base: "0px",
         //     "2xl": "20px"

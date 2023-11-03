@@ -31,6 +31,7 @@ import { MdCheckCircle, MdCancel, MdOutlineError } from "react-icons/md";
 import { EditIcon, InfoIcon } from "@chakra-ui/icons";
 
 export default function ColumnsTable(props) {
+  // eslint-disable-next-line react/prop-types
   const { columnsData, tableData } = props;
 
   const columns = useMemo(() => columnsData, [columnsData]);
@@ -60,6 +61,8 @@ export default function ColumnsTable(props) {
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
   return (
     <Card
+      padding="8px"
+      borderRadius='20px'
       direction="column"
       w="100%"
       px="0px"

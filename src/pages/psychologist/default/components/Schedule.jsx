@@ -37,7 +37,8 @@ export default function Schedule() {
     }
 
     return (
-        <Card w="100%" p={8}>
+        <Card w="100%" p={8}
+        borderRadius='20px'>
             <Heading size="md">Your Availability</Heading>
             <FullCalendar
                 height="100vh"

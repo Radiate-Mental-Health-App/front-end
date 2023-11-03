@@ -18,7 +18,7 @@ export default function TodaySessions(props) {
     } = props;
 
     return (
-        <Card justifyContent="center" align="left" w="100%" mb="0px" {...rest}>
+        <Card justifyContent="center" align="left" w="100%" mb="0px" borderRadius='20px' {...rest}>
             <CardHeader>
                 <HStack justifyContent={"space-between"}>
                     <Heading size='md'>Today Sessions</Heading>

@@ -30,6 +30,8 @@ export default function TotalSessions(props) {
 
     return (
         <Card
+            padding="20px"
+            borderRadius='20px'
             w="100%"
             mb="0px"
             {...rest}>
