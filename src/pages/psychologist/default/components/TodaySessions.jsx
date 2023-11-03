@@ -10,6 +10,7 @@ import {
 
 // Custom components import Card from "@/components/card/Card.jsx";
 import Appointment from "./Appointment";
+import { Link } from "react-router-dom";
 
 export default function TodaySessions(props) {
     const {
@@ -21,9 +22,11 @@ export default function TodaySessions(props) {
             <CardHeader>
                 <HStack justifyContent={"space-between"}>
                     <Heading size='md'>Today Sessions</Heading>
-                    <Button fontWeight={500} size="sm" variant="outline">
-                        View all
-                    </Button>
+                    <Link to={"/p/appointments"}>
+                        <Button fontWeight={500} size="sm" variant="outline">
+                            View all
+                        </Button>
+                    </Link>
                 </HStack>
             </CardHeader>
 

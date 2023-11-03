@@ -10,11 +10,13 @@ import {
 
 export default function Banner(props) {
     // eslint-disable-next-line react/prop-types
-    const { banner, avatar, name, job, acceptedAppointments, rejectedAppointments, reviews } = props;
+    const { banner, avatar, name, job, totalSessions, reviews } = props;
+
     // Chakra Color Mode
     const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
     const textColorSecondary = "gray.400";
     const borderColor = useColorModeValue("white !important", "#111C44 !important");
+
     return (
         <Card
             mb={{
@@ -45,25 +47,25 @@ export default function Banner(props) {
             <Flex w='max-content' mx='auto' mt='26px'>
                 <Flex mx='auto' me='60px' align='center' direction='column'>
                     <Text color={textColorPrimary} fontSize='2xl' fontWeight='700'>
-                        {acceptedAppointments}
+                        {totalSessions}
                     </Text>
-                    <Text color={textColorSecondary} fontSize='xs' fontWeight='400'>
-                        accepted<br/>appointments
-                    </Text>
-                </Flex>
-                <Flex mx='auto' me='60px' align='center' direction='column'>
-                    <Text color={textColorPrimary} fontSize='2xl' fontWeight='700'>
-                        {rejectedAppointments}
-                    </Text>
-                    <Text color={textColorSecondary} fontSize='xs' fontWeight='400'>
-                        rejected<br/>appointments
+                    <Text
+                        color={textColorSecondary}
+                        fontSize='xs'
+                        fontWeight='400'
+                        textAlign={"center"}>
+                        total sessions
                     </Text>
                 </Flex>
                 <Flex mx='auto' align='center' direction='column'>
                     <Text color={textColorPrimary} fontSize='2xl' fontWeight='700'>
                         {reviews}
                     </Text>
-                    <Text color={textColorSecondary} fontSize='xs' fontWeight='400'>
+                    <Text
+                        color={textColorSecondary}
+                        fontSize='xs'
+                        fontWeight='400'
+                        textAlign={"center"}>
                         reviews
                     </Text>
                 </Flex>
