@@ -27,10 +27,10 @@ export default function GeneralInformation(props) {
 
     return (
         <Card
-            mb={{
-            base: "0px",
-            "2xl": "20px"
-        }}
+        //     mb={{
+        //     base: "0px",
+        //     "2xl": "20px"
+        // }}
             {...rest}>
 
             <CardBody>

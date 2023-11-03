@@ -29,7 +29,7 @@ import General from "./components/General";
 
 // Assets
 import banner from "@/assets/img/auth/banner.png";
-import avatar from "@/assets/img/avatars/avatar4.png";
+import avatar from "@/assets/img/auth/avatars/avatar4.png";
 
 export default function Overview() {
     return (
