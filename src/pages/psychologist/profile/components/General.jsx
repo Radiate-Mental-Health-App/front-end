@@ -1,5 +1,6 @@
 // Chakra imports
 import {
+    Button,
     Card,
     CardBody,
     Checkbox,
@@ -40,17 +41,25 @@ export default function GeneralInformation(props) {
                     </TabList>
                     <TabPanels>
                         <TabPanel>
-                            <Text color={textColorSecondary} fontSize='md' fontWeight={"bold"} me='26px' mb='4px'>
+                            <Text
+                                color={textColorSecondary}
+                                fontSize='md'
+                                fontWeight={"bold"}
+                                me='26px'
+                                mb='4px'>
                                 Section 1
                             </Text>
-                            <SimpleGrid columns='2' gap='20px'>
+                            <SimpleGrid columns='2' gap='16px'>
                                 <FormControl id="fullName" isRequired>
                                     <FormLabel>Full name</FormLabel>
                                     <Input placeholder="Full name" value="Dr. Jane Smith" borderRadius="16px"/>
                                 </FormControl>
                                 <FormControl id="levelOfEducation" isRequired>
                                     <FormLabel>Level of education</FormLabel>
-                                    <Input placeholder="Level of education" value="Ph.D. in Clinical Psychology" borderRadius="16px"/>
+                                    <Input
+                                        placeholder="Level of education"
+                                        value="Ph.D. in Clinical Psychology"
+                                        borderRadius="16px"/>
                                 </FormControl>
                                 <FormControl id="bachelorCertificate" isRequired>
                                     <FormLabel>Bachelor certificate</FormLabel>
@@ -66,26 +75,44 @@ export default function GeneralInformation(props) {
                                 </FormControl>
                                 <FormControl id="yearsOfExperienceAsCounselor" isRequired>
                                     <FormLabel>Years of experience as counselor</FormLabel>
-                                    <Input placeholder="Years of experience as counselor" value="5" borderRadius="16px"/>
+                                    <Input
+                                        placeholder="Years of experience as counselor"
+                                        value="5"
+                                        borderRadius="16px"/>
                                     <Checkbox defaultChecked>received training as counselor</Checkbox>
                                 </FormControl>
                             </SimpleGrid>
 
-                            <Text color={textColorSecondary} fontSize='md' fontWeight={"bold"} me='26px' mt={"36px"} mb='4px'>
+                            <Text
+                                color={textColorSecondary}
+                                fontSize='md'
+                                fontWeight={"bold"}
+                                me='26px'
+                                mt={"24px"}
+                                mb='4px'>
                                 Section 2
                             </Text>
-                            <SimpleGrid columns='2' gap='20px'>
+                            <SimpleGrid columns='2' gap='16px'>
                                 <FormControl id="currentJob" isRequired>
                                     <FormLabel>Current job</FormLabel>
-                                    <Input placeholder="Current job" value="Clinical Psychologist" borderRadius="16px"/>
+                                    <Input
+                                        placeholder="Current job"
+                                        value="Clinical Psychologist"
+                                        borderRadius="16px"/>
                                 </FormControl>
                                 <FormControl id="expertiseField" isRequired>
                                     <FormLabel>Expertise field</FormLabel>
-                                    <Input placeholder="Expertise field" value={"Career & Human Resources"} borderRadius="16px"/>
+                                    <Input
+                                        placeholder="Expertise field"
+                                        value={"Career & Human Resources"}
+                                        borderRadius="16px"/>
                                 </FormControl>
                                 <FormControl id="languagesMastered" isRequired>
                                     <FormLabel>Languages mastered</FormLabel>
-                                    <Input placeholder="Languages mastered" value="English, Spanish" borderRadius="16px"/>
+                                    <Input
+                                        placeholder="Languages mastered"
+                                        value="English, Spanish"
+                                        borderRadius="16px"/>
                                 </FormControl>
                                 <FormControl id="counselingMethod" isRequired>
                                     <FormLabel>Counseling method</FormLabel>
@@ -97,27 +124,72 @@ export default function GeneralInformation(props) {
                                 </FormControl>
                                 <FormControl id="cityOrDistrict" isRequired>
                                     <FormLabel>City/district</FormLabel>
-                                    <Input placeholder="City/District Name" value="City/District Name" borderRadius="16px"/>
-                                    <Checkbox defaultChecked>received training as counselor</Checkbox>
+                                    <Input
+                                        placeholder="City/District Name"
+                                        value="City/District Name"
+                                        borderRadius="16px"/>
                                 </FormControl>
                             </SimpleGrid>
 
-                            <Text color={textColorSecondary} fontSize='md' fontWeight={"bold"} me='26px' mt={"36px"} mb='4px'>
-                                Contact                           
+                            <Text
+                                color={textColorSecondary}
+                                fontSize='md'
+                                fontWeight={"bold"}
+                                me='26px'
+                                mt={"24px"}
+                                mb='4px'>
+                                Contact
                             </Text>
-                            <SimpleGrid columns='2' gap='20px'>
+                            <SimpleGrid columns='2' gap='16px'>
                                 <FormControl id="whatsappNumber" isRequired>
                                     <FormLabel>WhatsApp number</FormLabel>
                                     <Input placeholder="WhatsApp number" value="123-456-7890" borderRadius="16px"/>
                                 </FormControl>
                                 <FormControl id="devicesUsed" isRequired>
                                     <FormLabel>Devices used</FormLabel>
-                                    <Input placeholder="Devices used" value="Device 1, Device 2" borderRadius="16px"/>
+                                    <Input
+                                        placeholder="Devices used"
+                                        value="Device 1, Device 2"
+                                        borderRadius="16px"/>
                                 </FormControl>
                             </SimpleGrid>
+                            <Button colorScheme='brand' mt={4}>Save changes</Button>
                         </TabPanel>
                         <TabPanel>
-                            <p>two!</p>
+                            <SimpleGrid columns='2' gap='16px'>
+                                <FormControl id="email" isRequired>
+                                    <FormLabel>Email</FormLabel>
+                                    <Input
+                                        placeholder="Email address"
+                                        value="drjane@example.com"
+                                        borderRadius="16px"/>
+                                </FormControl>
+                                <FormControl id="photo" isRequired>
+                                    <FormLabel>Profile photo</FormLabel>
+                                    <Input placeholder="Profile photo" borderRadius="16px"/>
+                                </FormControl>
+                            </SimpleGrid>
+
+                            <Text
+                                color={textColorSecondary}
+                                fontSize='md'
+                                fontWeight={"bold"}
+                                me='26px'
+                                mt={"36px"}
+                                mb='4px'>
+                                Change password
+                            </Text>
+                            <SimpleGrid  gap='16px'>
+                                <FormControl id="currentPassword" isRequired>
+                                    <FormLabel>Current password</FormLabel>
+                                    <Input placeholder="Current password" borderRadius="16px"/>
+                                </FormControl>
+                                <FormControl id="newPassword" isRequired>
+                                    <FormLabel>New password</FormLabel>
+                                    <Input placeholder="New password" borderRadius="16px"/>
+                                </FormControl>
+                            </SimpleGrid>
+                            <Button colorScheme='brand' mt={4}>Save changes</Button>
                         </TabPanel>
                     </TabPanels>
                 </Tabs>
