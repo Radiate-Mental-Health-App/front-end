@@ -21,23 +21,32 @@
 */
 
 // Chakra imports
-import {Stack, VStack} from "@chakra-ui/react";
+import { Stack, VStack, Button, Modal, useDisclosure } from "@chakra-ui/react";
 
 // Assets
 import EventCalendar from "@/components/calendar/MiniCalendar";
 import TodayAppointments from "../default/components/TodaySessions";
 import Schedule from "../default/components/Schedule";
+import InputSchedule from "./components/InputSchedule";
 
 export default function Schedules() {
-    return (
-        <Stack p={"32px"}>
-            <Stack direction={"row"} spacing={8}>
-                <VStack spacing={8} alignItems="stretch">
-                    <EventCalendar/>
-                    <TodayAppointments/>
-                </VStack>
-                <Schedule/>
-            </Stack>
-        </Stack>
-    );
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  return (
+    <Stack p={"32px"}>
+      <Button colorScheme="blue" width="20%" onClick={onOpen}>
+        Add Schedule
+      </Button>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <InputSchedule onClose={onClose} />
+      </Modal>
+      <Stack direction={"row"} spacing={8}>
+        <VStack spacing={8} alignItems="stretch">
+          <EventCalendar />
+          <TodayAppointments />
+        </VStack>
+        <Schedule />
+      </Stack>
+    </Stack>
+  );
 }
