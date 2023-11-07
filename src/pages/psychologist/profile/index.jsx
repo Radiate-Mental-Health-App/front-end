@@ -29,13 +29,11 @@ import General from "./components/General";
 
 // Assets
 import banner from "@/assets/img/auth/banner.png";
-import avatar from "@/assets/img/avatars/avatar4.png";
+import avatar from "@/assets/img/auth/avatars/avatar4.png";
 
 export default function Overview() {
     return (
-        <Box
-            padding={"32px"}
-        >
+        <Box padding={"32px"}>
             {/* Main Fields */}
             <Grid
                 templateColumns={{
@@ -54,10 +52,9 @@ export default function Overview() {
                     gridArea='1 / 1 / 2 / 2'
                     banner={banner}
                     avatar={avatar}
-                    name='Psychologist name'
-                    job='Psychologist'
-                    acceptedAppointments='17'
-                    rejectedAppointments='5'
+                    name='Dr. Jane Smith, Ph.D'
+                    job='Clinical Psychologist'
+                    totalSessions='17'
                     reviews='10'/>
                 <General
                     gridArea={{

@@ -42,7 +42,7 @@ export default function Appointment(props) {
                     <Text fontWeight={"bold"} fontSize={"md"}>
                         Patient name
                     </Text>
-                    <Stack direction="row" spacing={4} align="center">
+                    <Stack direction="row" spacing={2} align="center">
                         <Button colorScheme='green' size="sm">
                             Start session
                         </Button>

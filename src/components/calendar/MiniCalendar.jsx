@@ -9,14 +9,16 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 
 export default function MiniCalendar(props) {
+  // eslint-disable-next-line react/prop-types
   const { selectRange, ...rest } = props;
   const [value, onChange] = useState(new Date());
   return (
     <Card
+      borderRadius='20px'
       align="center"
       direction="column"
       w="100%"
-      p="20px 15px"
+      p="20px 16px"
       h="max-content"
       {...rest}
     >
