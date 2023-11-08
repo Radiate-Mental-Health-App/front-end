@@ -22,12 +22,23 @@
 
 // Chakra imports
 import {
+    Box,
     Card,
     CardBody,
     CardHeader,
     Heading,
-    Stack
+    Stack,
+    Text,
+    StackDivider,
+    Accordion,
+    AccordionItem,
+    AccordionButton,
+    AccordionIcon,
+    AccordionPanel,
+    Flex,
+    SimpleGrid
 } from "@chakra-ui/react";
+import Appointment from "../default/components/Appointment";
 
 // Custom components
 
@@ -35,16 +46,68 @@ export default function AppointmentDetail() {
     return (
         <Stack p={"32px"}>
             <Card
+                variant={"filled"}
+                bgColor="grey"
+                color={"white"}
+                mb={4}
+                borderRadius='16px'>
+                <CardHeader>
+                    <Heading size='md'>Patient name</Heading>
+                </CardHeader>
+                <CardBody>
+                    <SimpleGrid columns='2' gap='16px'>
+                        <Text>Full name</Text>
+                        <Text>Full name</Text>
+                        <Text>Full name</Text>
+                        <Text>Full name</Text>
+                    </SimpleGrid>
+                </CardBody>
+            </Card>
+            <Card
                 justifyContent="center"
                 align="left"
                 w="100%"
                 mb="0px"
                 borderRadius='20px'>
                 <CardHeader>
-                    <Heading size='md'>Appointment Detail</Heading>
+                    <Heading size='md'>Counseling Result</Heading>
                 </CardHeader>
 
-                <CardBody></CardBody>
+                <CardBody>
+                    <Accordion mt={2} defaultIndex={[0]} allowMultiple>
+                        <AccordionItem>
+                            <h2>
+                                <AccordionButton>
+                                    <Box as="span" flex='1' textAlign='left'>
+                                        Section 1 title
+                                    </Box>
+                                    <AccordionIcon/>
+                                </AccordionButton>
+                            </h2>
+                            <AccordionPanel pb={4}>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </AccordionPanel>
+                        </AccordionItem>
+
+                        <AccordionItem>
+                            <h2>
+                                <AccordionButton>
+                                    <Box as="span" flex='1' textAlign='left'>
+                                        Section 2 title
+                                    </Box>
+                                    <AccordionIcon/>
+                                </AccordionButton>
+                            </h2>
+                            <AccordionPanel pb={4}>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                                nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            </AccordionPanel>
+                        </AccordionItem>
+                    </Accordion>
+                </CardBody>
             </Card>
         </Stack>
 
