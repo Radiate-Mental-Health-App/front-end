@@ -29,6 +29,7 @@ import {
 // Assets
 import { MdCheckCircle, MdCancel, MdOutlineError } from "react-icons/md";
 import { EditIcon, InfoIcon } from "@chakra-ui/icons";
+import { Link } from "react-router-dom";
 
 export default function ColumnsTable(props) {
   // eslint-disable-next-line react/prop-types
@@ -175,18 +176,20 @@ export default function ColumnsTable(props) {
                   else if (cell.column.Header === "ACTION") {
                     data = (
                       <HStack>
+                        <Link to="/p/appointments/detail">
+                          <IconButton
+                            colorScheme="green"
+                            aria-label="Search database"
+                            borderRadius="10px"
+                            icon={<InfoIcon />}
+                          />
+                        </Link>
                         <IconButton
-                        colorScheme="green"
-                        aria-label="Search database"
-                        borderRadius="10px"
-                        icon={<InfoIcon />}
-                      />
-                      <IconButton
-                        colorScheme="orange"
-                        aria-label="Search database"
-                        borderRadius="10px"
-                        icon={<EditIcon />}
-                      />
+                          colorScheme="orange"
+                          aria-label="Search database"
+                          borderRadius="10px"
+                          icon={<EditIcon />}
+                        />
                       </HStack>
                     );
                   }

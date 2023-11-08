@@ -29,6 +29,7 @@ import {
   PSYCHOLOGIST_MENU,
   USER_MENU,
 } from "@/constants/sidebar.js";
+import AppointmentDetail from "@/pages/psychologist/dataTables/AppointmentDetail";
 
 const routes = createRoutesFromElements(
   <>
@@ -43,6 +44,7 @@ const routes = createRoutesFromElements(
       <Route index element={<PsychologistDashboard />}></Route>
       <Route path="schedules" element={<Schedule />}></Route>
       <Route path="appointments" element={<Appointment />}></Route>
+      <Route path="appointments/detail" element={<AppointmentDetail />}></Route>
       <Route path="profile" element={<Profile />}></Route>
       <Route path="help" element={<Help />}></Route>
     </Route>

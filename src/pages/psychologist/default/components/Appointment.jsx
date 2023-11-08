@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 // Custom components import Card from "@/components/card/Card.jsx"; Assets
 import {IoCalendarOutline, IoChatbubbleOutline, IoTimeOutline} from "react-icons/io5";
+import { Link } from "react-router-dom";
 
 export default function Appointment(props) {
     const {
@@ -44,11 +45,13 @@ export default function Appointment(props) {
                     </Text>
                     <Stack direction="row" spacing={2} align="center">
                         <Button colorScheme='green' size="sm">
-                            Start session
+                                Start session
                         </Button>
-                        <Button colorScheme='green' size="sm">
-                            ...
-                        </Button>
+                        <Link to="/p/appointments/detail">
+                            <Button colorScheme='green' size="sm">
+                                ...
+                            </Button>
+                        </Link>
                     </Stack>
                 </HStack>
                 <Stack
