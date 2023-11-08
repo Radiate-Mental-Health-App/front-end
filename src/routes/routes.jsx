@@ -10,7 +10,6 @@ import PsychologistDashboard from "@/pages/psychologist/default";
 import Schedule from "@/pages/psychologist/schedules";
 import Appointment from "@/pages/psychologist/dataTables";
 import Profile from "@/pages/psychologist/profile";
-import Help from "@/pages/psychologist/Help.jsx";
 
 import AdminDashboard from "@/pages/admin/home/Home";
 import User from "@/pages/admin/list/List";
@@ -39,7 +38,6 @@ const routes = createRoutesFromElements(
       <Route path="appointments" element={<Appointment />}></Route>
       <Route path="appointments/detail" element={<AppointmentDetail />}></Route>
       <Route path="profile" element={<Profile />}></Route>
-      <Route path="help" element={<Help />}></Route>
     </Route>
     <Route path="/a" element={<SidebarLayout menu={ADMIN_MENU} />}>
       <Route index element={<AdminDashboard />}></Route>
