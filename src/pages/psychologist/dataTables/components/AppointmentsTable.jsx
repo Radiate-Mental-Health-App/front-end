@@ -16,6 +16,15 @@ import {
   IconButton,
   HStack,
   Badge,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+  Button,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useMemo } from "react";
 
@@ -60,6 +69,7 @@ export default function ColumnsTable(props) {
 
   const textColor = useColorModeValue("black.500", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
+  const { isOpen, onOpen, onClose } = useDisclosure();
   return (
     <Card
       padding="8px"
@@ -185,6 +195,7 @@ export default function ColumnsTable(props) {
                           />
                         </Link>
                         <IconButton
+                          onClick={onOpen}
                           colorScheme="orange"
                           aria-label="Search database"
                           borderRadius="10px"
@@ -212,6 +223,22 @@ export default function ColumnsTable(props) {
           })}
         </Tbody>
       </Table>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Change appointment status</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            Abcd
+          </ModalBody>
+          <ModalFooter>
+            <Button variant="outline" mr={3} onClick={onClose}>
+              Cancel
+            </Button>
+            <Button colorScheme="brand">Save</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
       </CardBody>
     </Card>
   );
