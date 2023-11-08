@@ -19,17 +19,9 @@ import Resource from "@/pages/admin/Resource.jsx";
 import SidebarLayout from "@/layouts/SidebarLayout.jsx";
 import Login from "@/pages/auth/Login.jsx";
 
-<<<<<<< HEAD
-import {
-  ADMIN_MENU,
-  PSYCHOLOGIST_MENU,
-  USER_MENU,
-} from "@/constants/sidebar.js";
-import AppointmentDetail from "@/pages/psychologist/dataTables/AppointmentDetail";
-=======
 import { ADMIN_MENU, PSYCHOLOGIST_MENU, USER_MENU } from "@/constants/sidebar.js";
 import PsychologistDetails from "@/pages/user/counseling/psyDetail.component";
->>>>>>> 204c38582787e45fa766682e2a4b5c83ee8057b2
+import AppointmentDetail from "@/pages/psychologist/dataTables/AppointmentDetail";
 
 const routes = createRoutesFromElements(
   <>
