@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // Chakra imports
-import {Card, Heading} from "@chakra-ui/react";
+import {Button, Card, HStack, Heading} from "@chakra-ui/react";
 
 // Custom components
 import FullCalendar from "@fullcalendar/react";
@@ -9,6 +9,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from '@fullcalendar/interaction';
 import {INITIAL_EVENTS, createEventId} from '@/pages/psychologist/schedules/variables/event-utils';
+import { Link } from "react-router-dom";
 
 export default function Schedule() {
     // eslint-disable-next-line no-unused-vars
@@ -39,7 +40,14 @@ export default function Schedule() {
     return (
         <Card w="100%" p={8}
         borderRadius='20px'>
-            <Heading size="md">Your Availability</Heading>
+            <HStack justifyContent={"space-between"} pb={2}>
+                <Heading size='md'>Your availability</Heading>
+                <Link to={"#"}>
+                    <Button fontWeight={500} size="md" colorScheme="brand">
+                        + Create availability
+                    </Button>
+                </Link>
+            </HStack>
             <FullCalendar
                 height="100vh"
                 plugins={[dayGridPlugin,timeGridPlugin, interactionPlugin]}
