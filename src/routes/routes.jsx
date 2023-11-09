@@ -20,6 +20,7 @@ import Login from "@/pages/auth/Login.jsx";
 
 import { ADMIN_MENU, PSYCHOLOGIST_MENU, USER_MENU } from "@/constants/sidebar.js";
 import PsychologistDetails from "@/pages/user/counseling/psyDetail.component";
+import CounselingPayment from "@/pages/user/counseling/CounselingPayment";
 import AppointmentDetail from "@/pages/psychologist/dataTables/AppointmentDetail";
 
 const routes = createRoutesFromElements(
@@ -29,6 +30,7 @@ const routes = createRoutesFromElements(
       <Route path="mood-tracker" element={<MoodTracker />}></Route>
       <Route path="journal" element={<Journal />}></Route>
       <Route path="counseling" element={<Counseling />}></Route>
+      <Route path="counseling/payment" element={<CounselingPayment />}></Route>
       <Route path="wellness-center" element={<WellnessCenter />}></Route>
     </Route>
     <Route path="/p" element={<SidebarLayout menu={PSYCHOLOGIST_MENU} />}>
