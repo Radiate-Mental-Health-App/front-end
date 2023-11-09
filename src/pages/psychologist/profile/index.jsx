@@ -28,7 +28,7 @@ import Banner from "./components/Banner";
 import General from "./components/General";
 
 // Assets
-import banner from "@/assets/img/auth/banner.png";
+import banner from "@/assets/img/auth/banner.jpg";
 import avatar from "@/assets/img/auth/avatars/avatar4.png";
 
 export default function Overview() {
