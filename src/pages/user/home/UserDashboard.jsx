@@ -1,15 +1,16 @@
-import {
-  Center,
-  Heading,
-} from '@chakra-ui/react'
+import { Center, Heading } from "@chakra-ui/react";
+import BarChart from "./moodBarChart.component";
+import LineChart from "./moodLineChart.component";
 
 function UserDashboard() {
-  
   return (
-    <Center w='100%' h='100%'>
-      <Heading size='xl' color='gray.400'>Home</Heading>
+    <Center>
+      <Heading>Dashboard</Heading>
+      <br />
+      <BarChart />
+      <LineChart />
     </Center>
-  )
+  );
 }
 
-export default UserDashboard
+export default UserDashboard;

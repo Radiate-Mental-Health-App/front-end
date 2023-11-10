@@ -1,6 +1,6 @@
 import { Route, Navigate, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
 
-import UserDashboard from "@/pages/user/mood-tracker/MoodTracker.jsx";
+import UserDashboard from "@/pages/user/home/UserDashboard";
 import MoodTracker from "@/pages/user/mood-tracker/MoodTracker.jsx";
 import Journal from "@/pages/user/journal/Journal.jsx";
 import Counseling from "@/pages/user/counseling/Counseling.jsx";
