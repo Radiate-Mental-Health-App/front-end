@@ -22,6 +22,7 @@ import { ADMIN_MENU, PSYCHOLOGIST_MENU, USER_MENU } from "@/constants/sidebar.js
 import PsychologistDetails from "@/pages/user/counseling/psyDetail.component";
 import CounselingPayment from "@/pages/user/counseling/CounselingPayment";
 import AppointmentDetail from "@/pages/psychologist/dataTables/AppointmentDetail";
+import CounselingPaymentDone from "@/pages/user/counseling/CounselingPaymentDone";
 
 const routes = createRoutesFromElements(
   <>
@@ -31,6 +32,7 @@ const routes = createRoutesFromElements(
       <Route path="journal" element={<Journal />}></Route>
       <Route path="counseling" element={<Counseling />}></Route>
       <Route path="counseling/payment" element={<CounselingPayment />}></Route>
+      <Route path="counseling/payment/done" element={<CounselingPaymentDone />}></Route>
       <Route path="wellness-center" element={<WellnessCenter />}></Route>
     </Route>
     <Route path="/p" element={<SidebarLayout menu={PSYCHOLOGIST_MENU} />}>
