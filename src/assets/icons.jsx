@@ -1,4 +1,5 @@
 import { createIcon } from "@chakra-ui/icons";
+import { MdOutlineQuestionAnswer } from "react-icons/md";
 
 export const HomeIcon = createIcon({
   displayName: "HomeIcon",
@@ -275,3 +276,5 @@ export const ResourcesIcon = createIcon({
     </>
   ),
 });
+
+export const FAQIcon = { MdOutlineQuestionAnswer }
