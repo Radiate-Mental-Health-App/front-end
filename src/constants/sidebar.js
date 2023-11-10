@@ -24,7 +24,7 @@ export const PSYCHOLOGIST_MENU = [
 export const ADMIN_MENU = [
   { title: "Home", link: "/a", icon: Icons.HomeIcon },
   { title: "Users", link: "/a/users", icon: Icons.UsersIcon },
-  { title: "Counselors", link: "/a/counselors", icon: Icons.UsersIcon },
+  { title: "Psychologist", link: "/a/psychologist", icon: Icons.UsersIcon },
   { title: "Resources", link: "/a/resources", icon: Icons.ResourcesIcon },
   { title: "FAQ", link: "/a/faq", icon: MdOutlineQuestionAnswer },
 ];
