@@ -1,7 +1,7 @@
 import "./list.scss";
-import Navbar from "@/components/navbar/Navbar";
-import Sidebar from "@/components/sidebar/Sidebar";
-import Datatable from "@/components/datatable/Datatable";
+import Navbar from "@/components/Navbar/Navbar";
+import Sidebar from "@/components/Sidebar/Sidebar";
+import Datatable from "@/components/Datatable/Datatable";
 import { Flex, Box, Heading, ChakraProvider } from "@chakra-ui/react";
 import { ThemeProvider } from "@mui/material";
 
