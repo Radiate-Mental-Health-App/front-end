@@ -29,11 +29,31 @@ import Detail from "../pages/admin/psycologist/Detail.jsx";
 import SidebarLayout from "../layouts/SidebarLayout.jsx";
 import PrivateRoute from "../components/PrivateRoute.jsx";
 import Login from "../pages/auth/Login.jsx";
+
+import UserDashboard from "@/pages/user/mood-tracker/MoodTracker.jsx";
+import MoodTracker from "@/pages/user/mood-tracker/MoodTracker.jsx";
+import Journal from "@/pages/user/journal/Journal.jsx";
+import Counseling from "@/pages/user/counseling/Counseling.jsx";
+import WellnessCenter from "@/pages/user/wellness-center/WellnessCenter.jsx";
+
+import PsychologistDashboard from "@/pages/psychologist/default";
+import Schedule from "@/pages/psychologist/schedules";
+import Appointment from "@/pages/psychologist/dataTables";
+import Profile from "@/pages/psychologist/profile";
+import Help from "@/pages/psychologist/Help.jsx";
+
+import AdminDashboard from "@/pages/admin/home/Home";
+import User from "@/pages/admin/list/List";
+import Resource from "@/pages/admin/Resource.jsx";
+
+import SidebarLayout from "@/layouts/SidebarLayout.jsx";
+import Login from "@/pages/auth/Login.jsx";
+
 import {
   ADMIN_MENU,
   PSYCHOLOGIST_MENU,
   USER_MENU,
-} from "../constants/sidebar.js";
+} from "@/constants/sidebar.js";
 
 
 const routes = createRoutesFromElements(
