@@ -1,4 +1,5 @@
 import * as Icons from "../assets/icons";
+import { MdOutlineQuestionAnswer } from "react-icons/md";
 
 export const USER_MENU = [
   { title: "Home", link: "/u", icon: Icons.HomeIcon },
@@ -22,5 +23,7 @@ export const PSYCHOLOGIST_MENU = [
 export const ADMIN_MENU = [
   { title: "Home", link: "/a", icon: Icons.HomeIcon },
   { title: "Users", link: "/a/users", icon: Icons.UsersIcon },
+  { title: "Psychologist", link: "/a/psychologist", icon: Icons.UsersIcon },
   { title: "Resources", link: "/a/resources", icon: Icons.ResourcesIcon },
+  { title: "QNA", link: "/a/qna", icon: MdOutlineQuestionAnswer },
 ];

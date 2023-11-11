@@ -1,13 +1,13 @@
 import { Center, Heading } from "@chakra-ui/react";
 
-function User() {
+function AdminDashboard() {
   return (
     <Center w="100%" h="100%">
       <Heading size="xl" color="gray.400">
-        User
+        Admin Home
       </Heading>
     </Center>
   );
 }
 
-export default User;
+export default AdminDashboard;
