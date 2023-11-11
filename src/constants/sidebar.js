@@ -11,6 +11,7 @@ export const USER_MENU = [
     link: "/u/wellness-center",
     icon: Icons.WellnessIcon,
   },
+  { title: "Chatbot ", link: "/u/Chatbot", icon: Icons.Chatbot },
 ];
 
 export const PSYCHOLOGIST_MENU = [
