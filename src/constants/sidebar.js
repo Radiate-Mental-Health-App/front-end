@@ -25,5 +25,5 @@ export const ADMIN_MENU = [
   { title: "Users", link: "/a/users", icon: Icons.UsersIcon },
   { title: "Psychologist", link: "/a/psychologist", icon: Icons.UsersIcon },
   { title: "Resources", link: "/a/resources", icon: Icons.ResourcesIcon },
-  { title: "FAQ", link: "/a/faq", icon: MdOutlineQuestionAnswer },
+  { title: "QNA", link: "/a/qna", icon: MdOutlineQuestionAnswer },
 ];

@@ -1,4 +1,9 @@
-import { Route, Navigate, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import {
+  Route,
+  Navigate,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
 
 import UserDashboard from "@/pages/user/mood-tracker/MoodTracker.jsx";
 import MoodTracker from "@/pages/user/mood-tracker/MoodTracker.jsx";
@@ -18,6 +23,9 @@ import User from "../pages/admin/user/UserList.jsx";
 import UserDetail from "../pages/admin/user/UserDetail.jsx";
 import UserEdit from "../pages/admin/user/UserEdit.jsx";
 
+//qna
+import Qna from "../pages/admin/qna/QnaList.jsx";
+
 // psychologyst
 import List from "../pages/admin/psychologist/List.jsx";
 import Detail from "../pages/admin/psychologist/Detail.jsx";
@@ -28,7 +36,11 @@ import Resource from "../pages/admin/Resource.jsx";
 import SidebarLayout from "@/layouts/SidebarLayout.jsx";
 import Login from "@/pages/auth/Login.jsx";
 
-import { ADMIN_MENU, PSYCHOLOGIST_MENU, USER_MENU } from "@/constants/sidebar.js";
+import {
+  ADMIN_MENU,
+  PSYCHOLOGIST_MENU,
+  USER_MENU,
+} from "@/constants/sidebar.js";
 import PsychologistDetails from "@/pages/user/counseling/psyDetail.component";
 import CounselingPayment from "@/pages/user/counseling/CounselingPayment";
 import AppointmentDetail from "@/pages/psychologist/dataTables/AppointmentDetail";
@@ -42,7 +54,9 @@ const routes = createRoutesFromElements(
       <Route path="journal" element={<Journal />}></Route>
       <Route path="counseling" element={<Counseling />}></Route>
       <Route path="counseling/payment" element={<CounselingPayment />}></Route>
-      <Route path="counseling/payment/done" element={<CounselingPaymentDone />}></Route>
+      <Route
+        path="counseling/payment/done"
+        element={<CounselingPaymentDone />}></Route>
       <Route path="wellness-center" element={<WellnessCenter />}></Route>
     </Route>
     <Route path="/p" element={<SidebarLayout menu={PSYCHOLOGIST_MENU} />}>
@@ -60,13 +74,18 @@ const routes = createRoutesFromElements(
         <Route path=":id" element={<UserDetail />} />
         <Route path="edit/:id" element={<UserEdit />} />
       </Route>
+      <Route path="qna">
+        <Route index element={<Qna />} />
+        <Route path=":id" element={<UserDetail />} />
+        <Route path="edit/:id" element={<UserEdit />} />
+      </Route>
       <Route path="psychologist">
         <Route index element={<List />} />
         <Route path=":id" element={<Detail />} />
         <Route path="edit/:id" element={<Edit />} />
         <Route path="book/:id" element={<Booking />} />
       </Route>
-      <Route path="resources" element={<Resource />}/>
+      <Route path="resources" element={<Resource />} />
     </Route>
     <Route path="/login" element={<Login />}></Route>
     <Route path="/" element={<Navigate to="/u" />}></Route>
