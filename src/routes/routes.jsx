@@ -46,6 +46,7 @@ import PsychologistDetails from "@/pages/user/counseling/psyDetail.component";
 import CounselingPayment from "@/pages/user/counseling/CounselingPayment";
 import AppointmentDetail from "@/pages/psychologist/dataTables/AppointmentDetail";
 import CounselingPaymentDone from "@/pages/user/counseling/CounselingPaymentDone";
+import FormCounselingResult from "@/pages/psychologist/dataTables/components/FormCounselingResult";
 
 const routes = createRoutesFromElements(
   <>
@@ -67,6 +68,7 @@ const routes = createRoutesFromElements(
       <Route path="schedules" element={<Schedule />}></Route>
       <Route path="appointments" element={<Appointment />}></Route>
       <Route path="appointments/detail" element={<AppointmentDetail />}></Route>
+      <Route path="appointments/detail/edit" element={<FormCounselingResult />}></Route>
       <Route path="profile" element={<Profile />}></Route>
     </Route>
     <Route path="/a" element={<SidebarLayout menu={ADMIN_MENU} />}>

@@ -25,6 +25,7 @@ import {
   ModalFooter,
   Button,
   useDisclosure,
+  Select,
 } from "@chakra-ui/react";
 import { useMemo } from "react";
 
@@ -226,16 +227,16 @@ export default function ColumnsTable(props) {
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Change appointment status</ModalHeader>
+          <ModalHeader>Cancel the appointment?</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            Abcd
+          <Select placeholder='Change appointment status...' size='md' />
           </ModalBody>
           <ModalFooter>
             <Button variant="outline" mr={3} onClick={onClose}>
-              Cancel
+              No
             </Button>
-            <Button colorScheme="brand">Save</Button>
+            <Button colorScheme="brand">Yes</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

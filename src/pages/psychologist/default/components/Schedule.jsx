@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // Chakra imports
-import {Button, Card, HStack, Heading} from "@chakra-ui/react";
+import {Button, Card, FormControl, FormLabel, HStack, Heading, Input, Modal, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, Select, SimpleGrid, Textarea, useDisclosure} from "@chakra-ui/react";
 
 // Custom components
 import FullCalendar from "@fullcalendar/react";
@@ -9,7 +9,6 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from '@fullcalendar/interaction';
 import {INITIAL_EVENTS, createEventId} from '@/pages/psychologist/schedules/variables/event-utils';
-import { Link } from "react-router-dom";
 
 export default function Schedule() {
     // eslint-disable-next-line no-unused-vars
@@ -37,16 +36,16 @@ export default function Schedule() {
         setCurrentEvents(events);
     }
 
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     return (
         <Card w="100%" p={8}
         borderRadius='20px'>
             <HStack justifyContent={"space-between"} pb={2}>
                 <Heading size='md'>Your availability</Heading>
-                <Link to={"#"}>
-                    <Button fontWeight={500} size="md" colorScheme="brand">
+                    <Button onClick={onOpen} fontWeight={500} size="md" colorScheme="brand">
                         + Create availability
                     </Button>
-                </Link>
             </HStack>
             <FullCalendar
                 height="100vh"
@@ -66,6 +65,35 @@ export default function Schedule() {
                 eventContent={renderEventContent}
                 eventClick={handleEventClick}
                 eventsSet={handleEvents}/>
+                <Modal isOpen={isOpen} onClose={onClose}>
+                    <ModalOverlay />
+                    <ModalContent>
+                    <ModalHeader>Create availability</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <FormControl id="day">
+                            <FormLabel>Day</FormLabel>
+                            <Select placeholder="Select day" borderRadius="16px"/>
+                        </FormControl>
+                        <SimpleGrid mt={4} gap='16px' columns={2}>
+                            <FormControl id="startTime">
+                                <FormLabel>Start time</FormLabel>
+                                <Input type="time" placeholder="Start time" borderRadius="16px"/>
+                            </FormControl>
+                            <FormControl id="endTime">
+                                <FormLabel>End time</FormLabel>
+                                <Input type="time" placeholder="End time" borderRadius="16px"/>
+                            </FormControl>
+                        </SimpleGrid>
+                    </ModalBody>
+                    <ModalFooter>
+                        <Button variant="outline" mr={3} onClick={onClose}>
+                        Cancel
+                        </Button>
+                        <Button colorScheme="brand">Save</Button>
+                    </ModalFooter>
+                    </ModalContent>
+                </Modal>
         </Card>
     );
 }

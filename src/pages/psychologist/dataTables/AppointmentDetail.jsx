@@ -27,18 +27,17 @@ import {
     CardBody,
     CardHeader,
     Heading,
-    Accordion,
-    AccordionItem,
-    AccordionButton,
-    AccordionIcon,
-    AccordionPanel,
-    Grid
+    Grid,
+    Button,
+    HStack
 } from "@chakra-ui/react";
 
 import Banner from "./components/BannerPatient";
 
 import banner from "@/assets/img/auth/banner.jpg";
 import avatar from "@/assets/img/auth/avatars/avatar10.png";
+import CounselingResult from "./components/CounselingResult";
+import {Link} from "react-router-dom";
 
 export default function AppointmentDetail() {
     return (
@@ -56,110 +55,32 @@ export default function AppointmentDetail() {
                 base: "20px",
                 xl: "20px"
             }}>
-            <Banner
+                <Banner
                     gridArea='1 / 1 / 2 / 2'
                     banner={banner}
                     avatar={avatar}
-                    name='Patient full name'
-            />
-            <Card
-                justifyContent="center"
-                align="left"
-                w="100%"
-                mb="0px"
-                borderRadius='20px'>
-                <CardHeader>
-                    <Heading size='md'>Counseling Result</Heading>
-                </CardHeader>
+                    name='Patient full name'/>
+                <Card
+                    justifyContent="center"
+                    align="left"
+                    w="100%"
+                    mb="0px"
+                    borderRadius='20px'>
+                    <CardHeader>
+                        <HStack justifyContent={"space-between"}>
+                            <Heading size='md'>Counseling Result</Heading>
+                            <Link to="/p/appointments/detail/edit">
+                                <Button colorScheme="brand" variant={"outline"}>
+                                    Edit counseling result
+                                </Button>
+                            </Link>
+                        </HStack>
+                    </CardHeader>
 
-                <CardBody>
-                    <Accordion mt={2} defaultIndex={[0]} allowMultiple>
-                        <AccordionItem>
-                            <h2>
-                                <AccordionButton>
-                                    <Box as="span" flex='1' textAlign='left' fontWeight="bold">
-                                        Evaluation type
-                                    </Box>
-                                    <AccordionIcon/>
-                                </AccordionButton>
-                            </h2>
-                            <AccordionPanel pb={4}>
-                                Observation
-                            </AccordionPanel>
-                        </AccordionItem>
-
-                        <AccordionItem>
-                            <h2>
-                                <AccordionButton>
-                                    <Box as="span" flex='1' textAlign='left' fontWeight="bold">
-                                        Observation result
-                                    </Box>
-                                    <AccordionIcon/>
-                                </AccordionButton>
-                            </h2>
-                            <AccordionPanel pb={4}>
-                                The patient exhibited signs of...
-                            </AccordionPanel>
-                        </AccordionItem>
-
-                        <AccordionItem>
-                            <h2>
-                                <AccordionButton>
-                                    <Box as="span" flex='1' textAlign='left' fontWeight="bold">
-                                        Interview result
-                                    </Box>
-                                    <AccordionIcon/>
-                                </AccordionButton>
-                            </h2>
-                            <AccordionPanel pb={4}>
-                                During the interview,the patient...
-                            </AccordionPanel>
-                        </AccordionItem>
-
-                        <AccordionItem>
-                            <h2>
-                                <AccordionButton>
-                                    <Box as="span" flex='1' textAlign='left' fontWeight="bold">
-                                        Personality dinamics
-                                    </Box>
-                                    <AccordionIcon/>
-                                </AccordionButton>
-                            </h2>
-                            <AccordionPanel pb={4}>
-                                The patient&apos;s personality dynamics...
-                            </AccordionPanel>
-                        </AccordionItem>
-
-                        <AccordionItem>
-                            <h2>
-                                <AccordionButton>
-                                    <Box as="span" flex='1' textAlign='left' fontWeight="bold">
-                                        Solution and assignment
-                                    </Box>
-                                    <AccordionIcon/>
-                                </AccordionButton>
-                            </h2>
-                            <AccordionPanel pb={4}>
-                                The patient is advised to...
-                            </AccordionPanel>
-                        </AccordionItem>
-
-                        <AccordionItem>
-                            <h2>
-                                <AccordionButton>
-                                    <Box as="span" flex='1' textAlign='left' fontWeight="bold">
-                                        Conclusion
-                                    </Box>
-                                    <AccordionIcon/>
-                                </AccordionButton>
-                            </h2>
-                            <AccordionPanel pb={4}>
-                                In conclusion, the counseling session..
-                            </AccordionPanel>
-                        </AccordionItem>
-                    </Accordion>
-                </CardBody>
-            </Card>
+                    <CardBody>
+                        <CounselingResult/>
+                    </CardBody>
+                </Card>
             </Grid>
         </Box>
 
