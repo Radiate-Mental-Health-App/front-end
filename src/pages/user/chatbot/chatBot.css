@@ -9,7 +9,7 @@
 }
 
 .msginp{
-    width:100%;
+    width:490px;
     height:55px;
     border-radius: 50px 50px 50px 50px;
     margin-top: 5px;
@@ -37,7 +37,7 @@
 }
 
 .botmsg{
-    background-color: rgb(205, 173, 241);
+    background-color: #ffb850;
     padding-left: 15px;
     padding-right: 15px;
     height:auto;
@@ -49,7 +49,7 @@
 }
 
 .usermsg{
-    background-color: rgb(235, 220, 252);
+    background-color: #ffb850;
     padding-left: 15px;
     padding-right: 15px;
     height:auto;
@@ -74,13 +74,13 @@
    
   /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: rgb(140, 27, 185); 
+    background: #ffb850; 
     border-radius: 10px;
   }
   
   /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
-    background: #b909e6; 
+    background: #ffb850; 
   }
 
 .botIcon{
