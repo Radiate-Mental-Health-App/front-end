@@ -66,7 +66,7 @@ function Basic() {
   console.log(chat);
 
   const stylecard = {
-    maxWidth: "35rem",
+    width: "1100px",
     border: "1px solid black",
     paddingLeft: "0px",
     paddingRight: "0px",
@@ -77,13 +77,13 @@ function Basic() {
     height: "4.5rem",
     borderBottom: "1px solid black",
     borderRadius: "30px 30px 0px 0px",
-    backgroundColor: "#8012c4",
+    backgroundColor: "#ffb850",
   };
   const styleFooter = {
     //maxWidth : '32rem',
     borderTop: "1px solid black",
     borderRadius: "0px 0px 30px 30px",
-    backgroundColor: "#8012c4",
+    backgroundColor: "#ffb850",
   };
   const styleBody = {
     paddingTop: "10px",
@@ -100,7 +100,6 @@ function Basic() {
         <div className="row justify-content-center">
           <div className="card" style={stylecard}>
             <div className="cardHeader text-white" style={styleHeader}>
-              <h1 style={{ marginBottom: "0px" }}>AI Assistant</h1>
               {botTyping ? <h6>Bot Typing....</h6> : null}
             </div>
             <div className="cardBody" id="messageArea" style={styleBody}>
