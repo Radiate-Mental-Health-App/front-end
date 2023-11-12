@@ -19,6 +19,9 @@ import Appointment from "@/pages/psychologist/dataTables";
 import Profile from "@/pages/psychologist/profile";
 
 import AdminDashboard from "../pages/admin/AdminDashboard.jsx";
+// import AdminAppointmentDetail from "../pages/admin/AppointmentDetail.jsx";
+// import Resource from "../pages/admin/Resource.jsx";
+
 // user
 import User from "../pages/admin/user/UserList.jsx";
 import UserDetail from "../pages/admin/user/UserDetail.jsx";
