@@ -7,7 +7,7 @@ const PsychologistList = () => {
   return (
     <div>
       <h2>List of Psychologists</h2>
-      <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+      <Grid templateColumns="repeat(2, 1fr)" gap={8} mx={4}>
         {mockPsychologists.map((psychologist) => (
           <PsychologistCard key={psychologist.id} psychologist={psychologist} />
         ))}
