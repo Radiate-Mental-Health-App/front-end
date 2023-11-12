@@ -1,6 +1,5 @@
-import { FiUser, FiMail, FiCalendar, FiPhone } from "react-icons/fi";
-import { RiLockPasswordLine } from "react-icons/ri";
-import { IoLocationOutline } from "react-icons/io5";
+import { FiMail, FiCalendar, FiPhone } from "react-icons/fi";
+import { IoIosFemale, IoIosMale } from "react-icons/io";
 import { Input, Text, Flex, Box, Heading, ChakraProvider, Spacer, Image, Avatar, CardHeader, Card, Stack, Icon, FormControl, FormLabel, RadioGroup, HStack, Radio, Button } from '@chakra-ui/react';
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -33,8 +32,8 @@ function UserDetail() {
         event.preventDefault()
         axios.put(`http://localhost:8000/users/${id}`, data)
         .then( res => {
-            alert('User updated successfully!')
-            goTo(`/a/users/`)
+            alert('User updated successfully!');
+            goTo(`/a/users/`);
         })
         .catch( err => console.log(err))
     };
@@ -55,7 +54,7 @@ function UserDetail() {
     return ( 
         <div className="Edit">
             <div className="EditContainer">
-            <Box p="32px">
+            <Box p="24px">
                <Heading size='lg' mb={"5"}>User Details</Heading>
                 <Flex gap={4} justifyContent='space-between'>
                     <Box className='profile' bg='white' borderWidth='1px' borderRadius='lg' p='6' w='40%'>
@@ -72,7 +71,8 @@ function UserDetail() {
                         <Stack mt='4' >
                             <Text fontSize='md' fontWeight='semibold' color='gray.400'> Personal Information </Text>
                             <Flex alignItems='center' gap='3'>
-                                <Icon as={FiUser} />
+                                <Icon mr='3px'
+                                    as={data.gender === 'Female' ? IoIosFemale : IoIosMale } />
                                 <Text> {data.gender} </Text>
                             </Flex>
                             <Flex alignItems='center' gap='3'>
@@ -120,7 +120,6 @@ function UserDetail() {
                                                 size="md"
                                                 type="datetime-local"
                                                 value={ data.dateOfBirth }
-                                                onChange={e => setData({...data, dateOfBirth: e.target.value})}
                                                 readOnly
                                             />
                                         </FormControl>
@@ -158,7 +157,7 @@ function UserDetail() {
                                             <Box display='flex' ml='auto' mt='90px'>
                                                 <Button color='red' variant='ghost' mr='30px' onClick={() => handleDelete(data.id)}>Delete</Button>
                                                 <Link to={`/a/users/edit/${id}`}>
-                                                <Button bg='#FFAC31'color='white'> Edit </Button>
+                                                <Button bg='#FFAC31' color='white'> Edit </Button>
                                                 </Link>
                                             </Box>
                                         </Stack>

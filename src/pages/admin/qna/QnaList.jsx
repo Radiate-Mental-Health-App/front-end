@@ -16,6 +16,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useGetQnaQuery } from "../../../state/api";
 
 function QnaList() {
+  const goTo = useNavigate();
   const [sort, setSort] = useState({});
 
   const { data, isLoading } = useGetQnaQuery({
@@ -70,7 +71,7 @@ function QnaList() {
               color="white"
               leftIcon={<AddIcon />}
               size="sm"
-              onClick={() => goTo(`/a/add-user`)}>
+              onClick={() => goTo(`/a/qna/QnaCreate`)}>
               Add
             </Button>
           </Box>

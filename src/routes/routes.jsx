@@ -1,4 +1,9 @@
-import { Route, Navigate, createBrowserRouter, createRoutesFromElements } from "react-router-dom";
+import {
+  Route,
+  Navigate,
+  createBrowserRouter,
+  createRoutesFromElements,
+} from "react-router-dom";
 
 import UserDashboard from "@/pages/user/home/UserDashboard";
 import MoodTracker from "@/pages/user/mood-tracker/MoodTracker.jsx";
@@ -21,6 +26,7 @@ import UserEdit from "../pages/admin/user/UserEdit.jsx";
 
 //qna
 import Qna from "../pages/admin/qna/QnaList.jsx";
+import QnaCreate from "../pages/admin/qna/QnaCreate.jsx";
 
 // psychologyst
 import List from "../pages/admin/psychologist/List.jsx";
@@ -32,7 +38,11 @@ import Resource from "../pages/admin/Resource.jsx";
 import SidebarLayout from "@/layouts/SidebarLayout.jsx";
 import Login from "@/pages/auth/Login.jsx";
 
-import { ADMIN_MENU, PSYCHOLOGIST_MENU, USER_MENU } from "@/constants/sidebar.js";
+import {
+  ADMIN_MENU,
+  PSYCHOLOGIST_MENU,
+  USER_MENU,
+} from "@/constants/sidebar.js";
 import PsychologistDetails from "@/pages/user/counseling/psyDetail.component";
 import CounselingPayment from "@/pages/user/counseling/CounselingPayment";
 import AppointmentDetail from "@/pages/psychologist/dataTables/AppointmentDetail";
@@ -48,7 +58,9 @@ const routes = createRoutesFromElements(
       <Route path="journal" element={<Journal />}></Route>
       <Route path="counseling" element={<Counseling />}></Route>
       <Route path="counseling/payment" element={<CounselingPayment />}></Route>
-      <Route path="counseling/payment/done" element={<CounselingPaymentDone />}></Route>
+      <Route
+        path="counseling/payment/done"
+        element={<CounselingPaymentDone />}></Route>
       <Route path="wellness-center" element={<WellnessCenter />}></Route>
       <Route path="Chatbot" element={<Chatbot />}></Route>
     </Route>
@@ -70,6 +82,7 @@ const routes = createRoutesFromElements(
       </Route>
       <Route path="qna">
         <Route index element={<Qna />} />
+        <Route path="QnaCreate" element={<QnaCreate />} />
         <Route path=":id" element={<UserDetail />} />
         <Route path="edit/:id" element={<UserEdit />} />
       </Route>
