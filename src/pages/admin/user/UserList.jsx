@@ -96,22 +96,11 @@ function User() {
 
   return (
     <div className="showUser">
-      <Box p='32px'>
+      <Box p='24px'>
       <Flex justifyContent="space-between" alignItems='center'>
         <Heading size="lg" mb={"5"}>
           User
         </Heading>
-        <Box className="add-button">
-          <Button
-           variant="ghost"
-           bgColor="#FD9F00"
-           color="white" 
-           leftIcon={<AddIcon />} size="sm"
-           onClick={() => goTo(`/a/add-user`)}
-          >
-          Add
-          </Button>
-        </Box>
       </Flex>
       <Box border="1px" borderColor="gray.200" borderRadius="5px">
         <DataTable

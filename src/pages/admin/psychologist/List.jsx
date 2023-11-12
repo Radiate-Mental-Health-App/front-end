@@ -1,7 +1,6 @@
 import DataTable from "react-data-table-component";
 import axios from "axios";
-import { Text, Heading, Box, Avatar, Flex, Button, Icon, Tag, TagLeftIcon, TagLabel } from "@chakra-ui/react";
-import { AddIcon } from '@chakra-ui/icons';
+import { Text, Heading, Box, Avatar, Flex, Button, Tag, TagLeftIcon, TagLabel } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FiClock, FiCheckCircle } from "react-icons/fi";
@@ -25,7 +24,7 @@ const ActionButton = ({ row }) => {
       <Button mr='10px' height={7} width="60px" fontSize='sm' colorScheme="red"
       onClick={() => handleDelete(row.id)}
       > Delete </Button>
-      <Link to={`/a/users/edit/${row.id}`}>
+      <Link to={`/a/psychologist/edit/${row.id}`}>
         <Button height={7} width="50px" fontSize='sm' color='white' bg="#FFAC31"> Edit </Button>
       </Link>
     </div>
@@ -87,8 +86,6 @@ const style = {
 };
 
 function List() {
-
-  const goTo = useNavigate();
 
   const column = [
     {

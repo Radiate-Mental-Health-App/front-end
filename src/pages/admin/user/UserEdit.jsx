@@ -98,7 +98,7 @@ function UserEdit() {
                                         <Stack spacing='6' mt='2'>
                                         <FormControl >
                                             <FormLabel color='gray.500' fontSize='md'>Full Name</FormLabel>
-                                            <Input variant='outline ' value={ data.fullName } onChange={e => setData({...data, fullName: e.target.value})} />
+                                            <Input variant='outline' value={ data.fullName } onChange={e => setData({...data, fullName: e.target.value})} />
                                         </FormControl>
 
                                         <FormControl as='fieldset'>

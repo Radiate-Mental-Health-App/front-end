@@ -19,6 +19,9 @@ import Profile from "../pages/psychologist/Profile.jsx";
 import Help from "../pages/psychologist/Help.jsx";
 
 import AdminDashboard from "../pages/admin/AdminDashboard.jsx";
+import AppointmentDetail from "../pages/admin/AppointmentDetail.jsx";
+import Resource from "../pages/admin/Resource.jsx";
+
 // user
 import User from "../pages/admin/user/UserList.jsx";
 import UserDetail from "../pages/admin/user/UserDetail.jsx";
@@ -29,8 +32,6 @@ import List from "../pages/admin/psychologist/List.jsx";
 import Detail from "../pages/admin/psychologist/Detail.jsx";
 import Edit from "../pages/admin/psychologist/Edit.jsx";
 
-import Resource from "../pages/admin/Resource.jsx";
-
 import SidebarLayout from "../layouts/SidebarLayout.jsx";
 import PrivateRoute from "../components/PrivateRoute.jsx";
 import Login from "../pages/auth/Login.jsx";
@@ -39,6 +40,7 @@ import {
   PSYCHOLOGIST_MENU,
   USER_MENU,
 } from "../constants/sidebar.js";
+
 
 
 
@@ -73,6 +75,7 @@ const routes = createRoutesFromElements(
         <Route path="book/:id" element={<Booking />} />
       </Route>
       <Route path="resources" element={<Resource />}/>
+      <Route path="appointment-detail/:id" element={<AppointmentDetail />} />
     </Route>
     <Route path="/login" element={<Login />}></Route>
     <Route path="/" element={<Navigate to="/u" />}></Route>
