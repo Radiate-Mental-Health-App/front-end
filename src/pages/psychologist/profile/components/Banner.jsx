@@ -4,8 +4,13 @@ import {
     Box,
     Card,
     Text,
+    TagLeftIcon,
+    Tag,
+    TagLabel,
     useColorModeValue
 } from "@chakra-ui/react";
+
+import { FiClock, FiCheckCircle } from "react-icons/fi";
 
 export default function Banner(props) {
     // eslint-disable-next-line react/prop-types
@@ -24,7 +29,8 @@ export default function Banner(props) {
         // }}
             padding="20px"
             borderRadius='20px'
-            align='center'>
+            align='center'
+            height="max-content">
             <Box
                 bg={`url(${banner})`}
                 bgSize='cover'
@@ -45,6 +51,14 @@ export default function Banner(props) {
             <Text color={textColorSecondary} fontSize='sm'>
                 {job}
             </Text>
+            <Tag variant="subtle" size='md' colorScheme="green">
+                <TagLeftIcon as={ FiCheckCircle } />
+                <TagLabel> Verified </TagLabel>
+            </Tag>
+            <Tag variant="subtle" size='md' colorScheme="orange">
+        <TagLeftIcon as={ FiClock } />
+        <TagLabel> Pending </TagLabel>
+      </Tag>
         </Card>
     );
 }

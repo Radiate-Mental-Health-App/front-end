@@ -11,6 +11,12 @@ import {
   WrapItem,
   Tag,
   Textarea,
+  Flex,
+  Button,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 
 import { Icon } from "@chakra-ui/react";
@@ -22,64 +28,103 @@ import OkayIcon from "@/assets/mood-icons/3_okay.png";
 import GoodIcon from "@/assets/mood-icons/4_good.png";
 import WonderfulIcon from "@/assets/mood-icons/5_wonderful.png";
 
-const mood = {
-  terrible: {
-    name: "Terrible",
+const moodIcon = {
+  Terrible: {
     icon: TerribleIcon,
   },
-  bad: {
-    name: "Bad",
+  Sad: {
     icon: BadIcon,
   },
-  okay: {
-    name: "Okay",
+  Okay: {
     icon: OkayIcon,
   },
-  good: {
-    name: "Good",
+  Good: {
     icon: GoodIcon,
   },
-  wonderful: {
-    name: "Wonderful",
+  Wonderful: {
     icon: WonderfulIcon,
   },
 };
 
-export const MoodCard = ({ log }) => {
+export const MoodCard = ({ item, onOpen, setModalAction, setIdMood }) => {
+  const onClickEdit = () => {
+    setModalAction("edit");
+    setIdMood(item.id);
+    onOpen();
+  };
+
+  const onClickDelete = async () => {
+    if (confirm("are you sure delete this item ?!") == true) {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/user/moodentries/" + item.id,
+          {
+            method: "DELETE",
+            headers: {
+              "x-access-token":
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MmY5ZTA0MDUwYjdiYWQzODYzZDVlMyIsInJvbGVzIjoiUk9MRV9VU0VSIiwiaWF0IjoxNjk5NzgxNTQyLCJleHAiOjE2OTk4Njc5NDJ9.oX5hROlb5kokZWo_H7h16HfsEfQD-wqIltGBQYA4GmM",
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        const data = await response.json();
+        if (data.success) {
+          alert(data.message);
+          window.location.reload();
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+  };
+
   return (
-    <Card w={"350px"} h={"auto"} rounded={"xl"} mb={"21px"}>
+    <Card w={"350px"} h={"auto"} rounded={"xl"}>
       <CardBody>
-        <HStack mb={5}>
-          <Image src={mood[log.moodValue].icon} boxSize={"60px"} />
-          <VStack align={"left"} ml={4}>
-            <Heading size={"md"}>{mood[log.moodValue].name}</Heading>
-            <HStack>
-              <Icon as={HiCalendar} boxSize={5}></Icon>
-              <Text fontSize={"sm"}>{log.date}</Text>
-            </HStack>
-          </VStack>
-        </HStack>
+        <Flex justifyContent="space-between" mb={5}>
+          <HStack>
+            <Image src={moodIcon[item.moodValue].icon} boxSize={"60px"} />
+            <VStack align={"left"} ml={4}>
+              <Heading size={"md"}>{item.moodValue}</Heading>
+              <HStack>
+                <Icon as={HiCalendar} boxSize={5}></Icon>
+                <Text fontSize={"sm"}>
+                  {new Date(item.date).toDateString()}
+                </Text>
+              </HStack>
+            </VStack>
+          </HStack>
+          <Menu>
+            <MenuButton as={Button} colorScheme="gray" fontSize="2xl">
+              ...
+            </MenuButton>
+            <MenuList minWidth="100%">
+              <MenuItem onClick={onClickEdit}>Edit</MenuItem>
+              <MenuItem onClick={onClickDelete}>Delete</MenuItem>
+            </MenuList>
+          </Menu>
+        </Flex>
         <Container mb={5} p={0}>
           <Wrap spacing={"8px"}>
-            {log.activities.map((activity) => {
-              return (
-                <WrapItem>
-                  <Tag
-                    size={"md"}
-                    variant={"outline"}
-                    borderRadius={"full"}
-                    colorScheme="brand"
-                  >
-                    {activity}
-                  </Tag>
-                </WrapItem>
-              );
-            })}
+            {item.activities.map((activity, index) => (
+              <WrapItem key={index}>
+                <Tag
+                  size={"md"}
+                  variant={"outline"}
+                  borderRadius={"full"}
+                  colorScheme="brand"
+                >
+                  {activity}
+                </Tag>
+              </WrapItem>
+            ))}
           </Wrap>
         </Container>
         <Container mb={5} p={0}>
           <Textarea
-            value={log.moodNote}
+            isDisabled
+            value={item.moodNote}
             resize={"none"}
             w={"100%"}
             bg={"black.50"}
