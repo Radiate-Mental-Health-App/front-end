@@ -19,37 +19,78 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 
-import TerribleIcon from "@/assets/mood-icons/1_terrible.png";
-import BadIcon from "@/assets/mood-icons/2_bad.png";
-import OkayIcon from "@/assets/mood-icons/3_okay.png";
-import GoodIcon from "@/assets/mood-icons/4_good.png";
-import WonderfulIcon from "@/assets/mood-icons/5_wonderful.png";
+import listmood from "./listmood";
+
 import { useState } from "react";
+import TagSelect from "./TagSelect";
+import IconMood from "./IconMood";
 
-const TagInput = ({ data }) => {
-  const [selected, setSelected] = useState(false);
-  return (
-    <Tag
-      size={"lg"}
-      variant={selected ? "outline" : "fill"}
-      borderRadius={"full"}
-      colorScheme="brand"
-      fontSize={"14px"}
-      fontWeight={"regular"}
-      cursor="pointer"
-      color={selected ? "brand" : "#fff"}
-      mr="5px"
-      onClick={() => {
-        selected ? setSelected(false) : setSelected(true);
-        console.log(selected);
-      }}
-    >
-      {data}
-    </Tag>
-  );
-};
+const listSocial = ["Family", "Friends", "Relationship", "Colleagues"];
+const listActivities = [
+  "Studying",
+  "Working",
+  "Exercise",
+  "Trip",
+  "Watching",
+  "Date",
+  "Shopping",
+  "Game",
+  "Movies",
+];
 
-export const MoodModal = ({ isOpen, onClose }) => {
+export const MoodModal = ({
+  isOpen,
+  onClose,
+  moodChoose,
+  setMoodChoose,
+  modalAction,
+  idMood,
+}) => {
+  const [selectedSocials, setSelectedSocials] = useState([]);
+  const [selectedActivities, setSelectedActivities] = useState([]);
+  const [textareaValue, setTextareaValue] = useState("");
+
+  const handleSubmit = async () => {
+    const dataMood = {
+      moodValue: moodChoose,
+      social: selectedSocials,
+      activities: selectedActivities,
+      moodNote: textareaValue,
+    };
+
+    let methodAction;
+    let url;
+    if (modalAction == "edit") {
+      methodAction = "PUT";
+      url = "http://localhost:5000/api/user/moodentries/" + idMood;
+    } else {
+      methodAction = "POST";
+      url = "http://localhost:5000/api/user/moodentries";
+    }
+
+    try {
+      const response = await fetch(url, {
+        method: methodAction,
+        headers: {
+          "x-access-token":
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MmY5ZTA0MDUwYjdiYWQzODYzZDVlMyIsInJvbGVzIjoiUk9MRV9VU0VSIiwiaWF0IjoxNjk5NzgxNTQyLCJleHAiOjE2OTk4Njc5NDJ9.oX5hROlb5kokZWo_H7h16HfsEfQD-wqIltGBQYA4GmM",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(dataMood),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        if (methodAction == "PUT") {
+          alert(data.message);
+        }
+        window.location.reload();
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
     <>
       <Modal
@@ -66,40 +107,19 @@ export const MoodModal = ({ isOpen, onClose }) => {
           <ModalBody pb={6}>
             <VStack>
               <Container p={0}>
-                <Heading size={"md"} fontWeight={"medium"} mb={3}>
+                <Heading size={"md"} fontWeight={"medium"} mb={5}>
                   Rate your mood
                 </Heading>
                 <HStack spacing={"32px"} justify={"center"} mb={5}>
-                  <Image
-                    src={TerribleIcon}
-                    alt="mood_icon"
-                    boxSize={"60px"}
-                    cursor={"pointer"}
-                  />
-                  <Image
-                    src={BadIcon}
-                    alt="mood_icon"
-                    boxSize={"60px"}
-                    cursor={"pointer"}
-                  />
-                  <Image
-                    src={OkayIcon}
-                    alt="mood_icon"
-                    boxSize={"60px"}
-                    cursor={"pointer"}
-                  />
-                  <Image
-                    src={GoodIcon}
-                    alt="mood_icon"
-                    boxSize={"60px"}
-                    cursor={"pointer"}
-                  />
-                  <Image
-                    src={WonderfulIcon}
-                    alt="mood_icon"
-                    boxSize={"60px"}
-                    cursor={"pointer"}
-                  />
+                  {listmood.map((item, index) => (
+                    <IconMood
+                      key={index}
+                      item={item}
+                      size={"60px"}
+                      moodChoose={moodChoose}
+                      onClickMood={setMoodChoose}
+                    />
+                  ))}
                 </HStack>
               </Container>
               <Container p={0}>
@@ -111,167 +131,27 @@ export const MoodModal = ({ isOpen, onClose }) => {
                     Social
                   </Text>
                   <Wrap spacing={"8px"} mb={3}>
-                    <WrapItem>
-                      <Tag
-                        size={"lg"}
-                        variant={"outline"}
-                        borderRadius={"full"}
-                        colorScheme="brand"
-                        fontSize={"14px"}
-                        fontWeight={"regular"}
-                      >
-                        Family
-                      </Tag>
-                    </WrapItem>
-                    <WrapItem>
-                      <Tag
-                        size={"lg"}
-                        variant={"outline"}
-                        borderRadius={"full"}
-                        colorScheme="brand"
-                        fontSize={"14px"}
-                        fontWeight={"regular"}
-                      >
-                        Friends
-                      </Tag>
-                    </WrapItem>
-                    <WrapItem>
-                      <Tag
-                        size={"lg"}
-                        variant={"outline"}
-                        borderRadius={"full"}
-                        colorScheme="brand"
-                        fontSize={"14px"}
-                        fontWeight={"regular"}
-                      >
-                        Relationship
-                      </Tag>
-                    </WrapItem>
-                    <WrapItem>
-                      <Tag
-                        size={"lg"}
-                        variant={"outline"}
-                        borderRadius={"full"}
-                        colorScheme="brand"
-                        fontSize={"14px"}
-                        fontWeight={"regular"}
-                      >
-                        Colleagues
-                      </Tag>
-                    </WrapItem>
+                    {listSocial.map((item, index) => (
+                      <TagSelect
+                        key={index}
+                        item={item}
+                        selectedTags={selectedSocials}
+                        setSelectedTags={setSelectedSocials}
+                      />
+                    ))}
                   </Wrap>
                   <Text color={"black.500"} mb={3}>
                     Activities
                   </Text>
                   <Wrap spacing={"8px"} mb={5}>
-                    <WrapItem>
-                      <Tag
-                        size={"lg"}
-                        variant={"outline"}
-                        borderRadius={"full"}
-                        colorScheme="brand"
-                        fontSize={"14px"}
-                        fontWeight={"regular"}
-                      >
-                        Studying
-                      </Tag>
-                    </WrapItem>
-                    <WrapItem>
-                      <Tag
-                        size={"lg"}
-                        variant={"outline"}
-                        borderRadius={"full"}
-                        colorScheme="brand"
-                        fontSize={"14px"}
-                        fontWeight={"regular"}
-                      >
-                        Working
-                      </Tag>
-                    </WrapItem>
-                    <WrapItem>
-                      <Tag
-                        size={"lg"}
-                        variant={"outline"}
-                        borderRadius={"full"}
-                        colorScheme="brand"
-                        fontSize={"14px"}
-                        fontWeight={"regular"}
-                      >
-                        Exercise
-                      </Tag>
-                    </WrapItem>
-                    <WrapItem>
-                      <Tag
-                        size={"lg"}
-                        variant={"outline"}
-                        borderRadius={"full"}
-                        colorScheme="brand"
-                        fontSize={"14px"}
-                        fontWeight={"regular"}
-                      >
-                        Trip
-                      </Tag>
-                    </WrapItem>
-                    <WrapItem>
-                      <Tag
-                        size={"lg"}
-                        variant={"outline"}
-                        borderRadius={"full"}
-                        colorScheme="brand"
-                        fontSize={"14px"}
-                        fontWeight={"regular"}
-                      >
-                        Watching
-                      </Tag>
-                    </WrapItem>
-                    <WrapItem>
-                      <Tag
-                        size={"lg"}
-                        variant={"outline"}
-                        borderRadius={"full"}
-                        colorScheme="brand"
-                        fontSize={"14px"}
-                        fontWeight={"regular"}
-                      >
-                        Date
-                      </Tag>
-                    </WrapItem>
-                    <WrapItem>
-                      <Tag
-                        size={"lg"}
-                        variant={"outline"}
-                        borderRadius={"full"}
-                        colorScheme="brand"
-                        fontSize={"14px"}
-                        fontWeight={"regular"}
-                      >
-                        Shopping
-                      </Tag>
-                    </WrapItem>
-                    <WrapItem>
-                      <Tag
-                        size={"lg"}
-                        variant={"outline"}
-                        borderRadius={"full"}
-                        colorScheme="brand"
-                        fontSize={"14px"}
-                        fontWeight={"regular"}
-                      >
-                        Game
-                      </Tag>
-                    </WrapItem>
-                    <WrapItem>
-                      <Tag
-                        size={"lg"}
-                        variant={"outline"}
-                        borderRadius={"full"}
-                        colorScheme="brand"
-                        fontSize={"14px"}
-                        fontWeight={"regular"}
-                      >
-                        Movies
-                      </Tag>
-                    </WrapItem>
+                    {listActivities.map((item, index) => (
+                      <TagSelect
+                        key={index}
+                        item={item}
+                        selectedTags={selectedActivities}
+                        setSelectedTags={setSelectedActivities}
+                      />
+                    ))}
                   </Wrap>
                 </Container>
               </Container>
@@ -286,19 +166,19 @@ export const MoodModal = ({ isOpen, onClose }) => {
                   bg={"black.50"}
                   color={"black.500"}
                   focusBorderColor={"black.100"}
+                  onChange={(e) => setTextareaValue(e.target.value)}
                 />
               </Container>
             </VStack>
           </ModalBody>
           <ModalFooter>
-            <Button colorScheme="brand" mr={3}>
+            <Button colorScheme="brand" mr={3} onClick={handleSubmit}>
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
-      ;
     </>
   );
 };

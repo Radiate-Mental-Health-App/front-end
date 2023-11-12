@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 // Chakra imports
-import {Button, Card, HStack, Heading} from "@chakra-ui/react";
+import {Button, Card, HStack, Heading, Modal, useDisclosure} from "@chakra-ui/react";
 
 // Custom components
 import FullCalendar from "@fullcalendar/react";
@@ -10,10 +10,13 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from '@fullcalendar/interaction';
 import {INITIAL_EVENTS, createEventId} from '@/pages/psychologist/schedules/variables/event-utils';
 import { Link } from "react-router-dom";
+import InputSchedule from "./InputSchedule";
 
 export default function Schedule() {
     // eslint-disable-next-line no-unused-vars
     const [currentEvents, setCurrentEvents] = useState([]);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+
     const handleDateSelect = (selectInfo) => {
         let title = prompt("Please enter a new title for your event");
         let calendarApi = selectInfo.view.calendar;
@@ -43,7 +46,7 @@ export default function Schedule() {
             <HStack justifyContent={"space-between"} pb={2}>
                 <Heading size='md'>Your availability</Heading>
                 <Link to={"#"}>
-                    <Button fontWeight={500} size="md" colorScheme="brand">
+                    <Button fontWeight={500} size="md" colorScheme="brand" onClick={onOpen}>
                         + Create availability
                     </Button>
                 </Link>
@@ -66,6 +69,9 @@ export default function Schedule() {
                 eventContent={renderEventContent}
                 eventClick={handleEventClick}
                 eventsSet={handleEvents}/>
+                <Modal isOpen={isOpen} onClose={onClose}>
+                    <InputSchedule onClose={onClose} />
+                </Modal>
         </Card>
     );
 }
