@@ -1,5 +1,5 @@
 import { Spacer, Avatar, Box, Flex, Heading,  Tag, TagLabel, TagLeftIcon, Text, Icon, Stack, FormControl, FormLabel, Input, InputGroup, InputLeftElement, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Select, Link, Button } from '@chakra-ui/react';
-import { FiClock, FiCheckCircle } from "react-icons/fi";
+import { FiClock, FiCheckCircle, FiLock } from "react-icons/fi";
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { IoIosFemale, IoIosMale } from "react-icons/io";
@@ -189,7 +189,24 @@ function Detail() {
                   </FormControl>
                 </Flex>
 
-              <Box ml='auto' mt='152px'>
+              <Text fontSize='lg' fontWeight='bold' color='gray.300' mb='6px' mt={5}> Credentials </Text>
+              <Text color='gray.400' fontWeight='semibold'> Email </Text>
+                <Flex alignItems='center' mb={5}>
+                  <Icon as={FiMail} mr='8px' />
+                  <FormControl>
+                    <Input size='md' variant='unstyled' readOnly value={data.email} />
+                  </FormControl>
+                </Flex>
+
+              <Text color='gray.400' fontWeight='semibold'> Password </Text>
+              <Flex alignItems='center'>
+                <Icon as={FiLock} mr='8px' />
+                <FormControl>
+                  <Input size='md' variant='unstyled' readOnly value={data.password} />
+                </FormControl>
+              </Flex>
+
+              <Box display='flex' ml='auto' mt={9}>
                  <Approve />
               </Box>
             </Box>
