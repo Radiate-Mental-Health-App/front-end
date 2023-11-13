@@ -41,6 +41,7 @@ import Resource from "../pages/admin/Resource.jsx";
 
 import SidebarLayout from "@/layouts/SidebarLayout.jsx";
 import Login from "@/pages/auth/Login.jsx";
+import Register from "@/pages/auth/Register.jsx";
 
 import {
   ADMIN_MENU,
@@ -101,6 +102,7 @@ const routes = createRoutesFromElements(
       <Route path="resources" element={<Resource />} />
     </Route>
     <Route path="/login" element={<Login />}></Route>
+    <Route path="/register" element={<Register />}></Route>
     <Route path="/" element={<Navigate to="/u" />}></Route>
   </>
 );
