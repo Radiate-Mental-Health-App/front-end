@@ -23,7 +23,7 @@ export const api = createApi({
     }),
     addDataQNA: build.mutation({
       query: (initialQNAData) => ({
-        url: "client/add",
+        url: "/api/qna/addqna",
         method: "POST",
         body: {
           ...initialQNAData,

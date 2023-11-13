@@ -30,6 +30,7 @@ import UserEdit from "../pages/admin/user/UserEdit.jsx";
 //qna
 import Qna from "../pages/admin/qna/QnaList.jsx";
 import QnaCreate from "../pages/admin/qna/QnaCreate.jsx";
+import QnaEdit from "../pages/admin/qna/QnaEdit.jsx";
 
 // psychologyst
 import List from "../pages/admin/psychologist/List.jsx";
@@ -73,7 +74,9 @@ const routes = createRoutesFromElements(
       <Route path="schedules" element={<Schedule />}></Route>
       <Route path="appointments" element={<Appointment />}></Route>
       <Route path="appointments/detail" element={<AppointmentDetail />}></Route>
-      <Route path="appointments/detail/edit" element={<FormCounselingResult />}></Route>
+      <Route
+        path="appointments/detail/edit"
+        element={<FormCounselingResult />}></Route>
       <Route path="profile" element={<Profile />}></Route>
     </Route>
     <Route path="/a" element={<SidebarLayout menu={ADMIN_MENU} />}>
@@ -87,7 +90,7 @@ const routes = createRoutesFromElements(
         <Route index element={<Qna />} />
         <Route path="QnaCreate" element={<QnaCreate />} />
         <Route path=":id" element={<UserDetail />} />
-        <Route path="edit/:id" element={<UserEdit />} />
+        <Route path="QnaEdit/:id" element={<QnaEdit />} />
       </Route>
       <Route path="psychologist">
         <Route index element={<List />} />
