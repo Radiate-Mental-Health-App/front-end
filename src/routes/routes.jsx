@@ -59,6 +59,7 @@ const routes = createRoutesFromElements(
       <Route path="mood-tracker" element={<MoodTracker />}></Route>
       <Route path="journal" element={<Journal />}></Route>
       <Route path="counseling" element={<Counseling />}></Route>
+      <Route path="counseling/:id" element={<Booking />}></Route>
       <Route path="counseling/payment" element={<CounselingPayment />}></Route>
       <Route
         path="counseling/payment/done"

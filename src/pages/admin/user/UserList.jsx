@@ -85,9 +85,9 @@ function User() {
 
   useEffect(() => {
     const fetchData = async () => {
-      axios.get(`http://localhost:8000/users`)
+      axios.get(`http://localhost:5000/api/account/user`)
       .then(res => {
-        setData(res.data)
+        setData(res.data.data.users)
       })
       .catch(err => console.log(err))
     }

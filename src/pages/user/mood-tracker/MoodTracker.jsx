@@ -27,20 +27,22 @@ function MoodTracker() {
         "http://localhost:5000/api/user/moodentries",
         {
           headers: {
-            "x-access-token":
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MmY5ZTA0MDUwYjdiYWQzODYzZDVlMyIsInJvbGVzIjoiUk9MRV9VU0VSIiwiaWF0IjoxNjk5NzgxNTQyLCJleHAiOjE2OTk4Njc5NDJ9.oX5hROlb5kokZWo_H7h16HfsEfQD-wqIltGBQYA4GmM",
+            "x-access-token": localStorage.getItem("accessToken"),
           },
         }
       );
 
       const data = await response.json();
-      setListUserMood(data);
-      sessionStorage.setItem(
-        "lastDate",
-        new Date(data[data.length - 1].date).toDateString()
-      );
+      if (data.success) {
+        setListUserMood(data.moodEntries);
+        setLastDate(
+          new Date(
+            data.moodEntries[data.moodEntries.length - 1].date
+          ).toDateString()
+        );
+      } else throw data;
     } catch (error) {
-      alert(error.message);
+      console.log(error.message);
     }
   };
 
@@ -50,7 +52,7 @@ function MoodTracker() {
 
   return (
     <Flex p="32px" direction={"column"}>
-      {sessionStorage.getItem("lastDate") == new Date().toDateString() ? (
+      {lastDate == new Date().toDateString() ? (
         ""
       ) : (
         <>

@@ -1,64 +1,91 @@
 // Chakra imports
 import {
-    Avatar,
-    Box,
-    Card,
-    Text,
-    TagLeftIcon,
-    Tag,
-    TagLabel,
-    useColorModeValue
+  Avatar,
+  Box,
+  Card,
+  Text,
+  useColorModeValue,
+  Tag,
+  TagLabel,
+  TagLeftIcon,
 } from "@chakra-ui/react";
-
 import { FiClock, FiCheckCircle } from "react-icons/fi";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Banner(props) {
-    // eslint-disable-next-line react/prop-types
-    const { banner, avatar, name, job } = props;
+  // eslint-disable-next-line react/prop-types
+  const { banner, avatar, name, job } = props;
 
-    // Chakra Color Mode
-    const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
-    const textColorSecondary = "gray.400";
-    const borderColor = useColorModeValue("white !important", "#111C44 !important");
+  const [profile, setProfile] = useState({});
 
-    return (
-        <Card
-        //     mb={{
-        //     base: "0px",
-        //     lg: "20px"
-        // }}
-            padding="20px"
-            borderRadius='20px'
-            align='center'
-            height="max-content">
-            <Box
-                bg={`url(${banner})`}
-                bgSize='cover'
-                borderRadius='16px'
-                h='131px'
-                w='100%'/>
-            <Avatar
-                mx='auto'
-                src={avatar}
-                h='87px'
-                w='87px'
-                mt='-43px'
-                border='4px solid'
-                borderColor={borderColor}/>
-            <Text color={textColorPrimary} fontWeight='bold' fontSize='xl' mt='10px'>
-                {name}
-            </Text>
-            <Text color={textColorSecondary} fontSize='sm'>
-                {job}
-            </Text>
-            <Tag variant="subtle" size='md' colorScheme="green">
-                <TagLeftIcon as={ FiCheckCircle } />
-                <TagLabel> Verified </TagLabel>
-            </Tag>
-            <Tag variant="subtle" size='md' colorScheme="orange">
-        <TagLeftIcon as={ FiClock } />
-        <TagLabel> Pending </TagLabel>
-      </Tag>
-        </Card>
-    );
+  const fetchData = async () => {
+    axios
+      .get(
+        `http://localhost:5000/api/account/psychologist/652fb0eaf361df621268bfe2`
+      )
+      .then((res) => {
+        setProfile(res.data.data.psychologist);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // Chakra Color Mode
+  const textColorPrimary = useColorModeValue("secondaryGray.900", "white");
+  const textColorSecondary = "gray.400";
+  const borderColor = useColorModeValue(
+    "white !important",
+    "#111C44 !important"
+  );
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return (
+    <Card
+      padding="20px"
+      borderRadius="20px"
+      align="center"
+      height="max-content"
+    >
+      <Box
+        bg={`url(${banner})`}
+        bgSize="cover"
+        borderRadius="16px"
+        h="131px"
+        w="100%"
+      />
+      <Avatar
+        mx="auto"
+        src={avatar}
+        h="87px"
+        w="87px"
+        mt="-43px"
+        border="4px solid"
+        borderColor={borderColor}
+      />
+      <Text color={textColorPrimary} fontWeight="bold" fontSize="xl" mt="10px">
+        {profile.fullName}
+      </Text>
+      <Text color={textColorSecondary} fontSize="sm">
+        {profile.currentJob}
+      </Text>
+      <Box mt={2}>
+        {profile.isVerified ? (
+          <Tag variant="subtle" size="md" colorScheme="green">
+            <TagLabel>Account Status : </TagLabel>
+            <TagLeftIcon as={FiCheckCircle} ml={1} />
+            <TagLabel> Verified </TagLabel>
+          </Tag>
+        ) : (
+          <Tag variant="subtle" size="md" colorScheme="orange">
+            <TagLabel>Account Status : </TagLabel>
+            <TagLeftIcon as={FiClock} ml={1} />
+            <TagLabel> Pending</TagLabel>
+          </Tag>
+        )}
+      </Box>
+    </Card>
+  );
 }

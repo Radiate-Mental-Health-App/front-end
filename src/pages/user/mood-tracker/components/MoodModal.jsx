@@ -72,8 +72,7 @@ export const MoodModal = ({
       const response = await fetch(url, {
         method: methodAction,
         headers: {
-          "x-access-token":
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MmY5ZTA0MDUwYjdiYWQzODYzZDVlMyIsInJvbGVzIjoiUk9MRV9VU0VSIiwiaWF0IjoxNjk5NzgxNTQyLCJleHAiOjE2OTk4Njc5NDJ9.oX5hROlb5kokZWo_H7h16HfsEfQD-wqIltGBQYA4GmM",
+          "x-access-token": localStorage.getItem("accessToken"),
           "Content-Type": "application/json",
         },
         body: JSON.stringify(dataMood),

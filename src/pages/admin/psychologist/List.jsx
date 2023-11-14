@@ -44,7 +44,7 @@ const VerifButton = ({ row }) => (
 
 // status
 const Status = ({ row }) => {
-  if (row.isVerified === true) {
+  if (row.isActive === true) {
     return (
       <Tag variant="subtle" size='sm' colorScheme="green">
         <TagLeftIcon as={ FiCheckCircle } />
@@ -126,9 +126,9 @@ function List() {
 
   useEffect(() => {
     const fetchData = async () => {
-      axios.get(`http://localhost:8000/counselors`)
+      axios.get(`http://localhost:5000/api/account/psychologist`)
       .then(res => {
-        setData(res.data)
+        setData(res.data.data.psychologists)
       })
       .catch(err => console.log(err))
     }
