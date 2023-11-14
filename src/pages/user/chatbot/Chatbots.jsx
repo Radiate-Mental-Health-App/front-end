@@ -7,7 +7,7 @@ import "./chatBot.css";
 
 function Chatbots() {
 
-    const [chat, setChat] = useState([]);
+  const [chat, setChat] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const [botTyping, setbotTyping] = useState(false);
 
@@ -68,11 +68,7 @@ function Chatbots() {
   console.log(chat);
 
     return (
-
         <Box p='28px' className="chatbot">
-
-            
-            
             <Box className="card" border='1px' borderColor='gray.300'
                 borderRadius='10px' w='65%' margin='auto'>
 
