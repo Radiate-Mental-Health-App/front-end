@@ -9,22 +9,19 @@ import {
   Tag,
   TagLeftIcon,
   Icon,
-  HStack,
-  VStack,
   Select,
   Button,
   Card,
   CardHeader,
   Heading,
   CardBody,
-  ListItem,
   CardFooter,
-  SimpleGrid,
+  FormControl,
+  Input,
 } from "@chakra-ui/react";
-import { Link, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { FaBriefcase, FaRegCommentAlt, FaRegComment } from "react-icons/fa";
-import { AiFillStar } from "react-icons/ai";
+import { FaBriefcase } from "react-icons/fa";
 import { HiOutlineIdentification } from "react-icons/hi";
 import { IoSchoolOutline } from "react-icons/io5";
 import { BsFileEarmark } from "react-icons/bs";
@@ -34,40 +31,58 @@ function Booking() {
   // fetching data
   const { id } = useParams();
   const [data, setData] = useState([]);
+  const [listSchedule, setListSchedule] = useState([]);
+  const [problem, setProblem] = useState("");
+  const [selectedPackage, setSelectedPackage] = useState("");
+
+  const goTo = useNavigate();
+
+  const fetchData = async () => {
+    axios
+      .get(`http://localhost:5000/api/account/psychologist/${id}`)
+      .then((res) => {
+        setData(res.data.data.psychologist);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const getAvailableSchedule = async () => {
+    axios
+      .get(`http://localhost:5000/api/psychologist/schedule/${id}`)
+      .then((res) => {
+        setListSchedule(res.data.data.schedules);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleNext = () => {
+    console.log("id psikolog", id);
+    console.log("problem", problem);
+    console.log("paket yang dipilih", selectedPackage);
+    // const dataBooking = {
+    //   psychologistId: id,
+    //   scheduleId: ,
+    //   package: ,
+    //   amount: ,
+    //   userProblem: problem
+    // }
+    goTo(`payment`);
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      axios
-        .get(`http://localhost:5000/api/account/psychologist/${id}`)
-        .then((res) => {
-          setData(res.data.data.psychologist);
-        })
-        .catch((err) => console.log(err));
-    };
     fetchData();
+    getAvailableSchedule();
   }, [id]);
-
-  const [jam, setJam] = useState([]);
-  useEffect(() => {
-    const fetchData = async () => {
-      axios
-        .get(`http://localhost:8000/jadwal`)
-        .then((res) => {
-          setJam(res.jam);
-        })
-        .catch((err) => console.log(err));
-    };
-    fetchData();
-  }, []);
 
   // card
   const Package = () => {
     return (
-      <SimpleGrid
-        spacing={4}
-        templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
-      >
-        <Card variant="elevated">
+      <Flex justify="space-around" px={20} pt={10}>
+        <Card
+          transform={
+            selectedPackage === "Video Call" ? "translateY(-20px)" : ""
+          }
+        >
           <CardHeader>
             <Heading size="md" textAlign="center">
               Video Call
@@ -75,12 +90,16 @@ function Booking() {
           </CardHeader>
           <CardBody>
             <Text> A video call session for an hour. </Text>
-            <Text fontWeight="semibold"> Rp100.000 </Text>
+            <Text fontWeight="semibold"> Rp200.000 </Text>
           </CardBody>
           <CardFooter>
             <Box display="flex" justifyContent="center">
               <CardFooter>
-                <Button bg="#FFAC31" color="white">
+                <Button
+                  bg="#FFAC31"
+                  color="white"
+                  onClick={() => setSelectedPackage("Video Call")}
+                >
                   Select
                 </Button>
               </CardFooter>
@@ -88,7 +107,11 @@ function Booking() {
           </CardFooter>
         </Card>
 
-        <Card>
+        <Card
+          transform={
+            selectedPackage === "Voice Call" ? "translateY(-40px)" : ""
+          }
+        >
           <CardHeader>
             <Heading size="md" textAlign="center">
               Voice Call
@@ -101,14 +124,18 @@ function Booking() {
           <CardFooter>
             <Box display="flex" justifyContent="center">
               <CardFooter>
-                <Button bg="#FFAC31" color="white">
+                <Button
+                  bg="#FFAC31"
+                  color="white"
+                  onClick={() => setSelectedPackage("Voice Call")}
+                >
                   Select
                 </Button>
               </CardFooter>
             </Box>
           </CardFooter>
         </Card>
-      </SimpleGrid>
+      </Flex>
     );
   };
 
@@ -181,38 +208,45 @@ function Booking() {
                 <Text fontSize="16px" fontWeight="semibold">
                   Areas of Focus
                 </Text>
-                {data.expertiseFields &&
-                  data.expertiseFields.map((field, index) => (
-                    <Tag
-                      key={index}
-                      size="md"
-                      colorScheme="orange"
-                      variant="subtle"
-                      borderRadius="full"
-                      mt="6px"
-                      mr="6px"
-                    >
-                      <TagLabel>{field}</TagLabel>
-                    </Tag>
-                  ))}
+                <Tag
+                  size="md"
+                  colorScheme="orange"
+                  variant="subtle"
+                  borderRadius="full"
+                  mt="6px"
+                  mr="6px"
+                >
+                  <TagLabel>{data.expertiseFields}</TagLabel>
+                </Tag>
               </Box>
             </Flex>
           </Box>
         </Box>
 
+        <Box>
+          <FormControl id="problem" isRequired>
+            <Text fontWeight="semibold" mb={2}>
+              Your Problem
+            </Text>
+            <Input
+              placeholder="example: badmood about schools"
+              value={problem}
+              onChange={(e) => setProblem(e.target.value)}
+            />
+          </FormControl>
+        </Box>
+
         <Box className="jadwal" mt="40px">
           <Stack spacing={3}>
             <Text fontWeight="semibold"> Available Schedules </Text>
-
             <Select placeholder="Book an appoinment" size="md">
-              <option> Kamis, 28 September 2023 </option>
-              <option> Jum'at, 29 September 2023 </option>
-              <option> Sabtu, 30 September 2023 </option>
-            </Select>
-
-            <Select placeholder="Choose your session" size="md">
-              <option> 13.00 - 15.00 </option>
-              <option> 18.00 - 19.00 </option>
+              {listSchedule.map((item) => (
+                <option key={item._id}>
+                  {new Date(item.date).toDateString()} /{" "}
+                  {new Date(item.timeSlots.startTime).toLocaleTimeString()} -{" "}
+                  {new Date(item.timeSlots.endTime).toLocaleTimeString()}
+                </option>
+              ))}
             </Select>
           </Stack>
         </Box>
@@ -225,7 +259,7 @@ function Booking() {
         </Box>
 
         <Box mt="20px" display="flex" justifyContent="flex-end">
-          <Button bg="#FFAC31" color="white">
+          <Button bg="#FFAC31" color="white" onClick={handleNext}>
             Next
           </Button>
         </Box>

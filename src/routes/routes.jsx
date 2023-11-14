@@ -51,23 +51,33 @@ import CounselingPayment from "@/pages/user/counseling/CounselingPayment";
 import AppointmentDetail from "@/pages/psychologist/dataTables/AppointmentDetail";
 import CounselingPaymentDone from "@/pages/user/counseling/CounselingPaymentDone";
 
+const ProtectedRoute = ({ children, roles }) => {
+  const userRole = localStorage.getItem('roles');
+  const isAuthenticated = userRole === roles
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
+
 const routes = createRoutesFromElements(
   <>
-    <Route path="/u" element={<SidebarLayout menu={USER_MENU} />}>
+    <Route roles='user' path="/u" element={<ProtectedRoute roles='user'><SidebarLayout menu={USER_MENU} /></ProtectedRoute>}>
       <Route index element={<UserDashboard />}></Route>
       <Route path="profile" element={<UserDetail />}></Route>
       <Route path="mood-tracker" element={<MoodTracker />}></Route>
       <Route path="journal" element={<Journal />}></Route>
       <Route path="counseling" element={<Counseling />}></Route>
       <Route path="counseling/:id" element={<Booking />}></Route>
-      <Route path="counseling/payment" element={<CounselingPayment />}></Route>
+      <Route path="counseling/:id/payment" element={<CounselingPayment />}></Route>
       <Route
-        path="counseling/payment/done"
+        path="counseling/:id/payment/done"
         element={<CounselingPaymentDone />}></Route>
       <Route path="wellness-center" element={<WellnessCenter />}></Route>
       <Route path="Chatbot" element={<Chatbot />}></Route>
     </Route>
-    <Route path="/p" element={<SidebarLayout menu={PSYCHOLOGIST_MENU} />}>
+    <Route path="/p" element={<ProtectedRoute roles='psychologist'><SidebarLayout menu={PSYCHOLOGIST_MENU} /></ProtectedRoute>}>
       <Route index element={<PsychologistDashboard />}></Route>
       <Route path="details/:id" element={<PsychologistDetails />} />
       <Route path="schedules" element={<Schedule />}></Route>
@@ -75,7 +85,7 @@ const routes = createRoutesFromElements(
       <Route path="appointments/detail" element={<AppointmentDetail />}></Route>
       <Route path="profile" element={<Profile />}></Route>
     </Route>
-    <Route path="/a" element={<SidebarLayout menu={ADMIN_MENU} />}>
+    <Route path="/a" element={<ProtectedRoute roles='admin'><SidebarLayout menu={ADMIN_MENU} /></ProtectedRoute>}>
       <Route index element={<AdminDashboard />} />
       <Route path="users">
         <Route index element={<User />} />

@@ -10,6 +10,7 @@ import {
   FormControl,
   FormLabel,
   Input,
+  SimpleGrid,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
@@ -26,7 +27,7 @@ function InputSchedule({ onClose }) {
       },
     };
 
-    console.log(dataForm)
+    console.log(dataForm);
 
     try {
       const response = await fetch(
@@ -55,7 +56,7 @@ function InputSchedule({ onClose }) {
     <div>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>Add Schedule</ModalHeader>
+        <ModalHeader>Create availability</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -72,47 +73,44 @@ function InputSchedule({ onClose }) {
               />
             </FormControl>
 
-            <FormControl>
-              <FormLabel>Start Time</FormLabel>
-              <Input
-                type="time"
-                variant="outline"
-                rounded="10"
-                placeholder="Select Time"
-                {...register("startTime", {
-                  required: true,
-                })}
-              />
-            </FormControl>
+            <SimpleGrid mt={4} gap="16px" columns={2}>
+              <FormControl>
+                <FormLabel>Start Time</FormLabel>
+                <Input
+                  type="time"
+                  variant="outline"
+                  placeholder="Start time"
+                  borderRadius="16px"
+                  {...register("startTime", {
+                    required: true,
+                  })}
+                />
+              </FormControl>
 
-            <FormControl>
-              <FormLabel>End Time</FormLabel>
-              <Input
-                type="time"
-                variant="outline"
-                rounded="10"
-                placeholder="Select Time"
-                {...register("endTime", {
-                  required: true,
-                })}
-              />
-            </FormControl>
-
+              <FormControl>
+                <FormLabel>End Time</FormLabel>
+                <Input
+                  type="time"
+                  variant="outline"
+                  placeholder="End time"
+                  borderRadius="16px"
+                  {...register("endTime", {
+                    required: true,
+                  })}
+                />
+              </FormControl>
+            </SimpleGrid>
             <Button
               type="submit"
               mt="20px"
+              mb="10px"
               colorScheme="brand"
               onClick={onClose}
             >
-              Add
+              Save
             </Button>
           </form>
         </ModalBody>
-        <ModalFooter>
-          <Button colorScheme="red" onClick={onClose}>
-            Close
-          </Button>
-        </ModalFooter>
       </ModalContent>
     </div>
   );

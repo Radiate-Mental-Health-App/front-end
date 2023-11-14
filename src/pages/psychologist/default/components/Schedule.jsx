@@ -9,6 +9,7 @@ import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from '@fullcalendar/interaction';
 import {INITIAL_EVENTS, createEventId} from '@/pages/psychologist/schedules/variables/event-utils';
+import InputSchedule from "./InputSchedule";
 
 export default function Schedule() {
     // eslint-disable-next-line no-unused-vars
@@ -66,33 +67,7 @@ export default function Schedule() {
                 eventClick={handleEventClick}
                 eventsSet={handleEvents}/>
                 <Modal isOpen={isOpen} onClose={onClose}>
-                    <ModalOverlay />
-                    <ModalContent>
-                    <ModalHeader>Create availability</ModalHeader>
-                    <ModalCloseButton />
-                    <ModalBody>
-                        <FormControl id="day">
-                            <FormLabel>Day</FormLabel>
-                            <Select placeholder="Select day" borderRadius="16px"/>
-                        </FormControl>
-                        <SimpleGrid mt={4} gap='16px' columns={2}>
-                            <FormControl id="startTime">
-                                <FormLabel>Start time</FormLabel>
-                                <Input type="time" placeholder="Start time" borderRadius="16px"/>
-                            </FormControl>
-                            <FormControl id="endTime">
-                                <FormLabel>End time</FormLabel>
-                                <Input type="time" placeholder="End time" borderRadius="16px"/>
-                            </FormControl>
-                        </SimpleGrid>
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button variant="outline" mr={3} onClick={onClose}>
-                        Cancel
-                        </Button>
-                        <Button colorScheme="brand">Save</Button>
-                    </ModalFooter>
-                    </ModalContent>
+                    <InputSchedule onClose={onClose} />
                 </Modal>
         </Card>
     );
