@@ -1,5 +1,5 @@
 import react, { useEffect, useState } from "react";
-import { Text, Heading, Box, Input, Avatar, Flex, Button, Tag, TagLeftIcon, TagLabel, IconButton, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { Text, Box, Input, IconButton, InputGroup, InputRightElement } from "@chakra-ui/react";
 import { IoMdSend } from "react-icons/io";
 import { RiRobot2Fill } from "react-icons/ri";
 import { HiMiniUser } from "react-icons/hi2";
