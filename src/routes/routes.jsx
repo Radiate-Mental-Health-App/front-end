@@ -11,7 +11,7 @@ import Journal from "@/pages/user/journal/Journal.jsx";
 import Counseling from "@/pages/user/counseling/Counseling.jsx";
 import WellnessCenter from "@/pages/user/wellness-center/WellnessCenter.jsx";
 import Booking from "../pages/user/booking/Booking";
-import Chatbot from "@/pages/user/chatbot/chatbot.jsx";
+import Chatbots from "@/pages/user/chatbot/Chatbots";
 
 import PsychologistDashboard from "@/pages/psychologist/default";
 import Schedule from "@/pages/psychologist/schedules";
@@ -54,6 +54,7 @@ import AppointmentDetail from "@/pages/psychologist/dataTables/AppointmentDetail
 import CounselingPaymentDone from "@/pages/user/counseling/CounselingPaymentDone";
 import FormCounselingResult from "@/pages/psychologist/dataTables/components/FormCounselingResult";
 
+
 const routes = createRoutesFromElements(
   <>
     <Route path="/u" element={<SidebarLayout menu={USER_MENU} />}>
@@ -67,7 +68,7 @@ const routes = createRoutesFromElements(
         path="counseling/payment/done"
         element={<CounselingPaymentDone />}></Route>
       <Route path="wellness-center" element={<WellnessCenter />}></Route>
-      <Route path="Chatbot" element={<Chatbot />}></Route>
+      <Route path="chatbot" element={<Chatbots />}></Route>
     </Route>
     <Route path="/p" element={<SidebarLayout menu={PSYCHOLOGIST_MENU} />}>
       <Route index element={<PsychologistDashboard />}></Route>
