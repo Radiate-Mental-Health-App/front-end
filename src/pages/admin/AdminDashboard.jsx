@@ -41,7 +41,7 @@ function AdminDashboard() {
     );
     if (confirmation) {
       axios
-        .delete(`http://localhost:8000/appointment/${id}`)
+        .delete(`http://localhost:5000/api/appointment/${id}`)
         .then((res) => {
           alert("Order deleted.");
           window.location.reload();
@@ -64,7 +64,7 @@ function AdminDashboard() {
         >
           Delete
         </Button>
-        <Link to={`/a/appointment-detail/${row._id}`}>
+        <Link to={`/a/psychologist/book/${row._id}`}>
           <Button height={7} fontSize="sm" color="white" bg="#FFAC31">
             View
           </Button>

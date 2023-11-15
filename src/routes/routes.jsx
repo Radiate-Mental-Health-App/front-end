@@ -14,7 +14,7 @@ import Appointment from "@/pages/psychologist/dataTables";
 import Profile from "@/pages/psychologist/profile";
 
 import AdminDashboard from "../pages/admin/AdminDashboard.jsx";
-// import AdminAppointmentDetail from "../pages/admin/AppointmentDetail.jsx";
+import AdminAppointmentDetail from "../pages/admin/AppointmentDetail.jsx";
 // import Resource from "../pages/admin/Resource.jsx";
 
 // user
@@ -96,7 +96,7 @@ const routes = createRoutesFromElements(
           <Route index element={<List />} />
           <Route path=":id" element={<Detail />} />
           <Route path="edit/:id" element={<Edit />} />
-          <Route path="book/:id" element={<Booking />} />
+          <Route path="book/:id" element={<AdminAppointmentDetail />} />
         </Route>
         <Route path="resources" element={<Resource />} />
     </Route>
