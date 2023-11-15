@@ -8,7 +8,7 @@ function Sidebar({ menu }) {
   return (
     <>
       <Flex color="white" className="sidebar">
-        <Box bg="#FFAC31" w="280px" h="100vh" p="20px" pt="12px">
+        <Box bg="#FFAC31" w="280px" minH="100vh" p="20px" pt="12px">
           <Center p="5" mb="5">
             <img src={RadiateLogo} alt="Radiate Logo" />
           </Center>

@@ -6,7 +6,7 @@ import Journal from "@/pages/user/journal/Journal.jsx";
 import Counseling from "@/pages/user/counseling/Counseling.jsx";
 import WellnessCenter from "@/pages/user/wellness-center/WellnessCenter.jsx";
 import Booking from "../pages/user/booking/Booking";
-import Chatbot from "@/pages/user/chatbot/chatbot.jsx";
+import Chatbots from "@/pages/user/chatbot/Chatbots";
 
 import PsychologistDashboard from "@/pages/psychologist/default";
 import Schedule from "@/pages/psychologist/schedules";
@@ -45,6 +45,7 @@ import AppointmentDetail from "@/pages/psychologist/dataTables/AppointmentDetail
 import CounselingPaymentDone from "@/pages/user/counseling/CounselingPaymentDone";
 import FormCounselingResult from "@/pages/psychologist/dataTables/components/FormCounselingResult";
 
+
 const ProtectedRoute = ({ children, roles }) => {
   const userRole = localStorage.getItem("roles");
   const isAuthenticated = userRole === roles;
@@ -76,6 +77,40 @@ const routes = createRoutesFromElements(
         <Route path="counseling/payment/done" element={<CounselingPaymentDone />}></Route>
         <Route path="wellness-center" element={<WellnessCenter />}></Route>
         <Route path="Chatbot" element={<Chatbot />}></Route>
+
+
+const routes = createRoutesFromElements(
+  <>
+    <Route path="/u" element={<SidebarLayout menu={USER_MENU} />}>
+      <Route index element={<UserDashboard />}></Route>
+      <Route path="profile" element={<UserDetail />}></Route>
+      <Route path="mood-tracker" element={<MoodTracker />}></Route>
+      <Route path="journal" element={<Journal />}></Route>
+      <Route path="counseling" element={<Counseling />}></Route>
+      <Route path="counseling/payment" element={<CounselingPayment />}></Route>
+      <Route
+        path="counseling/payment/done"
+        element={<CounselingPaymentDone />}></Route>
+      <Route path="wellness-center" element={<WellnessCenter />}></Route>
+      <Route path="chatbot" element={<Chatbots />}></Route>
+    </Route>
+    <Route path="/p" element={<SidebarLayout menu={PSYCHOLOGIST_MENU} />}>
+      <Route index element={<PsychologistDashboard />}></Route>
+      <Route path="details/:id" element={<PsychologistDetails />} />
+      <Route path="schedules" element={<Schedule />}></Route>
+      <Route path="appointments" element={<Appointment />}></Route>
+      <Route path="appointments/detail" element={<AppointmentDetail />}></Route>
+      <Route
+        path="appointments/detail/edit"
+        element={<FormCounselingResult />}></Route>
+      <Route path="profile" element={<Profile />}></Route>
+    </Route>
+    <Route path="/a" element={<SidebarLayout menu={ADMIN_MENU} />}>
+      <Route index element={<AdminDashboard />} />
+      <Route path="users">
+        <Route index element={<User />} />
+        <Route path=":id" element={<UserDetail />} />
+        <Route path="edit/:id" element={<UserEdit />} />
       </Route>
     </Route>
     <Route
@@ -103,7 +138,6 @@ const routes = createRoutesFromElements(
           <SidebarLayout menu={ADMIN_MENU} />
         </ProtectedRoute>
       }
-    >
       <Route path="/a" element={<SidebarLayout menu={ADMIN_MENU} />}>
         <Route index element={<AdminDashboard />} />
         <Route path="users">
