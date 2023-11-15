@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -11,25 +10,68 @@ import {
 
 import Logo from "../../assets/radiate-logo.png";
 
-import { userState } from "../../components/PrivateRoutes/AuthAtoms";
-import { useRecoilState } from "recoil";
+// import { userState } from "../../components/PrivateRoutes/AuthAtoms";
+// import { useRecoilState } from "recoil";
 
 import { useForm } from "react-hook-form";
-import { redirect } from "react-router";
+import { useNavigate } from "react-router";
+import { useEffect } from "react";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
+  const navigate = useNavigate();
+  const roles = localStorage.getItem("roles");
 
-  const [user, setUser] = useRecoilState(userState);
+  // const [user, setUser] = useRecoilState(userState);
 
-  const onSubmit = (data) => {
-    setUser({
+  const onSubmit = async (data) => {
+    const dataForm = {
       email: data.email,
       password: data.password,
-    });
-    console.log(user);
-    redirect("/u");
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(dataForm),
+      });
+
+      const data = await response.json();
+      localStorage.setItem("token", data.accessToken);
+      localStorage.setItem("roles", data.roles);
+      if (data.roles == "user") {
+        navigate("/u");
+      } else if (data.roles == "psychologist") {
+        navigate("/p");
+      } else if (data.roles == "admin") {
+        navigate("/a");
+      } else {
+        alert("gagal login");
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+
+    // setUser({
+    //   email: data.email,
+    //   password: data.password,
+    // });
+    // console.log(user);
+    // redirect("/u");
   };
+
+  useEffect(() => {
+    if (roles == "user") {
+      navigate("/u");
+    } else if (roles == "psychologist") {
+      navigate("/p");
+    } else if (roles == "admin") {
+      navigate("/a");
+    } else {
+      console.log("sesi login habis");
+    }
+  });
 
   return (
     <div className="login">
@@ -94,6 +136,10 @@ const Login = () => {
               Login
             </Button>
           </form>
+
+          <Button colorScheme="blue" onClick={() => navigate("/register")}>
+            ke halaman register
+          </Button>
         </Box>
       </Box>
     </div>

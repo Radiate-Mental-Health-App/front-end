@@ -41,7 +41,7 @@ import { MdCheckCircle, MdCancel, MdOutlineError } from "react-icons/md";
 import { EditIcon, InfoIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
 
-export default function ColumnsTable(props) {
+export default function UserAppointmentsTable(props) {
   // eslint-disable-next-line react/prop-types
   const { columnsData, tableData } = props;
 
@@ -117,12 +117,6 @@ export default function ColumnsTable(props) {
                 {row.cells.map((cell, index) => {
                   let data = "";
                   if (cell.column.Header === "NAME") {
-                    data = (
-                      <Text color={textColor} fontSize="sm">
-                        {cell.value}
-                      </Text>
-                    );
-                  } else if (cell.column.Header === "AGE") {
                     data = (
                       <Text color={textColor} fontSize="sm">
                         {cell.value}

@@ -23,7 +23,52 @@ function QnaList() {
     sort: JSON.stringify(sort),
   });
   console.log("data", data);
+  const ActionButton = ({ row }) => {
+    if (row.isVerified === false) {
+      return <VerifButton row={row} />;
+    }
 
+    return (
+      <div className="button" justifycontent="center">
+        <Button
+          mr="10px"
+          height={7}
+          width="60px"
+          fontSize="sm"
+          colorScheme="red"
+          onClick={() => handleDelete(row._id)}>
+          {" "}
+          Delete{" "}
+        </Button>
+        <Link to={`/a/qna/QnaEdit/${row._id}`}>
+          <Button
+            height={7}
+            width="50px"
+            fontSize="sm"
+            color="white"
+            bg="#FFAC31">
+            {" "}
+            Edit{" "}
+          </Button>
+        </Link>
+      </div>
+    );
+  };
+  // delete function
+  function handleDelete(id) {
+    const confirmation = window.confirm(
+      "Do you want to delete this user? You can't undo this action."
+    );
+    if (confirmation) {
+      axios
+        .delete(`http://localhost:5000/api/qna/deleteQna/${id}`)
+        .then((res) => {
+          alert("User deleted.");
+          window.location.reload();
+        })
+        .catch((err) => console.log(err));
+    }
+  }
   // table custom style
   const style = {
     headCells: {
@@ -44,18 +89,18 @@ function QnaList() {
     },
 
     {
-      name: "pertanyaan",
-      selector: (row) => row.pertanyaan,
+      name: "Questions",
+      selector: (row) => row.Questions,
     },
     {
-      name: "response",
-      selector: (row) => row.response,
+      name: "Answers",
+      selector: (row) => row.Answers,
     },
-    // {
-    //   name: "Action",
-    //   cell: (row) => <ActionButton row={row} />,
-    //   paddingRight: "20px",
-    // },
+    {
+      name: "Action",
+      cell: (row) => <ActionButton row={row} />,
+      paddingRight: "20px",
+    },
   ];
   return (
     <div className="showUser">

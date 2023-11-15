@@ -39,29 +39,37 @@ import { IoSchoolOutline } from "react-icons/io5";
 import axios from "axios";
 import { ExternalLinkIcon, DeleteIcon } from "@chakra-ui/icons";
 
-import { useAddDataQNAMutation } from "../../../state/api";
-
 function QnaCreate() {
-  const [addNewData, { isSuccess }] = useAddDataQNAMutation();
   const navigate = useNavigate();
   const [Questions, setQuestions] = useState("");
   const [Answers, setAnswers] = useState("");
 
+  const { id } = useParams();
+
   useEffect(() => {
-    if (isSuccess) {
-      setQuestions("");
-      setAnswers("");
-      navigate("/a/qna");
-      window.location.reload();
-    }
-  }, [isSuccess, navigate]);
+    getQnaById();
+  }, []);
+  const getQnaById = async () => {
+    const qnas = await axios.get(`http://localhost:5000/api/qna/getQna/${id}`);
+    setQuestions(qnas.data.Questions);
+    setAnswers(qnas.data.Answers);
+  };
 
   const onQuestionsChanged = (e) => setQuestions(e.target.value);
   const onAnswersChanged = (e) => setAnswers(e.target.value);
 
   const onSavedQnAClicked = async (e) => {
     e.preventDefault();
-    addNewData({ Questions, Answers });
+    try {
+      await axios.put(`http://localhost:5000/api/qna/updateQna/${id}`, {
+        Questions,
+        Answers,
+      });
+      navigate("/a/qna");
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <form className="form" onSubmit={onSavedQnAClicked}>
@@ -69,7 +77,7 @@ function QnaCreate() {
         <Stack spacing={5}>
           <Text fontSize="lg" fontWeight="bold" color="gray.300">
             {" "}
-            Add Data QNA{" "}
+            Edit Data QNA{" "}
           </Text>
 
           <Box className="credentials">
@@ -109,7 +117,7 @@ function QnaCreate() {
       </Box>
       <Box display="flex" justifyContent="end" mt="20px">
         <Button type="submit" color="secondary" variant="contained">
-          Create Data Qna
+          Edit Data Qna
         </Button>
       </Box>
     </form>

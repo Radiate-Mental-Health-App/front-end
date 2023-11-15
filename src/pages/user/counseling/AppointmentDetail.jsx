@@ -28,16 +28,14 @@ import {
     CardHeader,
     Heading,
     Grid,
-    Button,
     HStack
 } from "@chakra-ui/react";
 
-import Banner from "./components/BannerPatient";
+import Banner from "./components/BannerPsycholog";
 
 import banner from "@/assets/img/auth/banner.jpg";
 import avatar from "@/assets/img/auth/avatars/avatar10.png";
 import CounselingResult from "./components/CounselingResult";
-import {Link} from "react-router-dom";
 
 export default function AppointmentDetail() {
     return (
@@ -59,7 +57,7 @@ export default function AppointmentDetail() {
                     gridArea='1 / 1 / 2 / 2'
                     banner={banner}
                     avatar={avatar}
-                    name='Patient full name'/>
+                    name='Psycholog name'/>
                 <Card
                     justifyContent="center"
                     align="left"
@@ -69,11 +67,6 @@ export default function AppointmentDetail() {
                     <CardHeader>
                         <HStack justifyContent={"space-between"}>
                             <Heading size='md'>Counseling Result</Heading>
-                            <Link to="/p/appointments/detail/edit">
-                                <Button colorScheme="brand" variant={"outline"}>
-                                    Edit counseling result
-                                </Button>
-                            </Link>
                         </HStack>
                     </CardHeader>
 
