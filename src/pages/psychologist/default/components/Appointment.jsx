@@ -17,6 +17,7 @@ export default function Appointment(props) {
     const {
         ...rest
     } = props;
+    console.log(props.item)
 
     return (
         <Card
