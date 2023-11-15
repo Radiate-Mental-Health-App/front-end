@@ -1,10 +1,10 @@
 // import LineChart from "@/components/charts/LineAreaChart";
 import { Box, Center, Heading } from "@chakra-ui/react";
-// import FetchLineChart from "./LineChart.component";
+import FetchLineChart from "./LineChart.component";
 import FetchBarChart from "./BarChart.component";
 import UserAppointmentsTable from "./UserAppointmentsTable";
 import { columnsData } from "./variables/columnsData";
-import tableData from './variables/tableData.json'
+import tableData from "./variables/tableData.json";
 
 function UserDashboard() {
   return (
@@ -19,13 +19,11 @@ function UserDashboard() {
           <FetchBarChart />
         </div>
         <div style={{ width: "500px", height: "250px", margin: "20px" }}>
-          <FetchBarChart />
+          <FetchLineChart />
         </div>
       </div>
       <Box>
-        <UserAppointmentsTable
-          columnsData={columnsData}
-          tableData={tableData}/>
+        <UserAppointmentsTable columnsData={columnsData} tableData={tableData} />
       </Box>
     </Box>
   );
