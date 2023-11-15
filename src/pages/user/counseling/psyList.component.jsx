@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import PsychologistCard from "./psyCard.component";
-import mockPsychologists from "./mockPsychologist";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid } from "@chakra-ui/react";
 
 const PsychologistList = () => {
   const [listPsychologists, setListPsychologists] = useState([]);
@@ -29,9 +28,11 @@ const PsychologistList = () => {
     <div>
       <h2>List of Psychologists</h2>
       <Grid templateColumns="repeat(3, 1fr)" gap={8} mx={4}>
-        {listPsychologists.map((item) => (
-          <PsychologistCard key={item._id} psychologist={item} />
-        ))}
+        {listPsychologists
+          .filter((item) => item.isVerified)
+          .map((item) => (
+            <PsychologistCard key={item._id} psychologist={item} />
+          ))}
       </Grid>
     </div>
   );

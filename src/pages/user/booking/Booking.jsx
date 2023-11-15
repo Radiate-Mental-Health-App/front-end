@@ -33,7 +33,9 @@ function Booking() {
   const [data, setData] = useState([]);
   const [listSchedule, setListSchedule] = useState([]);
   const [problem, setProblem] = useState("");
+  const [selectedSchedule, setSelectedSchedule] = useState("");
   const [selectedPackage, setSelectedPackage] = useState("");
+  const [amount, setAmount] = useState(null);
 
   const goTo = useNavigate();
 
@@ -55,18 +57,27 @@ function Booking() {
       .catch((err) => console.log(err));
   };
 
+  const handlePackage = (select, amount) => {
+    setSelectedPackage(select);
+    setAmount(amount);
+  };
+
   const handleNext = () => {
-    console.log("id psikolog", id);
-    console.log("problem", problem);
-    console.log("paket yang dipilih", selectedPackage);
-    // const dataBooking = {
-    //   psychologistId: id,
-    //   scheduleId: ,
-    //   package: ,
-    //   amount: ,
-    //   userProblem: problem
-    // }
-    goTo(`payment`);
+    const dataBooking = {
+      psychologistId: id,
+      scheduleId: selectedSchedule,
+      package: selectedPackage,
+      amount: amount,
+      userProblem: problem,
+    };
+    const dataDate = listSchedule.find((item) => item._id == selectedSchedule);
+    goTo("payment", {
+      state: {
+        dataBooking: dataBooking,
+        dataDate: dataDate,
+        doctorName: data.fullName,
+      },
+    });
   };
 
   useEffect(() => {
@@ -98,7 +109,7 @@ function Booking() {
                 <Button
                   bg="#FFAC31"
                   color="white"
-                  onClick={() => setSelectedPackage("Video Call")}
+                  onClick={() => handlePackage("Video Call", 200000)}
                 >
                   Select
                 </Button>
@@ -127,7 +138,7 @@ function Booking() {
                 <Button
                   bg="#FFAC31"
                   color="white"
-                  onClick={() => setSelectedPackage("Voice Call")}
+                  onClick={() => handlePackage("Voice Call", 100000)}
                 >
                   Select
                 </Button>
@@ -239,14 +250,21 @@ function Booking() {
         <Box className="jadwal" mt="40px">
           <Stack spacing={3}>
             <Text fontWeight="semibold"> Available Schedules </Text>
-            <Select placeholder="Book an appoinment" size="md">
-              {listSchedule.map((item) => (
-                <option key={item._id}>
-                  {new Date(item.date).toDateString()} /{" "}
-                  {new Date(item.timeSlots.startTime).toLocaleTimeString()} -{" "}
-                  {new Date(item.timeSlots.endTime).toLocaleTimeString()}
-                </option>
-              ))}
+            <Select
+              placeholder="Book an appoinment"
+              size="md"
+              value={selectedSchedule}
+              onChange={(e) => setSelectedSchedule(e.target.value)}
+            >
+              {listSchedule
+                .filter((item) => !item.isBooked)
+                .map((item) => (
+                  <option key={item._id} value={item._id}>
+                    {new Date(item.date).toDateString()} /{" "}
+                    {new Date(item.timeSlots.startTime).toLocaleTimeString()} -{" "}
+                    {new Date(item.timeSlots.endTime).toLocaleTimeString()}
+                  </option>
+                ))}
             </Select>
           </Stack>
         </Box>
