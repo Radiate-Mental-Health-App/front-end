@@ -130,10 +130,7 @@ function AdminDashboard() {
         const appointmentResponse = await axios.get(
           `http://localhost:5000/api/appointment`,
           {
-            headers: {
-              "x-access-token":
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MmY5Y2FlZmZjYTAzN2YyZGIwMzI4MSIsInJvbGVzIjoiUk9MRV9BRE1JTiIsImlhdCI6MTY5OTkzMzI2MiwiZXhwIjoxNzAwMDE5NjYyfQ.gJxrkQj8UjXZdbtYymqBaxOyFYp9O8ErsmHCAFvj4no",
-            },
+            headers: { "x-access-token": localStorage.getItem("accessToken") },
           }
         );
         const userResponse = await axios.get(

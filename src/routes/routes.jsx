@@ -58,39 +58,6 @@ const ProtectedRoute = ({ children, roles }) => {
 
 const routes = createRoutesFromElements(
   <>
-    <Route
-      roles="user"
-      path="/u"
-      element={
-        <ProtectedRoute roles="user">
-          <SidebarLayout menu={USER_MENU} />
-        </ProtectedRoute>
-      }
-    >
-      <Route path="/u" element={<SidebarLayout menu={USER_MENU} />}>
-        <Route index element={<UserDashboard />}></Route>
-        <Route path="profile" element={<UserDetail />}></Route>
-        <Route path="mood-tracker" element={<MoodTracker />}></Route>
-        <Route path="journal" element={<Journal />}></Route>
-        <Route path="counseling" element={<Counseling />}></Route>
-        <Route path="counseling/payment" element={<CounselingPayment />}></Route>
-        <Route path="counseling/payment/done" element={<CounselingPaymentDone />}></Route>
-        <Route path="wellness-center" element={<WellnessCenter />}></Route>
-        <Route path="Chatbot" element={<Chatbot />}></Route>
-
-
-const ProtectedRoute = ({ children, roles }) => {
-  const userRole = localStorage.getItem('roles');
-  const isAuthenticated = userRole === roles
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
-
-  return children;
-};
-
-const routes = createRoutesFromElements(
-  <>
     <Route roles='user' path="/u" element={<ProtectedRoute roles='user'><SidebarLayout menu={USER_MENU} /></ProtectedRoute>}>
       <Route index element={<UserDashboard />}></Route>
       <Route path="profile" element={<UserDetail />}></Route>
@@ -99,9 +66,7 @@ const routes = createRoutesFromElements(
       <Route path="counseling" element={<Counseling />}></Route>
       <Route path="counseling/:id" element={<Booking />}></Route>
       <Route path="counseling/:id/payment" element={<CounselingPayment />}></Route>
-      <Route
-        path="counseling/:id/payment/done"
-        element={<CounselingPaymentDone />}></Route>
+      <Route path="counseling/:id/payment/done" element={<CounselingPaymentDone />}></Route>
       <Route path="wellness-center" element={<WellnessCenter />}></Route>
       <Route path="chatbot" element={<Chatbots />}></Route>
     </Route>
@@ -111,46 +76,11 @@ const routes = createRoutesFromElements(
       <Route path="schedules" element={<Schedule />}></Route>
       <Route path="appointments" element={<Appointment />}></Route>
       <Route path="appointments/detail" element={<AppointmentDetail />}></Route>
-      <Route
-        path="appointments/detail/edit"
-        element={<FormCounselingResult />}></Route>
+      <Route path="appointments/detail/edit" element={<FormCounselingResult />}></Route>
       <Route path="profile" element={<Profile />}></Route>
     </Route>
-    <Route path="/a" element={<ProtectedRoute roles='admin'><SidebarLayout menu={ADMIN_MENU} /></ProtectedRoute>}>
+    <Route path="/a" element={ <ProtectedRoute roles="admin"><SidebarLayout menu={ADMIN_MENU} /></ProtectedRoute>}>
       <Route index element={<AdminDashboard />} />
-      <Route path="users">
-        <Route index element={<User />} />
-        <Route path=":id" element={<UserDetail />} />
-        <Route path="edit/:id" element={<UserEdit />} />
-      </Route>
-    </Route>
-    <Route
-      path="/p"
-      element={
-        <ProtectedRoute roles="psychologist">
-          <SidebarLayout menu={PSYCHOLOGIST_MENU} />
-        </ProtectedRoute>
-      }
-    >
-      <Route path="/p" element={<SidebarLayout menu={PSYCHOLOGIST_MENU} />}>
-        <Route index element={<PsychologistDashboard />}></Route>
-        <Route path="details/:id" element={<PsychologistDetails />} />
-        <Route path="schedules" element={<Schedule />}></Route>
-        <Route path="appointments" element={<Appointment />}></Route>
-        <Route path="appointments/detail" element={<AppointmentDetail />}></Route>
-        <Route path="appointments/detail/edit" element={<FormCounselingResult />}></Route>
-        <Route path="profile" element={<Profile />}></Route>
-      </Route>
-    </Route>
-    <Route
-      path="/a"
-      element={
-        <ProtectedRoute roles="admin">
-          <SidebarLayout menu={ADMIN_MENU} />
-        </ProtectedRoute>
-      }
-      <Route path="/a" element={<SidebarLayout menu={ADMIN_MENU} />}>
-        <Route index element={<AdminDashboard />} />
         <Route path="users">
           <Route index element={<User />} />
           <Route path=":id" element={<UserDetail />} />
@@ -169,7 +99,6 @@ const routes = createRoutesFromElements(
           <Route path="book/:id" element={<Booking />} />
         </Route>
         <Route path="resources" element={<Resource />} />
-      </Route>
     </Route>
     <Route path="/login" element={<Login />}></Route>
     <Route path="/register" element={<Register />}></Route>

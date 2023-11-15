@@ -38,7 +38,7 @@ const Login = () => {
       });
 
       const data = await response.json();
-      localStorage.setItem("token", data.accessToken);
+      localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("roles", data.roles);
       if (data.roles == "user") {
         navigate("/u");

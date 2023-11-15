@@ -35,7 +35,7 @@ function InputSchedule({ onClose }) {
         {
           method: "POST",
           headers: {
-            "x-access-token": sessionStorage.getItem("token"),
+            "x-access-token": localStorage.getItem("accessToken"),
             "Content-Type": "application/json",
           },
           body: JSON.stringify(dataForm),
