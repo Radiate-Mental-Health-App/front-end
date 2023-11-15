@@ -64,7 +64,7 @@ function CounselingPayment() {
                     </SimpleGrid>
 
                     <Center>
-                        <Link to={"/u/counseling/payment/done"}>
+                        <Link to={"done"}>
                             <Button mt={8} float={"right"} colorScheme="brand">Confirm and Pay</Button>
                         </Link>
                     </Center>

@@ -1,6 +1,6 @@
 import { FiMail, FiCalendar, FiPhone } from "react-icons/fi";
 import { IoIosFemale, IoIosMale } from "react-icons/io";
-import { Input, Text, Flex, Box, Heading, ChakraProvider, Spacer, Image, Avatar, CardHeader, Card, Stack, Icon, FormControl, FormLabel, RadioGroup, HStack, Radio, Button } from '@chakra-ui/react';
+import { Input, Text, Flex, Box, Heading,Avatar, Stack, Icon, FormControl, FormLabel, RadioGroup, HStack, Radio, Button } from '@chakra-ui/react';
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";

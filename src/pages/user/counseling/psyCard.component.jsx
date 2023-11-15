@@ -17,6 +17,9 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
+  Tag,
+  TagLeftIcon,
+  TagLabel,
 } from "@chakra-ui/react";
 import { StarIcon } from "@chakra-ui/icons";
 import { Icon } from "@chakra-ui/react";
@@ -39,35 +42,21 @@ const PsychologistCard = ({ psychologist }) => {
       <Stack>
         <CardBody>
           <Heading size="md" fontFamily="body">
-            {psychologist.name}
+            {psychologist.fullName}
           </Heading>
           <Stack direction={"row"} mt={2}>
-              <Badge
-                px={2}
-                py={1}
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                bg={useColorModeValue("gray.50", "gray.800")}
-                fontWeight={"400"}
-              >
-                <Icon as={FaBriefcase} />
-                <span />5 years
-              </Badge>
-              <Badge
-                px={2}
-                py={1}
-                // eslint-disable-next-line react-hooks/rules-of-hooks
-                bg={useColorModeValue("gray.50", "gray.800")}
-                fontWeight={"400"}
-              >
-                <StarIcon /> <span />
-                4.8
-              </Badge>
+            <Tag variant="solid" mt="6px" colorScheme="orange" size="md">
+              <TagLeftIcon as={FaBriefcase} fontSize="12px" />
+              <TagLabel>
+                {psychologist.yearsOfExperienceAsCounselor} years
+              </TagLabel>
+            </Tag>
           </Stack>
-          <Text pt={4}>{psychologist.specialization}</Text>
+          <Text pt={4}>{psychologist.expertiseFields}</Text>
         </CardBody>
 
         <CardFooter>
-          <Link to={`/p/details/${psychologist.id}`}>
+          <Link to={psychologist._id}>
             <Button
               flex={1}
               fontSize={"sm"}
@@ -85,29 +74,3 @@ const PsychologistCard = ({ psychologist }) => {
 };
 
 export default PsychologistCard;
-
-/*
-<Stack align={"center"} justify={"center"} direction={"row"} mt={1}>
-            <Badge
-              px={2}
-              py={1}
-              // eslint-disable-next-line react-hooks/rules-of-hooks
-              bg={useColorModeValue("gray.50", "gray.800")}
-              fontWeight={"400"}
-            >
-              <Icon as={FaBriefcase} />
-              <span />5 years
-            </Badge>
-            <Badge
-              px={2}
-              py={1}
-              // eslint-disable-next-line react-hooks/rules-of-hooks
-              bg={useColorModeValue("gray.50", "gray.800")}
-              fontWeight={"400"}
-            >
-              <StarIcon /> <span />
-              4.8
-            </Badge>
-          </Stack>
-          <Text py="2">{psychologist.specialization}</Text>
-*/

@@ -54,15 +54,14 @@ export const MoodCard = ({ item, onOpen, setModalAction, setIdMood }) => {
   };
 
   const onClickDelete = async () => {
-    if (confirm("are you sure delete this item ?!") == true) {
+    if (confirm("are you sure delete this item ?") == true) {
       try {
         const response = await fetch(
           "http://localhost:5000/api/user/moodentries/" + item.id,
           {
             method: "DELETE",
             headers: {
-              "x-access-token":
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MmY5ZTA0MDUwYjdiYWQzODYzZDVlMyIsInJvbGVzIjoiUk9MRV9VU0VSIiwiaWF0IjoxNjk5NzgxNTQyLCJleHAiOjE2OTk4Njc5NDJ9.oX5hROlb5kokZWo_H7h16HfsEfQD-wqIltGBQYA4GmM",
+              "x-access-token": localStorage.getItem("accessToken"),
               "Content-Type": "application/json",
             },
           }

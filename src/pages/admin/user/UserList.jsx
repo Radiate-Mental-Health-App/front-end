@@ -94,12 +94,11 @@ function User() {
 
   useEffect(() => {
     const fetchData = async () => {
-      axios
-        .get(`http://localhost:5000/user`)
-        .then((res) => {
-          setData(res.data);
-        })
-        .catch((err) => console.log(err));
+      axios.get(`http://localhost:5000/api/account/user`)
+      .then(res => {
+        setData(res.data.data.users)
+      })
+      .catch(err => console.log(err))
     };
     fetchData();
   }, []);
