@@ -108,5 +108,3 @@ Make sure you have the following installed on your machine:
 5. To remove the containers and associated resources, run:
     ```
     docker-compose down
-
-
