@@ -6,7 +6,7 @@ This is the documentation for a web application which developed for Independent 
 In this project, we utilize MERN as the tech stack. Node.js and Express.js are used for building the API(s), MongoDB for the database, and React.js for building the user interfaces. We also use Chakra UI as the component library.
 
 
-## Table of Contents
+## 📚 Table of Contents
 -    Overview
 -    Features
 -    Technology
@@ -28,7 +28,7 @@ Radiate is developed with the hope of helping people to be concerned and appreci
 ## 🗄️ Features
 Radiate has 3 roles that consist of user, psychologist, and admin. Every role has their own features.
 
-* ### User
+* ### 👥 User
 * **1. Dashboard**
     * The Dashboard provides users with an overview of their mental health. It prominently displays mood charts, offering a visual representation of mood fluctuations over time. Additionally, it includes a mood log history, allowing users to reflect on their emotional well-being trends.
 
@@ -38,7 +38,7 @@ Radiate has 3 roles that consist of user, psychologist, and admin. Every role ha
 * **3. Chatbot**
     * The Chatbot feature is designed to support users in their mental health journey. The chatbot is tailored to address mental health concerns, offering guidance, resources, and a supportive interaction to enhance the user's well-being.
 
-* ### Psychologist
+* ### ❤️‍🩹 Psychologist
 * **1. Dashboard** 
     * The Dashboard provide psychologists a comprehensive overview of their appointments, schedules, and relevant statistics.
 * **2. Schedule**
@@ -48,7 +48,7 @@ Radiate has 3 roles that consist of user, psychologist, and admin. Every role ha
 * **4. Profile**
     * The Profile allows psychologists to maintain and update their professional profiles, including details such as qualifications, expertise, specialties, and other relevant information.
 
-* ### Admin
+* ### 🛡️ Admin
 * **1. Dashboard**
     * The Dashboard for administrators offers an overview of the platform's activity. It displays key metrics such as the number of registered users and psychologists. Additionally, it includes a table that provides details on scheduled appointments between psychologists and users, facilitating efficient management of appointments.
 
@@ -62,7 +62,7 @@ Radiate has 3 roles that consist of user, psychologist, and admin. Every role ha
     * The QNA (Chatbot Management) feature allows admins to manage the chatbot's content and responses, ensuring users receive relevant and accurate information.
 
 ---
-## Technology
+## 🌐 Technology
 1. React.js
 2. Vite
 3. Chakra UI
@@ -70,7 +70,7 @@ Radiate has 3 roles that consist of user, psychologist, and admin. Every role ha
 
 ---
 
-## Installation Steps
+## 🛠️ Installation Steps
 1. Clone the Repository
 Clone the backend repository using Git:
     ```
