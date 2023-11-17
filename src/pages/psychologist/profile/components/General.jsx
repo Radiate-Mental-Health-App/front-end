@@ -30,10 +30,12 @@ export default function GeneralInformation(props) {
   const [profile, setProfile] = useState({});
   const [isEdited, setIsEdited] = useState(false);
 
+  const id = localStorage.getItem("idAccount")
+
   const fetchData = async () => {
     axios
       .get(
-        `http://localhost:5000/api/account/psychologist/652fb0eaf361df621268bfe2`
+        `http://localhost:5000/api/account/psychologist/${id}`
       )
       .then((res) => {
         setProfile(res.data.data.psychologist);
@@ -44,7 +46,7 @@ export default function GeneralInformation(props) {
   const saveProfile = async () => {
     axios
       .put(
-        `http://localhost:5000/api/account/psychologist/652fb0eaf361df621268bfe2`,
+        `http://localhost:5000/api/account/psychologist/${id}`,
         profile
       )
       .then((res) => {

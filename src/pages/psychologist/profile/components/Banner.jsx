@@ -20,9 +20,10 @@ export default function Banner(props) {
   const [profile, setProfile] = useState({});
 
   const fetchData = async () => {
+    const id = localStorage.getItem("idAccount")
     axios
       .get(
-        `http://localhost:5000/api/account/psychologist/652fb0eaf361df621268bfe2`
+        `http://localhost:5000/api/account/psychologist/${id}`
       )
       .then((res) => {
         setProfile(res.data.data.psychologist);

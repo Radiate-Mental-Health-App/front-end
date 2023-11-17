@@ -14,9 +14,9 @@ function UserEdit() {
 
     useEffect(() => {
         const fetchData = async () => {
-          axios.get(`http://localhost:8000/users/${id}`)
+          axios.get(`http://localhost:5000/api/account/user/${id}`)
           .then(res => {
-            setData(res.data)
+            setData(res.data.data.user)
           })
           .catch(err => console.log(err))
         }
@@ -29,7 +29,7 @@ function UserEdit() {
     // handleSubmit
     function handleSubmit(event) {
         event.preventDefault()
-        axios.put(`http://localhost:8000/users/${id}`, data)
+        axios.put(`http://localhost:5000/api/account/user/${id}`, data)
         .then( res => {
             alert('User updated successfully!')
             goTo(`/a/users/`)
@@ -41,7 +41,7 @@ function UserEdit() {
     function handleDelete(id) {
         const confirmation = window.confirm("Do you want to delete this user? You can't undo this action.");
         if (confirmation) {
-          axios.delete(`http://localhost:8000/users/${id}`)
+          axios.delete(`http://localhost:5000/api/account/user/${id}`)
           .then(res => {
             alert('User deleted.');
             goTo(`/a/users/`);
@@ -75,7 +75,7 @@ function UserEdit() {
                             </Flex>
                             <Flex alignItems='center' gap='3'>
                                 <Icon as={FiCalendar} />
-                                <Text> {data.dateOfBirth} </Text>
+                                <Text> {new Date(data.dateOfBirth).toDateString()} </Text>
                             </Flex>
                            
                             <Text mt='10px' fontSize='md' fontWeight='semibold' color='gray.400'> Contact Details </Text>
@@ -116,7 +116,7 @@ function UserEdit() {
                                             <Input
                                                 placeholder="Select Date and Time"
                                                 size="md"
-                                                type="datetime-local"
+                                                type="date"
                                                 value={ data.dateOfBirth }
                                                 onChange={e => setData({...data, dateOfBirth: e.target.value})}
                                             />
@@ -153,7 +153,7 @@ function UserEdit() {
                                             </FormControl>
 
                                             <Box display='flex' ml='auto' mt='90px'>
-                                                <Button color='red' variant='ghost' mr='30px' onClick={() => handleDelete(data.id)}>Delete</Button>
+                                                <Button color='red' variant='ghost' mr='30px' onClick={() => handleDelete(data._id)}>Delete</Button>
                                                 <Button bg='#FFAC31'color='white' type='submit'>Save</Button>
                                             </Box>
                                         </Stack>

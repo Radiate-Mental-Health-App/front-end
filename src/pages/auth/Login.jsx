@@ -40,6 +40,7 @@ const Login = () => {
       const data = await response.json();
       localStorage.setItem("accessToken", data.accessToken);
       localStorage.setItem("roles", data.roles);
+      localStorage.setItem("idAccount", data.id)
       if (data.roles == "user") {
         navigate("/u");
       } else if (data.roles == "psychologist") {

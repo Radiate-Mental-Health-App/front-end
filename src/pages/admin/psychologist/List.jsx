@@ -22,9 +22,9 @@ const ActionButton = ({ row }) => {
   return(
     <div className="button" justifycontent="center">
       <Button mr='10px' height={7} width="60px" fontSize='sm' colorScheme="red"
-      onClick={() => handleDelete(row.id)}
+      onClick={() => handleDelete(row._id)}
       > Delete </Button>
-      <Link to={`/a/psychologist/edit/${row.id}`}>
+      <Link to={`/a/psychologist/edit/${row._id}`}>
         <Button height={7} width="50px" fontSize='sm' color='white' bg="#FFAC31"> Edit </Button>
       </Link>
     </div>
@@ -34,7 +34,7 @@ const ActionButton = ({ row }) => {
 // view profile button
 const VerifButton = ({ row }) => (
   <div className="button" justifyContent="center">
-    <Link to={`/a/psychologist/${row.id}`}>
+    <Link to={`/a/psychologist/${row._id}`}>
       <Button mr='10px' fontSize='sm' width="120px" height={7} colorScheme="green">
         View profile
       </Button>
@@ -44,7 +44,7 @@ const VerifButton = ({ row }) => (
 
 // status
 const Status = ({ row }) => {
-  if (row.isActive === true) {
+  if (row.isVerified === true) {
     return (
       <Tag variant="subtle" size='sm' colorScheme="green">
         <TagLeftIcon as={ FiCheckCircle } />
@@ -65,7 +65,7 @@ const Status = ({ row }) => {
 function handleDelete(id) {
   const confirmation = window.confirm("Do you want to delete this user? You can't undo this action.");
   if (confirmation) {
-    axios.delete(`http://localhost:8000/counselors/${id}`)
+    axios.delete(`http://localhost:5000/api/account/psychologist/${id}`)
     .then(res => {
       alert('User deleted.');
       window.location.reload();
@@ -90,13 +90,13 @@ function List() {
   const column = [
     {
         name: 'ID',
-        selector: row => row.id,
+        selector: row => row._id,
         sortable: true,
         width: '70px'
     },
     {
         name: 'User',
-        cell: row => <Link to={`/a/psychologist/${row.id}`}> <UserList row={ row } /> </Link>,
+        cell: row => <Link to={`/a/psychologist/${row._id}`}> <UserList row={ row } /> </Link>,
         sortable: true,
     },
     {
