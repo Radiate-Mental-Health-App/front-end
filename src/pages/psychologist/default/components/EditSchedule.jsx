@@ -12,11 +12,11 @@ import {
   Input,
   SimpleGrid,
 } from "@chakra-ui/react";
-import axios from "axios";
 
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
-function InputSchedule({ onClose }) {
+function EditSchedule({idSchedule, onClose}) {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = async (data) => {
@@ -30,11 +30,9 @@ function InputSchedule({ onClose }) {
 
     try {
       axios
-        .post(`http://localhost:5000/api/psychologist/schedule/`, dataForm, {
-          headers: { "x-access-token": localStorage.getItem("accessToken") },
-        })
+        .put(`http://localhost:5000/api/psychologist/schedule/${idSchedule}`, dataForm)
         .then((res) => {
-          alert("Success create new schedule!");
+          alert("Schedule updated successfully!");
           window.location.reload();
         })
         .catch((err) => console.log(err));
@@ -42,7 +40,6 @@ function InputSchedule({ onClose }) {
       alert(error);
     }
   };
-
   return (
     <div>
       <ModalOverlay />
@@ -98,7 +95,7 @@ function InputSchedule({ onClose }) {
               colorScheme="brand"
               onClick={onClose}
             >
-              Save
+              Save Change
             </Button>
           </form>
         </ModalBody>
@@ -107,4 +104,4 @@ function InputSchedule({ onClose }) {
   );
 }
 
-export default InputSchedule;
+export default EditSchedule;

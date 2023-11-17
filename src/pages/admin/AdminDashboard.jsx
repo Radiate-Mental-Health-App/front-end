@@ -124,33 +124,48 @@ function AdminDashboard() {
   const [userCount, setUserCount] = useState(0);
   const [counselorCount, setCounselorCount] = useState(0);
 
+  const fetchUser = async () => {
+    try {
+      const userResponse = await axios.get(
+        `http://localhost:5000/api/account/user`
+      );
+      setUserData(userResponse.data.data.users);
+      setUserCount(userResponse.data.data.users.length);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchPsychologist = async () => {
+    try {
+      const counselorResponse = await axios.get(
+        `http://localhost:5000/api/account/psychologist`
+      );
+      setCounselorData(counselorResponse.data.data.psychologists);
+      setCounselorCount(counselorResponse.data.data.psychologists.length);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchAppointment = async () => {
+    try {
+      const appointmentResponse = await axios.get(
+        `http://localhost:5000/api/appointment`,
+        {
+          headers: { "x-access-token": localStorage.getItem("accessToken") },
+        }
+      );
+      setAppointmentData(appointmentResponse.data.data.appointments);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const appointmentResponse = await axios.get(
-          `http://localhost:5000/api/appointment`,
-          {
-            headers: { "x-access-token": localStorage.getItem("accessToken") },
-          }
-        );
-        const userResponse = await axios.get(
-          `http://localhost:5000/api/account/user`
-        );
-        const counselorResponse = await axios.get(
-          `http://localhost:5000/api/account/psychologist`
-        );
-
-        setAppointmentData(appointmentResponse.data.data.appointments);
-        setUserData(userResponse.data.data.users);
-        setCounselorData(counselorResponse.data.data.psychologists);
-        setUserCount(userResponse.data.data.users.length);
-        setCounselorCount(counselorResponse.data.data.psychologists.length);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
+    fetchUser();
+    fetchPsychologist();
+    fetchAppointment();
   }, []);
 
   return (

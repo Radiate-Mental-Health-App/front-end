@@ -1,43 +1,62 @@
-/*!
-  _   _  ___  ____  ___ ________  _   _   _   _ ___
- | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _|
- | |_| | | | | |_) || |  / / | | |  \| | | | | || |
- |  _  | |_| |  _ < | | / /| |_| | |\  | | |_| || |
- |_| |_|\___/|_| \_\___/____\___/|_| \_|  \___/|___|
-
-=========================================================
-* Horizon UI - v1.1.0
-=========================================================
-
-* Product Page: https://www.horizon-ui.com/
-* Copyright 2023 Horizon UI (https://www.horizon-ui.com/)
-
-* Designed and Coded by Simmmple
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
-// Chakra imports
-import {Stack, VStack} from "@chakra-ui/react";
+import {
+  Stack,
+  VStack,
+  Flex,
+  Button,
+  Modal,
+  useDisclosure,
+} from "@chakra-ui/react";
 
 // Assets
 import EventCalendar from "@/components/calendar/MiniCalendar";
 import TodayAppointments from "../default/components/TodaySessions";
 import Schedule from "../default/components/Schedule";
+import InputSchedule from "../default/components/InputSchedule";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import ListAppointment from "../default/components/ListAppointment";
 
 export default function Schedules() {
-    return (
-        <Stack p={"32px"}>
-            <Stack direction={"row"} spacing={8}>
-                <VStack spacing={8} alignItems="stretch">
-                    <EventCalendar/>
-                    <TodayAppointments/>
-                </VStack>
-                <Schedule/>
-            </Stack>
-        </Stack>
-    );
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [listSchedule, setListSchedule] = useState([]);
+
+  const getSession = async () => {
+    const id = localStorage.getItem("idAccount");
+    axios
+      .get(`http://localhost:5000/api/psychologist/schedule/${id}`, {
+        headers: { "x-access-token": localStorage.getItem("accessToken") },
+      })
+      .then((res) => {
+        setListSchedule(res.data.data.schedules);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  useEffect(() => {
+    getSession();
+  }, []);
+
+  return (
+    <Stack p={"32px"}>
+      <Flex justifyContent="flex-end">
+        <Button onClick={onOpen} fontWeight={500} size="md" colorScheme="brand">
+          + Create availability
+        </Button>
+      </Flex>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <InputSchedule onClose={onClose} />
+      </Modal>
+      <Stack direction={"row"} spacing={8}>
+        <ListAppointment
+          status="Available"
+          listSchedule={listSchedule.filter((item) => item.isBooked == false)}
+        />
+        <ListAppointment
+          status="Booked"
+          listSchedule={listSchedule.filter((item) => item.isBooked == true)}
+        />
+      </Stack>
+    </Stack>
+  );
 }

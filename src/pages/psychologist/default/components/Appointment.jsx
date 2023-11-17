@@ -1,109 +1,115 @@
 // Chakra imports
 import {
-    Button,
-    Card,
-    CardBody,
-    Flex,
-    Icon,
-    Stack,
-    HStack,
-    Text
+  Button,
+  Card,
+  CardBody,
+  Flex,
+  Icon,
+  Stack,
+  HStack,
+  Text,
+  Box,
+  Modal,
+  useDisclosure,
 } from "@chakra-ui/react";
+import axios from "axios";
+import { useState } from "react";
 // Custom components import Card from "@/components/card/Card.jsx"; Assets
-import {IoCalendarOutline, IoChatbubbleOutline, IoTimeOutline} from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { IoCalendarOutline, IoTimeOutline } from "react-icons/io5";
+import EditSchedule from "./EditSchedule";
 
-export default function Appointment(props) {
-    const {
-        ...rest
-    } = props;
-    console.log(props.item)
+export default function Appointment({ item }) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [idSchedule, setIdSchedule] = useState("");
 
-    return (
-        <Card
-            bgColor={"grass.100"}
-            borderRadius="16px"
-            border={"2px solid"}
-            borderColor={"grass.300"}
-            justifyContent="center"
-            align="left"
-            w="100%"
-            mb="0px"
-            mt="16px"
-            fontSize={"sm"}
-            direction={{
-            base: 'column',
-            sm: 'column'
-        }}
-            overflow='hidden'
-            variant='outline'
-            {...rest}>
+  const handleClickEdit = (id) => {
+    setIdSchedule(id);
+    onOpen();
+  };
 
-            <CardBody>
-                <HStack justifyContent="space-between" marginBottom={4}>
-                    <Text fontWeight={"bold"} fontSize={"md"}>
-                        Patient name
-                    </Text>
-                    <Stack direction="row" spacing={2} align="center">
-                        <Button colorScheme='green' size="sm">
-                                Start session
-                        </Button>
-                        <Link to="/p/appointments/detail">
-                            <Button colorScheme='green' size="sm">
-                                ...
-                            </Button>
-                        </Link>
-                    </Stack>
-                </HStack>
-                <Stack
-                    direction="row"
-                    spacing={2}
-                    align="left"
-                    fontWeight="medium"
-                    color={"black.400"}>
-                    <Text>30 min</Text>
-                    <Text>•</Text>
-                    <Text>Sleep, Depression, Relationship</Text>
-                </Stack>
-
-                <Stack
-                    direction="row"
-                    spacing={4}
-                    align="center"
-                    color={"grass.500"}
-                    fontWeight={"medium"}>
-                    <Flex>
-                        <Icon
-                            marginRight="4px"
-                            transition="0.2s linear"
-                            w="20px"
-                            h="20px"
-                            as={IoCalendarOutline}
-                            color="grass.500"/>
-                        <Text>Sep 30, 2023</Text>
-                    </Flex>
-                    <Flex>
-                        <Icon
-                            marginRight="4px"
-                            transition="0.2s linear"
-                            w="20px"
-                            h="20px"
-                            as={IoTimeOutline}
-                            color="grass.500"/>
-                        <Text>03:00-03.30 PM</Text>
-                    </Flex>
-                    <Flex>
-                        <Icon
-                            marginRight="4px"
-                            transition="0.2s linear"
-                            w="20px"
-                            h="20px"
-                            as={IoChatbubbleOutline}
-                            color="grass.500"/>
-                        <Text>Chat</Text>
-                    </Flex>
-                </Stack>
-            </CardBody>
-        </Card>
+  const handleClickDelete = (id) => {
+    const confirmation = window.confirm(
+      "Do you want to delete this schedule? You can't undo this action."
     );
+    if (confirmation) {
+      axios
+        .delete(`http://localhost:5000/api/psychologist/schedule/${id}`)
+        .then((res) => {
+          alert("Shcedule deleted.");
+          window.location.reload();
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  return (
+    <Card
+      bgColor={item.isBooked ? "grass.100" : "gray.100"}
+      borderRadius="16px"
+      border={"2px solid"}
+      borderColor={item.isBooked ? "grass.300" : "black.100"}
+      justifyContent="center"
+      align="left"
+      w="100%"
+      mb="0px"
+      mt="16px"
+      fontSize={"sm"}
+      direction={{
+        base: "column",
+        sm: "column",
+      }}
+      overflow="hidden"
+      variant="outline"
+    >
+      <CardBody>
+        <Flex mb={2}>
+          <Icon
+            marginRight="4px"
+            transition="0.2s linear"
+            w="20px"
+            h="20px"
+            as={IoCalendarOutline}
+            color="black.400"
+          />
+          <Text>{new Date(item.date).toDateString()}</Text>
+        </Flex>
+        <Flex justifyContent="space-between" alignItems="center">
+          <HStack>
+            <Icon
+              marginRight="4px"
+              transition="0.2s linear"
+              w="20px"
+              h="20px"
+              as={IoTimeOutline}
+              color={"grass.500"}
+            />
+            <Text>
+              {new Date(item.timeSlots.startTime).toLocaleTimeString()} -{" "}
+              {new Date(item.timeSlots.endTime).toLocaleTimeString()}
+            </Text>
+          </HStack>
+          <Box>
+            <Button
+              variant="solid"
+              colorScheme="brand"
+              mr="2"
+              onClick={() => handleClickEdit(item._id)}
+            >
+              Edit
+            </Button>
+            <Button
+              variant="solid"
+              colorScheme="red"
+              onClick={() => handleClickDelete(item._id)}
+            >
+              Delete
+            </Button>
+          </Box>
+        </Flex>
+      </CardBody>
+      <Modal isOpen={isOpen} onClose={onClose}>
+        <EditSchedule idSchedule={idSchedule} onClose={onClose} />
+      </Modal>
+    </Card>
+  );
 }
