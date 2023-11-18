@@ -1,13 +1,11 @@
 import { Center, Heading, SimpleGrid, Box } from "@chakra-ui/react";
 import ArticleCard from "./ArticleCard.component.jsx";
+import ArticleList from "./ArticleList.component.jsx";
 
 function WellnessCenter() {
   return (
     <div>
-      <Heading size="xl" color="gray.400" margin={5}>
-        Wellness Center
-      </Heading>
-      <SimpleGrid columns={2} spacingY="20px">
+      {/* <SimpleGrid columns={2} spacingY="20px">
         <Box height="190px">
           <ArticleCard />
         </Box>
@@ -23,7 +21,8 @@ function WellnessCenter() {
         <Box height="190px">
           <ArticleCard />
         </Box>
-      </SimpleGrid>
+      </SimpleGrid> */}
+      <ArticleList />
     </div>
   );
 }

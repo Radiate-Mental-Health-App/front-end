@@ -1,31 +1,16 @@
-import { Card, CardHeader, CardBody, CardFooter, Stack, Heading, Button, Text, Image } from "@chakra-ui/react";
+import { Box, Heading, Image, Text, Divider, HStack, Tag, Wrap, WrapItem, useColorModeValue, Container, VStack, Card, CardHeader, CardBody, CardFooter, Stack, ButtonGroup, Button } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 function ArticleCard() {
   return (
-    <Card direction={{ base: "column", sm: "row" }} overflow="hidden" variant="outline" margin={5}>
-      <Image
-        objectFit="cover"
-        maxW={{ base: "100%", sm: "200px" }}
-        src="https://images.unsplash.com/photo-1667489022797-ab608913feeb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=800&q=60"
-        alt="Caffe Latte"
-      />
-
-      <Stack>
-        <CardBody>
-          <Heading size="md">Article Title</Heading>
-
-          <Text py="2">Article Summary</Text>
-        </CardBody>
-
-        <CardFooter>
-          <Link to="article">
-            <Button variant="solid" bg={"#FFAC31"} color={"white"}>
-              Read
-            </Button>
-          </Link>
-        </CardFooter>
-      </Stack>
+    <Card maxW="sm" marginTop="5" marginBottom="3">
+      <CardBody>
+        <Image src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80" alt="Green double couch with wooden legs" borderRadius="lg" />
+        <Stack mt="6" spacing="3">
+          <Heading size="md">Living room Sofa</Heading>
+          <Text>This sofa is perfect for modern tropical spaces, baroque inspired spaces, earthy toned spaces and for people who love a chic design with a sprinkle of vintage design.</Text>
+        </Stack>
+      </CardBody>
     </Card>
   );
 }
