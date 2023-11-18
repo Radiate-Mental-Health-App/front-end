@@ -15,7 +15,7 @@ const FetchLineChart = () => {
           label: "mood entries chart",
           data: [],
           borderColor: "#FFD18D",
-          borderWidth: 2,
+          borderWidth: 3,
           pointStyle: [],
           tension: 0.4,
           pointHoverRadius: 40,
@@ -94,14 +94,21 @@ const FetchLineChart = () => {
   };
 
   const options = {
+    scales: {
+      y: {
+        beginAtZero: true,
+        min: 0,
+        max: 6,
+        ticks: {
+          stepSize: 1,
+          display: false,
+        },
+      },
+    },
     responsive: true,
     plugins: {
       legend: {
         position: "top",
-      },
-      title: {
-        display: true,
-        text: "Chart.js Line Chart",
       },
     },
   };

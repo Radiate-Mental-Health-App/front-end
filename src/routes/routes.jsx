@@ -46,7 +46,6 @@ import AppointmentDetail from "@/pages/psychologist/dataTables/AppointmentDetail
 import CounselingPaymentDone from "@/pages/user/counseling/CounselingPaymentDone";
 import FormCounselingResult from "@/pages/psychologist/dataTables/components/FormCounselingResult";
 
-
 const ProtectedRoute = ({ children, roles }) => {
   const userRole = localStorage.getItem("roles");
   const isAuthenticated = userRole === roles;
@@ -59,7 +58,15 @@ const ProtectedRoute = ({ children, roles }) => {
 
 const routes = createRoutesFromElements(
   <>
-    <Route roles='user' path="/u" element={<ProtectedRoute roles='user'><SidebarLayout menu={USER_MENU} /></ProtectedRoute>}>
+    <Route
+      roles="user"
+      path="/u"
+      element={
+        <ProtectedRoute roles="user">
+          <SidebarLayout menu={USER_MENU} />
+        </ProtectedRoute>
+      }
+    >
       <Route index element={<UserDashboard />}></Route>
       <Route path="profile" element={<UserDetail />}></Route>
       <Route path="mood-tracker" element={<MoodTracker />}></Route>
@@ -72,35 +79,49 @@ const routes = createRoutesFromElements(
       <Route path="chatbot" element={<Chatbots />}></Route>
       <Route path="appointments/detail/:id" element={<AppointmentDetailUser />}></Route>
     </Route>
-    <Route path="/p" element={<ProtectedRoute roles='psychologist'><SidebarLayout menu={PSYCHOLOGIST_MENU} /></ProtectedRoute>}>
+    <Route
+      path="/p"
+      element={
+        <ProtectedRoute roles="psychologist">
+          <SidebarLayout menu={PSYCHOLOGIST_MENU} />
+        </ProtectedRoute>
+      }
+    >
       <Route index element={<PsychologistDashboard />}></Route>
       <Route path="details/:id" element={<PsychologistDetails />} />
       <Route path="schedules" element={<Schedule />}></Route>
       <Route path="appointments" element={<Appointment />}></Route>
       <Route path="appointments/detail/:id" element={<AppointmentDetail />}></Route>
-      <Route path="appointments/detail/edit" element={<FormCounselingResult />}></Route>
+      <Route path="appointments/detail/:id/edit" element={<FormCounselingResult />}></Route>
       <Route path="profile" element={<Profile />}></Route>
     </Route>
-    <Route path="/a" element={ <ProtectedRoute roles="admin"><SidebarLayout menu={ADMIN_MENU} /></ProtectedRoute>}>
+    <Route
+      path="/a"
+      element={
+        <ProtectedRoute roles="admin">
+          <SidebarLayout menu={ADMIN_MENU} />
+        </ProtectedRoute>
+      }
+    >
       <Route index element={<AdminDashboard />} />
-        <Route path="users">
-          <Route index element={<User />} />
-          <Route path=":id" element={<UserDetail />} />
-          <Route path="edit/:id" element={<UserEdit />} />
-        </Route>
-        <Route path="qna">
-          <Route index element={<Qna />} />
-          <Route path="QnaCreate" element={<QnaCreate />} />
-          <Route path=":id" element={<UserDetail />} />
-          <Route path="QnaEdit/:id" element={<QnaEdit />} />
-        </Route>
-        <Route path="psychologist">
-          <Route index element={<List />} />
-          <Route path=":id" element={<Detail />} />
-          <Route path="edit/:id" element={<Edit />} />
-          <Route path="book/:id" element={<AdminAppointmentDetail />} />
-        </Route>
-        <Route path="resources" element={<Resource />} />
+      <Route path="users">
+        <Route index element={<User />} />
+        <Route path=":id" element={<UserDetail />} />
+        <Route path="edit/:id" element={<UserEdit />} />
+      </Route>
+      <Route path="qna">
+        <Route index element={<Qna />} />
+        <Route path="QnaCreate" element={<QnaCreate />} />
+        <Route path=":id" element={<UserDetail />} />
+        <Route path="QnaEdit/:id" element={<QnaEdit />} />
+      </Route>
+      <Route path="psychologist">
+        <Route index element={<List />} />
+        <Route path=":id" element={<Detail />} />
+        <Route path="edit/:id" element={<Edit />} />
+        <Route path="book/:id" element={<AdminAppointmentDetail />} />
+      </Route>
+      <Route path="resources" element={<Resource />} />
     </Route>
     <Route path="/login" element={<Login />}></Route>
     <Route path="/register" element={<Register />}></Route>
