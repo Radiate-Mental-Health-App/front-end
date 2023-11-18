@@ -17,6 +17,7 @@ import {
   Tag,
   Text,
   Textarea,
+  useDisclosure
 } from "@chakra-ui/react";
 
 import listmood from "./listmood";
@@ -49,6 +50,9 @@ export const MoodModal = ({
   const [selectedSocials, setSelectedSocials] = useState([]);
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [textareaValue, setTextareaValue] = useState("");
+  const { isOpen: isSuccessModalOpen, onOpen: onOpenSuccessModal, onClose: onCloseSuccessModal } = useDisclosure();
+  const { isOpen: isErrorModalOpen, onOpen: onOpenErrorModal, onClose: onCloseErrorModal } = useDisclosure();
+  const [modalMessage, setModalMessage] = useState("");
 
   const handleSubmit = async () => {
     const dataMood = {
@@ -81,14 +85,19 @@ export const MoodModal = ({
       const data = await response.json();
       if (data.success) {
         if (methodAction == "PUT") {
-          alert(data.message);
+          setModalMessage(data.message);
+          onOpenSuccessModal();
         }
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       }
     } catch (error) {
-      alert(error.message);
+      setModalMessage(error.message);
+      onOpenErrorModal();
     }
   };
+
 
   return (
     <>
@@ -175,6 +184,46 @@ export const MoodModal = ({
               Save
             </Button>
             <Button onClick={onClose}>Cancel</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      <Modal
+        isOpen={isSuccessModalOpen}
+        onClose={onCloseSuccessModal}
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Success</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>{modalMessage}</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="brand" onClick={onCloseSuccessModal}>
+              OK
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+      <Modal
+        isOpen={isErrorModalOpen}
+        onClose={onCloseErrorModal}
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Error</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>{modalMessage}</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="brand" onClick={onCloseErrorModal}>
+              OK
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
