@@ -1,5 +1,13 @@
 import react, { useEffect, useState } from "react";
-import { Text, Box, Input, IconButton, InputGroup, InputRightElement } from "@chakra-ui/react";
+import { Text, Box, Input, IconButton, InputGroup, InputRightElement,   useDisclosure,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogCloseButton,
+  AlertDialogFooter, 
+  Button} from "@chakra-ui/react";
 import { IoMdSend } from "react-icons/io";
 import { RiRobot2Fill } from "react-icons/ri";
 import { HiMiniUser } from "react-icons/hi2";
@@ -10,7 +18,8 @@ function Chatbots() {
   const [chat, setChat] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const [botTyping, setbotTyping] = useState(false);
-
+  const { isOpen: isAlertOpen, onOpen: onOpenAlert, onClose: onCloseAlert } = useDisclosure();
+ 
   useEffect(() => {
     console.log("called");
     const objDiv = document.getElementById("messageArea");
@@ -28,7 +37,7 @@ function Chatbots() {
       setInputMessage("");
       rasaAPI(name, inputMessage);
     } else {
-      window.alert("Please enter valid message");
+      onOpenAlert();
     }
   };
 
@@ -140,6 +149,25 @@ function Chatbots() {
                     </form>
                 </Box>
             </Box>
+
+        <AlertDialog isOpen={isAlertOpen} onClose={onCloseAlert}>
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                Message not valid
+              </AlertDialogHeader>
+              <AlertDialogCloseButton />
+              <AlertDialogBody>
+                Please enter a valid message
+              </AlertDialogBody>
+              <AlertDialogFooter>
+                <Button colorScheme="brand" onClick={onCloseAlert}>
+                  OK
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
         </Box>
     )
 }

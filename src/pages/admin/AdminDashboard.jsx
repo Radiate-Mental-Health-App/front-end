@@ -8,6 +8,13 @@ import {
   TagLabel,
   TagLeftIcon,
   Text,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import DataTable from "react-data-table-component";
 import axios from "axios";
@@ -16,6 +23,10 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function AdminDashboard() {
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  
+
   // cell component
   const Status = ({ row }) => {
     if (row.paymentTime !== null) {
@@ -43,12 +54,36 @@ function AdminDashboard() {
       axios
         .delete(`http://localhost:5000/api/appointment/${id}`)
         .then((res) => {
-          alert("Order deleted.");
-          window.location.reload();
+          setModalMessage("Order deleted.");
+          setModalOpen(true);
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
         })
         .catch((err) => console.log(err));
     }
   }
+
+  const ModalComponent = () => {
+    return (
+      <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Success</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>{modalMessage}</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="brand" onClick={() => setModalOpen(false)}>
+              OK
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    );
+  };
+  
 
   // action button
   const ActionButton = ({ row }) => {
@@ -238,6 +273,8 @@ function AdminDashboard() {
             />
           </Box>
         </Box>
+
+        <ModalComponent />
       </Box>
     </div>
   );

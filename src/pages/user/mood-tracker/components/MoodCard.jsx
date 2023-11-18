@@ -13,7 +13,7 @@ import {
   Textarea,
   Flex,
   Button,
-  Menu,
+  Menu, 
   MenuButton,
   MenuList,
   MenuItem,
@@ -163,24 +163,24 @@ export const MoodCard = ({ item, isOpen, onOpen, onClose, setModalAction, setIdM
         </Container>
 
         <Modal
-        isOpen={isSuccessModalOpen}
-        onClose={onCloseSuccessModal}
-        isCentered
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Success</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text>{modalMessage}</Text>
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="brand" onClick={onCloseSuccessModal}>
-              OK
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+          isOpen={isSuccessModalOpen}
+          onClose={onCloseSuccessModal}
+          isCentered
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Success</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Text>{modalMessage}</Text>
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="brand" onClick={onCloseSuccessModal}>
+                OK
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
 
       <Modal
         isOpen={isErrorModalOpen}

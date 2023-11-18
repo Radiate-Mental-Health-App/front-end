@@ -12,6 +12,13 @@ import {
   HStack,
   Input,
   Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalFooter,
+  ModalBody,
+  ModalCloseButton,
 } from "@chakra-ui/react";
 import { FiMail, FiCalendar, FiPhone, FiUsers, FiClock } from "react-icons/fi";
 import { BsArrowLeftRight } from "react-icons/bs";
@@ -26,6 +33,8 @@ function AppointmentDetail() {
   const { id } = useParams();
   const [data, setData] = useState();
   const [linkSession, setLinkSession] = useState("");
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
 
   const fetchData = async () => {
     axios
@@ -42,8 +51,11 @@ function AppointmentDetail() {
         linkSession: linkSession,
       })
       .then((res) => {
-        alert(res.data.message);
-        goTo("/a");
+        setModalMessage(res.data.message);
+        setModalOpen(true);
+        setTimeout(() => {
+          goTo("/a");
+        }, 2000);
       })
       .catch((err) => console.log(err));
   };
@@ -51,6 +63,26 @@ function AppointmentDetail() {
   useEffect(() => {
     fetchData();
   }, []);
+
+  const ModalComponent = () => {
+    return (
+      <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Success</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>{modalMessage}</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="brand" onClick={() => setModalOpen(false)}>
+              OK
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    );
+  };
 
   //status
   const Status = () => {
@@ -300,6 +332,7 @@ function AppointmentDetail() {
           </Box>
         </Box>
       </form>
+      <ModalComponent />
     </div>
   );
 }

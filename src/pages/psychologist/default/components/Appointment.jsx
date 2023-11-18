@@ -5,11 +5,16 @@ import {
   CardBody,
   Flex,
   Icon,
-  Stack,
   HStack,
   Text,
   Box,
   Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalFooter,
+  ModalHeader,
+  ModalBody,
   useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
@@ -21,6 +26,8 @@ import EditSchedule from "./EditSchedule";
 export default function Appointment({ item }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [idSchedule, setIdSchedule] = useState("");
+  const { isOpen: isSuccessModalOpen, onOpen: onOpenSuccessModal, onClose: onCloseSuccessModal } = useDisclosure();
+
 
   const handleClickEdit = (id) => {
     setIdSchedule(id);
@@ -35,8 +42,10 @@ export default function Appointment({ item }) {
       axios
         .delete(`http://localhost:5000/api/psychologist/schedule/${id}`)
         .then((res) => {
-          alert("Shcedule deleted.");
-          window.location.reload();
+          onOpenSuccessModal();
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
         })
         .catch((err) => console.log(err));
     }
@@ -109,6 +118,26 @@ export default function Appointment({ item }) {
       </CardBody>
       <Modal isOpen={isOpen} onClose={onClose}>
         <EditSchedule idSchedule={idSchedule} onClose={onClose} />
+      </Modal>
+
+      <Modal
+        isOpen={isSuccessModalOpen}
+        onClose={onCloseSuccessModal}
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Success</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>Schedule deleted.</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="brand" onClick={onCloseSuccessModal}>
+              OK
+            </Button>
+          </ModalFooter>
+        </ModalContent>
       </Modal>
     </Card>
   );
