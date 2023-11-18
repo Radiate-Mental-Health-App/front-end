@@ -83,7 +83,7 @@ export const MoodCard = ({ item, onOpen, setModalAction, setIdMood }) => {
       <CardBody>
         <Flex justifyContent="space-between" mb={5}>
           <HStack>
-            <Image src={moodIcon[item.moodValue].icon} boxSize={"60px"} />
+            <Image src={moodIcon[item.moodValue]?.icon} boxSize={"60px"} />
             <VStack align={"left"} ml={4}>
               <Heading size={"md"}>{item.moodValue}</Heading>
               <HStack>
