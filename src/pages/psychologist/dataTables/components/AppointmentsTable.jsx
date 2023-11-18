@@ -119,37 +119,39 @@ export default function ColumnsTable(props) {
                   if (cell.column.Header === "NAME") {
                     data = (
                       <Text color={textColor} fontSize="sm">
-                        {cell.value}
-                      </Text>
-                    );
-                  } else if (cell.column.Header === "AGE") {
-                    data = (
-                      <Text color={textColor} fontSize="sm">
-                        {cell.value}
+                        {cell.row.original.userId.fullName}
                       </Text>
                     );
                   } else if (cell.column.Header === "DATE") {
                     data = (
                       <Text color={textColor} fontSize="sm">
-                        {cell.value}
+                        {new Date(
+                          cell.row.original.scheduleId.date
+                        ).toDateString()}
                       </Text>
                     );
                   } else if (cell.column.Header === "TIME") {
                     data = (
                       <Text color={textColor} fontSize="sm">
-                        {cell.value}
+                        {new Date(
+                          cell.row.original.scheduleId.timeSlots.startTime
+                        ).toLocaleTimeString()}{" "}
+                        -{" "}
+                        {new Date(
+                          cell.row.original.scheduleId.timeSlots.endTime
+                        ).toLocaleTimeString()}
                       </Text>
                     );
                   } else if (cell.column.Header === "PROBLEMS") {
-                    data = cell.value.map((problem, problemIndex) => (
-                      <Badge key={problemIndex} colorScheme="green" mr="2" mt="2">
-                        {problem}
+                    data = (
+                      <Badge colorScheme="green" mr="2" mt="2">
+                        {cell.row.original.userProblem}
                       </Badge>
-                    ));
+                    );
                   } else if (cell.column.Header === "PACKAGE") {
                     data = (
                       <Text color={textColor} fontSize="sm">
-                        {cell.value}
+                        {cell.row.original.package}
                       </Text>
                     );
                   } else if (cell.column.Header === "STATUS") {
@@ -160,18 +162,18 @@ export default function ColumnsTable(props) {
                           h="24px"
                           me="5px"
                           color={
-                            cell.value === "Confirmed"
+                            cell.value === "Scheduled"
                               ? "green.500"
-                              : cell.value === "Declined"
+                              : cell.value === "Canceled"
                               ? "red.500"
                               : cell.value === "Waiting confirmation"
                               ? "orange.500"
                               : null
                           }
                           as={
-                            cell.value === "Confirmed"
+                            cell.value === "Scheduled"
                               ? MdCheckCircle
-                              : cell.value === "Declined"
+                              : cell.value === "Canceled"
                               ? MdCancel
                               : cell.value === "Waiting confirmation"
                               ? MdOutlineError
@@ -187,7 +189,7 @@ export default function ColumnsTable(props) {
                   else if (cell.column.Header === "ACTION") {
                     data = (
                       <HStack>
-                        <Link to="/p/appointments/detail">
+                        <Link to={`/p/appointments/detail/${cell.row.original._id}`}>
                           <IconButton
                             colorScheme="green"
                             aria-label="Search database"

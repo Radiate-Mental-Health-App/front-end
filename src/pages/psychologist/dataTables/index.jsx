@@ -1,40 +1,40 @@
-/*!
-  _   _  ___  ____  ___ ________  _   _   _   _ ___
- | | | |/ _ \|  _ \|_ _|__  / _ \| \ | | | | | |_ _|
- | |_| | | | | |_) || |  / / | | |  \| | | | | || |
- |  _  | |_| |  _ < | | / /| |_| | |\  | | |_| || |
- |_| |_|\___/|_| \_\___/____\___/|_| \_|  \___/|___|
-
-=========================================================
-* Horizon UI - v1.1.0
-=========================================================
-
-* Product Page: https://www.horizon-ui.com/
-* Copyright 2023 Horizon UI (https://www.horizon-ui.com/)
-
-* Designed and Coded by Simmmple
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-
 // Chakra imports
-import {Box} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import AppointmentsTable from "@/pages/psychologist/dataTables/components/AppointmentsTable";
-import {columnsDataComplex} from "@/pages/psychologist/default/variables/columnsData";
+import { columnsDataComplex } from "@/pages/psychologist/default/variables/columnsData";
 import tableDataComplex from "@/pages/psychologist/default/variables/tableDataComplex.json";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Settings() {
-    // Chakra Color Mode
-    return (
-        <Box p={"32px"}>
-            <Box>
-                <AppointmentsTable
-                    columnsData={columnsDataComplex}
-                    tableData={tableDataComplex}/>
-            </Box>
-        </Box>
-    );
+  const [appointmentData, setAppointmentData] = useState([]);
+
+  const fetchAppointment = async () => {
+    try {
+      const appointmentResponse = await axios.get(
+        `http://localhost:5000/api/appointment`,
+        {
+          headers: { "x-access-token": localStorage.getItem("accessToken") },
+        }
+      );
+      setAppointmentData(appointmentResponse.data.data.appointments);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAppointment();
+  }, []);
+
+  return (
+    <Box p={"32px"}>
+      <Box>
+        <AppointmentsTable
+          columnsData={columnsDataComplex}
+          tableData={appointmentData}
+        />
+      </Box>
+    </Box>
+  );
 }

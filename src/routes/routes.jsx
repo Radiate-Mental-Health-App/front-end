@@ -7,6 +7,7 @@ import Counseling from "@/pages/user/counseling/Counseling.jsx";
 import WellnessCenter from "@/pages/user/wellness-center/WellnessCenter.jsx";
 import Booking from "../pages/user/booking/Booking";
 import Chatbots from "@/pages/user/chatbot/Chatbots";
+import AppointmentDetailUser from "@/pages/user/home/AppointmentDetail";
 
 import PsychologistDashboard from "@/pages/psychologist/default";
 import Schedule from "@/pages/psychologist/schedules";
@@ -69,13 +70,14 @@ const routes = createRoutesFromElements(
       <Route path="counseling/:id/payment/done" element={<CounselingPaymentDone />}></Route>
       <Route path="wellness-center" element={<WellnessCenter />}></Route>
       <Route path="chatbot" element={<Chatbots />}></Route>
+      <Route path="appointments/detail/:id" element={<AppointmentDetailUser />}></Route>
     </Route>
     <Route path="/p" element={<ProtectedRoute roles='psychologist'><SidebarLayout menu={PSYCHOLOGIST_MENU} /></ProtectedRoute>}>
       <Route index element={<PsychologistDashboard />}></Route>
       <Route path="details/:id" element={<PsychologistDetails />} />
       <Route path="schedules" element={<Schedule />}></Route>
       <Route path="appointments" element={<Appointment />}></Route>
-      <Route path="appointments/detail" element={<AppointmentDetail />}></Route>
+      <Route path="appointments/detail/:id" element={<AppointmentDetail />}></Route>
       <Route path="appointments/detail/edit" element={<FormCounselingResult />}></Route>
       <Route path="profile" element={<Profile />}></Route>
     </Route>

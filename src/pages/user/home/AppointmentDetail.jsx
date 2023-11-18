@@ -4,18 +4,18 @@ import {
   Card,
   CardBody,
   CardHeader,
-  CardFooter,
   Heading,
   Grid,
   Button,
   HStack,
+  CardFooter,
 } from "@chakra-ui/react";
 
-import Banner from "./components/BannerPatient";
+import Banner from "./BannerPsychologist";
 
 import banner from "@/assets/img/auth/banner.jpg";
 import avatar from "@/assets/img/auth/avatars/avatar10.png";
-import CounselingResult from "./components/CounselingResult";
+import CounselingResult from "../../psychologist/dataTables/components/CounselingResult";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -73,11 +73,6 @@ export default function AppointmentDetail() {
           <CardHeader>
             <HStack justifyContent={"space-between"}>
               <Heading size="md">Counseling Result</Heading>
-              <Link to="/p/appointments/detail/edit">
-                <Button colorScheme="brand" variant={"outline"}>
-                  Edit counseling result
-                </Button>
-              </Link>
             </HStack>
           </CardHeader>
 
@@ -85,7 +80,7 @@ export default function AppointmentDetail() {
             <CounselingResult />
           </CardBody>
           <CardFooter display="flex" justifyContent="flex-end">
-            <Link to="/p/appointments">
+            <Link to="/u">
               <Button colorScheme="brand" variant={"outline"}>
                 Close
               </Button>

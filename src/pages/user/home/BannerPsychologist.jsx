@@ -39,22 +39,22 @@ export default function Banner(props) {
                 mt='10px'
                 mb='4px'
                 align={"center"}>
-                {appointmentData.userId.fullName}
+                {appointmentData.psychologistId.fullName}
             </Text>
 
             <SimpleGrid columns={2} columnGap={1}>
                 <Text fontWeight={"bold"}>Gender</Text>
-                <Text>{appointmentData.userId.gender || "-"}</Text>
+                <Text>{appointmentData.psychologistId.gender || "-"}</Text>
             </SimpleGrid>
 
             <SimpleGrid columns={2} columnGap={1}>
                 <Text fontWeight={"bold"}>Email</Text>
-                <Text>{appointmentData.userId.email}</Text>
+                <Text>{appointmentData.psychologistId.email}</Text>
             </SimpleGrid>
 
             <SimpleGrid columns={2} columnGap={1}>
                 <Text fontWeight={"bold"}>WhatsApp</Text>
-                <Text>{appointmentData.userId.whatsappNo || "-"}</Text>
+                <Text>{appointmentData.psychologistId.whatsappNo || "-"}</Text>
             </SimpleGrid>
 
             <SimpleGrid columns={2} columnGap={1}>
