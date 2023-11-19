@@ -33,7 +33,7 @@ import List from "../pages/admin/psychologist/List.jsx";
 import Detail from "../pages/admin/psychologist/Detail.jsx";
 import Edit from "../pages/admin/psychologist/Edit.jsx";
 
-import Resource from "../pages/admin/Resource.jsx";
+import Resource from "../pages/admin/articles/ArticleList.jsx";
 
 import SidebarLayout from "@/layouts/SidebarLayout.jsx";
 import Login from "@/pages/auth/Login.jsx";
@@ -46,6 +46,8 @@ import AppointmentDetail from "@/pages/psychologist/dataTables/AppointmentDetail
 import CounselingPaymentDone from "@/pages/user/counseling/CounselingPaymentDone";
 import FormCounselingResult from "@/pages/psychologist/dataTables/components/FormCounselingResult";
 import ArticleBlog from "@/pages/user/wellness-center/ArticleBlog.component";
+import ArticleList from "../pages/admin/articles/ArticleList.jsx";
+import ArticleLists from "../pages/admin/articles/ArticleList.jsx";
 
 const ProtectedRoute = ({ children, roles }) => {
   const userRole = localStorage.getItem("roles");
@@ -123,7 +125,7 @@ const routes = createRoutesFromElements(
         <Route path="edit/:id" element={<Edit />} />
         <Route path="book/:id" element={<AdminAppointmentDetail />} />
       </Route>
-      <Route path="resources" element={<Resource />} />
+      <Route path="articles" element={<ArticleLists />} />
     </Route>
     <Route path="/login" element={<Login />}></Route>
     <Route path="/register" element={<Register />}></Route>
