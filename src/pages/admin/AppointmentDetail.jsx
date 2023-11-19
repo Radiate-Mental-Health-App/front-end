@@ -20,7 +20,7 @@ import {
   ModalBody,
   ModalCloseButton,
 } from "@chakra-ui/react";
-import { FiMail, FiCalendar, FiPhone, FiUsers, FiClock } from "react-icons/fi";
+import { FiCalendar, FiPhone, FiUsers, FiClock } from "react-icons/fi";
 import { BsArrowLeftRight } from "react-icons/bs";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
