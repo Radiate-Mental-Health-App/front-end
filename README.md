@@ -98,8 +98,7 @@ Make sure you have the following installed on your machine:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/Radiate-Mental-Health-App/front-end.git
-   cd front-end
+   docker pull iqsyal21/radiate-be
 2. Create a .env file in the root of the project with the necessary environment variables. Refer to the provided .env.example for guidance.
 3. Build and start the Docker containers:
     ```bash
