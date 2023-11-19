@@ -13,25 +13,10 @@ import {
   Textarea,
   Flex,
   Button,
-  Menu, 
+  Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton,
-  ModalFooter,
-  ModalHeader,
-  ModalBody,
-  useDisclosure,
-  AlertDialog,
-  AlertDialogOverlay,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogBody,
-  AlertDialogCloseButton,
-  AlertDialogFooter
 } from "@chakra-ui/react";
 
 import { Icon } from "@chakra-ui/react";
@@ -42,7 +27,6 @@ import BadIcon from "@/assets/mood-icons/2_bad.png";
 import OkayIcon from "@/assets/mood-icons/3_okay.png";
 import GoodIcon from "@/assets/mood-icons/4_good.png";
 import WonderfulIcon from "@/assets/mood-icons/5_wonderful.png";
-import { useState } from "react";
 
 const moodIcon = {
   Terrible: {
@@ -62,58 +46,44 @@ const moodIcon = {
   },
 };
 
-export const MoodCard = ({ item, isOpen, onOpen, onClose, setModalAction, setIdMood }) => {
-  const { isOpen: isSuccessModalOpen, onOpen: onOpenSuccessModal, onClose: onCloseSuccessModal } = useDisclosure();
-  const { isOpen: isErrorModalOpen, onOpen: onOpenErrorModal, onClose: onCloseErrorModal } = useDisclosure();
-  const { isOpen: isAlertOpen, onOpen: onOpenAlert, onClose: onCloseAlert } = useDisclosure();
-  const [modalMessage, setModalMessage] = useState("");
-
-  const onClickDelete = async () => {
-    onOpenAlert();
-  };
-  
+export const MoodCard = ({ item, onOpen, setModalAction, setIdMood }) => {
   const onClickEdit = () => {
     setModalAction("edit");
     setIdMood(item.id);
     onOpen();
   };
 
-  const handleDelete = async () => {
-    try {
-      const response = await fetch(
-        "http://localhost:5000/api/user/moodentries/" + item.id,
-        {
-          method: "DELETE",
-          headers: {
-            "x-access-token": localStorage.getItem("accessToken"),
-            "Content-Type": "application/json",
-          },
-        }
-      );
+  const onClickDelete = async () => {
+    if (confirm("are you sure delete this item ?") == true) {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/api/user/moodentries/" + item.id,
+          {
+            method: "DELETE",
+            headers: {
+              "x-access-token": localStorage.getItem("accessToken"),
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
-      const data = await response.json();
-      if (data.success) {
-        onCloseAlert();
-        setModalMessage(data.message);
-        onOpenSuccessModal();
-        setTimeout(() => {
+        const data = await response.json();
+        if (data.success) {
+          alert(data.message);
           window.location.reload();
-        }, 2000);
+        }
+      } catch (error) {
+        alert(error.message);
       }
-    } catch (error) {
-      setModalMessage(error.message);
-      onOpenErrorModal();
     }
-  }
-  ;
-
+  };
 
   return (
     <Card w={"350px"} h={"auto"} rounded={"xl"}>
       <CardBody>
         <Flex justifyContent="space-between" mb={5}>
           <HStack>
-            <Image src={moodIcon[item.moodValue]?.icon} boxSize={"60px"} />
+            <Image src={moodIcon[item.moodValue].icon} boxSize={"60px"} />
             <VStack align={"left"} ml={4}>
               <Heading size={"md"}>{item.moodValue}</Heading>
               <HStack>
@@ -161,67 +131,6 @@ export const MoodCard = ({ item, isOpen, onOpen, onClose, setModalAction, setIdM
             focusBorderColor={"black.100"}
           />
         </Container>
-
-        <Modal
-          isOpen={isSuccessModalOpen}
-          onClose={onCloseSuccessModal}
-          isCentered
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Success</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Text>{modalMessage}</Text>
-            </ModalBody>
-            <ModalFooter>
-              <Button colorScheme="brand" onClick={onCloseSuccessModal}>
-                OK
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-
-      <Modal
-        isOpen={isErrorModalOpen}
-        onClose={onCloseErrorModal}
-        isCentered
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Error</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text>{modalMessage}</Text>
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="brand" onClick={onCloseErrorModal}>
-              OK
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-
-        <AlertDialog isOpen={isAlertOpen} onClose={onCloseAlert}>
-          <AlertDialogOverlay>
-            <AlertDialogContent>
-              <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                Confirm
-              </AlertDialogHeader>
-              <AlertDialogCloseButton />
-              <AlertDialogBody>
-                Are you sure you want to delete this item?
-              </AlertDialogBody>
-              <AlertDialogFooter>
-                <Button onClick={onCloseAlert} mr={2}>Cancel</Button>
-                <Button colorScheme="red" onClick={handleDelete}>
-                  Delete
-                </Button>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialogOverlay>
-        </AlertDialog>
-
       </CardBody>
     </Card>
   );

@@ -18,6 +18,7 @@ import {
   NumberInputStepper,
   NumberIncrementStepper,
   NumberDecrementStepper,
+  Select,
   Link,
   Button,
   RadioGroup,
@@ -27,17 +28,9 @@ import {
   IconButton,
   Checkbox,
   CheckboxGroup,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton,
-  ModalFooter,
-  ModalHeader,
-  ModalBody,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { FiClock, FiCheckCircle, FiLock } from "react-icons/fi";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { FiMail, FiCalendar, FiPhone } from "react-icons/fi";
 import { BsCheckCircleFill, BsXCircleFill } from "react-icons/bs";
@@ -50,10 +43,6 @@ function Edit() {
   // fetching data
   const { id } = useParams();
   const [data, setData] = useState([]);
-  const { isOpen: isSuccessModalOpen, onOpen: onOpenSuccessModal, onClose: onCloseSuccessModal } = useDisclosure();
-  const [modalMessage, setModalMessage] = useState("");
-
-
   useEffect(() => {
     const fetchData = async () => {
       axios
@@ -78,11 +67,7 @@ function Edit() {
       axios
         .delete(`http://localhost:5000/api/account/psychologist/${id}`)
         .then((res) => {
-          setModalMessage("User deleted.");
-          onOpenSuccessModal();
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
+          alert("User deleted.");
           goTo(`/a/psychologist/`);
         })
         .catch((err) => console.log(err));
@@ -95,11 +80,7 @@ function Edit() {
     axios
       .put(`http://localhost:5000/api/account/psychologist/${id}`, data)
       .then((res) => {
-        setModalMessage("User updated successfully!");
-        onOpenSuccessModal();
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
+        alert("User updated successfully!");
         goTo(`/a/psychologist`);
       })
       .catch((err) => console.log(err));
@@ -164,11 +145,8 @@ function Edit() {
     axios
       .post("http://localhost:8000/counselors/${id}", input)
       .then((res) => {
-        setModalMessage("User updated successfully!");
-        onOpenSuccessModal();
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
+        alert("User updated successfully!");
+        window.location.reload();
       })
       .catch((err) => console.log(err));
   }
@@ -757,26 +735,6 @@ function Edit() {
           </Box>
         </Flex>
       </Box>
-
-      <Modal
-          isOpen={isSuccessModalOpen}
-          onClose={onCloseSuccessModal}
-          isCentered
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Success</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Text>{modalMessage}</Text>
-            </ModalBody>
-            <ModalFooter>
-              <Button colorScheme="brand" onClick={onCloseSuccessModal}>
-                OK
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
     </div>
   );
 }

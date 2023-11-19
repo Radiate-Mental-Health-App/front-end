@@ -14,14 +14,9 @@ import {
   TabPanels,
   Tabs,
   Text,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton,
-  ModalFooter,
-  ModalHeader,
-  ModalBody,
-  useDisclosure,
+  Tag,
+  TagLeftIcon,
+  TagLabel,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -34,8 +29,6 @@ export default function GeneralInformation(props) {
 
   const [profile, setProfile] = useState({});
   const [isEdited, setIsEdited] = useState(false);
-  const { isOpen: isSuccessModalOpen, onOpen: onOpenSuccessModal, onClose: onCloseSuccessModal } = useDisclosure();
-  const [modalMessage, setModalMessage] = useState("");
 
   const id = localStorage.getItem("idAccount")
 
@@ -57,12 +50,9 @@ export default function GeneralInformation(props) {
         profile
       )
       .then((res) => {
-        setModalMessage(res.data.message);
-        onOpenSuccessModal();
+        alert(res.data.message);
         setIsEdited(!isEdited);
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
+        window.location.reload()
       })
       .catch((err) => console.log(err));
   };
@@ -382,26 +372,6 @@ export default function GeneralInformation(props) {
             </TabPanel>
           </TabPanels>
         </Tabs>
-
-        <Modal
-          isOpen={isSuccessModalOpen}
-          onClose={onCloseSuccessModal}
-          isCentered
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Success</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Text>{modalMessage}</Text>
-            </ModalBody>
-            <ModalFooter>
-              <Button colorScheme="brand" onClick={onCloseSuccessModal}>
-                OK
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
       </CardBody>
     </Card>
   );

@@ -156,7 +156,7 @@ function Booking() {
         <Box className="title">
           <Center>
             <Text fontSize="18px" fontWeight="semibold">
-              Psychologyst Detail
+              About this Psychologyst
             </Text>
           </Center>
         </Box>

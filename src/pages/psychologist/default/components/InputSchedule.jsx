@@ -11,20 +11,13 @@ import {
   FormLabel,
   Input,
   SimpleGrid,
-  Modal,
-  useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
-import { useState } from "react";
 
 import { useForm } from "react-hook-form";
 
 function InputSchedule({ onClose }) {
   const { register, handleSubmit } = useForm();
-  const { isOpen: isSuccessModalOpen, onOpen: onOpenSuccessModal, onClose: onCloseSuccessModal } = useDisclosure();
-  const { isOpen: isErrorModalOpen, onOpen: onOpenErrorModal, onClose: onCloseErrorModal } = useDisclosure();
-  const [modalMessage, setModalMessage] = useState("");
-
 
   const onSubmit = async (data) => {
     const dataForm = {
@@ -41,16 +34,12 @@ function InputSchedule({ onClose }) {
           headers: { "x-access-token": localStorage.getItem("accessToken") },
         })
         .then((res) => {
-          setModalMessage("Success create new schedule!");
-          onOpenSuccessModal();
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
+          alert("Success create new schedule!");
+          window.location.reload();
         })
         .catch((err) => console.log(err));
     } catch (error) {
-        setModalMessage(error.message);
-        onOpenErrorModal();
+      alert(error);
     }
   };
 
@@ -114,46 +103,6 @@ function InputSchedule({ onClose }) {
           </form>
         </ModalBody>
       </ModalContent>
-
-      <Modal
-          isOpen={isSuccessModalOpen}
-          onClose={onCloseSuccessModal}
-          isCentered
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Success</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Text>{modalMessage}</Text>
-            </ModalBody>
-            <ModalFooter>
-              <Button colorScheme="brand" onClick={onCloseSuccessModal}>
-                OK
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-
-      <Modal
-        isOpen={isErrorModalOpen}
-        onClose={onCloseErrorModal}
-        isCentered
-      >
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Error</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text>{modalMessage}</Text>
-          </ModalBody>
-          <ModalFooter>
-            <Button colorScheme="brand" onClick={onCloseErrorModal}>
-              OK
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
     </div>
   );
 }
