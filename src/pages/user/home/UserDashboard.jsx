@@ -13,12 +13,9 @@ function UserDashboard() {
 
   const fetchAppointment = async () => {
     try {
-      const appointmentResponse = await axios.get(
-        `http://localhost:5000/api/appointment`,
-        {
-          headers: { "x-access-token": localStorage.getItem("accessToken") },
-        }
-      );
+      const appointmentResponse = await axios.get(`http://localhost:5000/api/appointment`, {
+        headers: { "x-access-token": localStorage.getItem("accessToken") },
+      });
       setAppointmentData(appointmentResponse.data.data.appointments);
     } catch (error) {
       console.error(error);
@@ -45,10 +42,7 @@ function UserDashboard() {
         </div>
       </div>
       <Box>
-        <UserAppointmentsTable
-          columnsData={columnsData}
-          tableData={appointmentData}
-        />
+        <UserAppointmentsTable columnsData={columnsData} tableData={appointmentData} />
       </Box>
     </Box>
   );

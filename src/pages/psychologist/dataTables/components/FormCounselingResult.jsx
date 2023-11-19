@@ -22,7 +22,7 @@
 
 // Chakra imports
 import React, { useEffect, useState } from "react";
-import { Card, CardHeader, CardBody, Heading, SimpleGrid, FormControl, FormLabel, Button, Textarea, Box } from "@chakra-ui/react";
+import { Card, CardHeader, CardBody, Heading, SimpleGrid, FormControl, FormLabel, Button, Textarea, Box, Alert, AlertIcon, AlertTitle, AlertDescription } from "@chakra-ui/react";
 import axios from "axios";
 import { useLocation } from "react-router-dom";
 
@@ -30,6 +30,7 @@ export default function FormCounselingResult() {
   const location = useLocation();
   const appointmentData = location.state.dataPatient;
   console.log(appointmentData);
+  const [showAlert, setShowAlert] = useState(false);
 
   const [formData, setFormData] = useState({
     userId: appointmentData.userId,
@@ -58,6 +59,12 @@ export default function FormCounselingResult() {
         headers: { "x-access-token": localStorage.getItem("accessToken") },
       });
       console.log(response.data);
+      setShowAlert(true);
+
+      // Hide the alert after 5 seconds
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 2000);
     } catch (error) {
       console.error("Error creating counseling result:", error.message);
       setError("An error occurred while saving changes. Please try again.");
@@ -103,8 +110,20 @@ export default function FormCounselingResult() {
             </Box>
           )}
           <Button float="right" colorScheme="brand" mt={4} onClick={handleSaveChanges}>
-            Save changes
+            Save Changes
           </Button>
+
+          {showAlert && (
+            <Box position="fixed" top="50%" left="60%" transform="translate(-50%, -50%)" zIndex="9999">
+              <Alert status="success" variant="subtle" flexDirection="column" alignItems="center" justifyContent="center" textAlign="center" height="200px" bg="#FFAC31">
+                <AlertIcon boxSize="40px" mr={0} color="white" />
+                <AlertTitle mt={4} mb={1} fontSize="lg">
+                  Application submitted!
+                </AlertTitle>
+                <AlertDescription maxWidth="sm">Thanks for submitting your application. Our team will get back to you soon.</AlertDescription>
+              </Alert>
+            </Box>
+          )}
         </CardBody>
       </Card>
     </Box>
