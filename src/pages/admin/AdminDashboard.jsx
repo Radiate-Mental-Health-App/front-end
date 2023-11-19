@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Center,
   Flex,
   Heading,
   Tag,
@@ -11,7 +10,7 @@ import {
 } from "@chakra-ui/react";
 import DataTable from "react-data-table-component";
 import axios from "axios";
-import { FiMail, FiCalendar, FiPhone, FiUsers, FiClock } from "react-icons/fi";
+import { FiCalendar, FiClock } from "react-icons/fi";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -123,6 +122,7 @@ function AdminDashboard() {
   const [counselorData, setCounselorData] = useState([]);
   const [userCount, setUserCount] = useState(0);
   const [counselorCount, setCounselorCount] = useState(0);
+  const [appointmentCount, setAppointmentCount] = useState(0);
 
   const fetchUser = async () => {
     try {
@@ -157,6 +157,7 @@ function AdminDashboard() {
         }
       );
       setAppointmentData(appointmentResponse.data.data.appointments);
+      setAppointmentCount(appointmentResponse.data.data.appointments.length);
     } catch (error) {
       console.error(error);
     }
@@ -183,7 +184,7 @@ function AdminDashboard() {
         >
           <Flex gap={3}>
             <Box
-              bg="#FFAC31"
+              bg="blue.300"
               w="50%"
               p={5}
               boxShadow="base"
@@ -203,7 +204,7 @@ function AdminDashboard() {
             </Box>
 
             <Box
-              bg="blue.300"
+              bg="#FFAC31"
               w="50%"
               p={5}
               boxShadow="base"
@@ -218,6 +219,26 @@ function AdminDashboard() {
               <Box className="body" display="flex" justifyContent="center">
                 <Text color="white" fontSize="lg">
                   Registered Psychologists
+                </Text>
+              </Box>
+            </Box>
+
+            <Box
+              bg="teal.300"
+              w="50%"
+              p={5}
+              boxShadow="base"
+              rounded="md"
+              className="appointment"
+            >
+              <Box display="flex" justifyContent="center">
+                <Text fontSize="60px" color="white" fontWeight="semibold">
+                  {appointmentCount}
+                </Text>
+              </Box>
+              <Box className="body" display="flex" justifyContent="center">
+                <Text color="white" fontSize="lg">
+                  Scheduled Appointments
                 </Text>
               </Box>
             </Box>

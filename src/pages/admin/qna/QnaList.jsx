@@ -1,13 +1,10 @@
 import DataTable from "react-data-table-component";
 import axios from "axios";
 import {
-  Text,
   Heading,
   Box,
-  Avatar,
   Flex,
   Button,
-  Center,
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { useEffect, useState } from "react";
@@ -91,10 +88,13 @@ function QnaList() {
     {
       name: "Questions",
       selector: (row) => row.Questions,
+      wrap: true,
+      width:'390px'
     },
     {
       name: "Answers",
       selector: (row) => row.Answers,
+      width: '390px'
     },
     {
       name: "Action",
