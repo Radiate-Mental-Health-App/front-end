@@ -29,12 +29,32 @@ import AppointmentsTable from "../dataTables/components/AppointmentsTable";
 import { columnsDataComplex } from "./variables/columnsData";
 import tableDataComplex from "./variables/tableDataComplex.json";
 import TodaySessions from "./components/TodaySessions";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function UserReports() {
+  const [appointmentData, setAppointmentData] = useState([]);
+
+  const fetchAppointment = async () => {
+    try {
+      const appointmentResponse = await axios.get(
+        `http://localhost:5000/api/appointment`,
+        {
+          headers: { "x-access-token": localStorage.getItem("accessToken") },
+        }
+      );
+      setAppointmentData(appointmentResponse.data.data.appointments);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchAppointment();
+  }, []);
+
   return (
-    <Box
-      p="32px"
-    >
+    <Box p="32px">
       <SimpleGrid
         columns={{
           base: 1,
@@ -51,7 +71,7 @@ export default function UserReports() {
       <Box>
         <AppointmentsTable
           columnsData={columnsDataComplex}
-          tableData={tableDataComplex}
+          tableData={appointmentData}
         />
       </Box>
     </Box>

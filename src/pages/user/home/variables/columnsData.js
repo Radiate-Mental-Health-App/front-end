@@ -8,10 +8,6 @@ export const columnsData = [
     accessor: "problems",
   },
   {
-    Header: "DATE",
-    accessor: "date",
-  },
-  {
     Header: "TIME",
     accessor: "time",
   },

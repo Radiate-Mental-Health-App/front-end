@@ -5,6 +5,7 @@ import {
   Box,
   Flex,
   Button,
+
   Modal,
   ModalOverlay,
   ModalContent,
@@ -14,6 +15,7 @@ import {
   ModalBody,
   Text,
   useDisclosure,
+
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
 import { useState } from "react";
@@ -102,10 +104,13 @@ function QnaList() {
     {
       name: "Questions",
       selector: (row) => row.Questions,
+      wrap: true,
+      width:'390px'
     },
     {
       name: "Answers",
       selector: (row) => row.Answers,
+      width: '390px'
     },
     {
       name: "Action",
