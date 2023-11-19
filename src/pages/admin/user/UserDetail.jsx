@@ -15,14 +15,6 @@ import {
   HStack,
   Radio,
   Button,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalCloseButton,
-  ModalFooter,
-  ModalHeader,
-  ModalBody,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -34,9 +26,6 @@ function UserDetail() {
   const { id } = useParams();
 
   const [data, setData] = useState([]);
-  const { isOpen: isSuccessModalOpen, onOpen: onOpenSuccessModal, onClose: onCloseSuccessModal } = useDisclosure();
-  const [modalMessage, setModalMessage] = useState("");
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -59,8 +48,7 @@ function UserDetail() {
     axios
       .put(`http://localhost:5000/api/account/user/${id}`, data)
       .then((res) => {
-        setModalMessage("User updated successfully!");
-        onOpenSuccessModal();
+        alert("User updated successfully!");
         goTo(`/a/users/`);
       })
       .catch((err) => console.log(err));
@@ -75,8 +63,7 @@ function UserDetail() {
       axios
         .delete(`http://localhost:5000/api/account/user/${id}`)
         .then((res) => {
-          setModalMessage("User deleted.");
-          onOpenSuccessModal();
+          alert("User deleted.");
           goTo(`/a/users/`);
         })
         .catch((err) => console.log(err));
@@ -319,25 +306,6 @@ function UserDetail() {
           </Flex>
         </Box>
       </div>
-      <Modal
-          isOpen={isSuccessModalOpen}
-          onClose={onCloseSuccessModal}
-          isCentered
-        >
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Success</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-              <Text>{modalMessage}</Text>
-            </ModalBody>
-            <ModalFooter>
-              <Button colorScheme="brand" onClick={onCloseSuccessModal}>
-                OK
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
     </div>
   );
 }

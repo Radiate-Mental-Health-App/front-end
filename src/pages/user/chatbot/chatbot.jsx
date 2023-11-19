@@ -2,25 +2,12 @@ import "./chatBot.css";
 import react, { useEffect, useState } from "react";
 import { IoMdSend } from "react-icons/io";
 import { BiBot, BiUser } from "react-icons/bi";
-import {
-  Center,
-  Heading,
-  useDisclosure,
-  AlertDialog,
-  AlertDialogOverlay,
-  AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogBody,
-  AlertDialogCloseButton,
-  AlertDialogFooter,
-  Button,
-} from "@chakra-ui/react";
+import { Center, Heading } from "@chakra-ui/react";
 
 function Basic() {
   const [chat, setChat] = useState([]);
   const [inputMessage, setInputMessage] = useState("");
   const [botTyping, setbotTyping] = useState(false);
-  const { isOpen: isAlertOpen, onOpen: onOpenAlert, onClose: onCloseAlert } = useDisclosure();
 
   useEffect(() => {
     console.log("called");
@@ -39,7 +26,7 @@ function Basic() {
       setInputMessage("");
       rasaAPI(name, inputMessage);
     } else {
-      onOpenAlert();
+      window.alert("Please enter valid message");
     }
   };
 
@@ -154,25 +141,6 @@ function Basic() {
             </div>
           </div>
         </div>
-
-        <AlertDialog isOpen={isAlertOpen} onClose={onCloseAlert}>
-          <AlertDialogOverlay>
-            <AlertDialogContent>
-              <AlertDialogHeader fontSize="lg" fontWeight="bold">
-                Message not valid
-              </AlertDialogHeader>
-              <AlertDialogCloseButton />
-              <AlertDialogBody>
-                Please enter a valid message
-              </AlertDialogBody>
-              <AlertDialogFooter>
-                <Button colorScheme="brand" onClick={onCloseAlert}>
-                  OK
-                </Button>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialogOverlay>
-        </AlertDialog>
       </div>
     </Center>
   );
