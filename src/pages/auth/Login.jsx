@@ -5,7 +5,7 @@ import {
   Input,
   Image,
   Text,
-  VStack,
+  Stack
 } from "@chakra-ui/react";
 
 import Logo from "../../assets/radiate-logo.png";
@@ -84,63 +84,81 @@ const Login = () => {
         h="100vh"
       >
         <Box
-          w={["full", "md"]}
-          p="50px 50px"
-          bg="neutralW"
-          borderRadius="20"
-          boxShadow="lg"
+          bg='white'
+          borderRadius='20'
+          boxShadow='md'
+          p='50px'
+          border='1px'
+          borderColor='gray.200'
         >
           <form onSubmit={handleSubmit(onSubmit)}>
-            <VStack spacing={1} align="flex-start" w="full">
-              <VStack spacing={1} align={["flex-start", " center"]} w="full">
-                <Image src={Logo} height="60px" mb="48px" />
-                <Text fontSize="30px" as="b">
-                  Sign In
-                </Text>
-                <Text> Enter your email and password to login</Text>
-              </VStack>
-            </VStack>
+            <Stack spacing={6}>
+              <Box className="logo">
+                <Stack align="center" spacing={4}>
+                  <Image src={Logo} h="60px" />
+                  <Box textAlign='center'>
+                    <Text fontSize="28px" as="b">
+                      Log In
+                    </Text>
+                    <Text fontSize="16px"> Enter your email and password to login </Text>
+                  </Box>
+                </Stack>
+              </Box>
 
-            <FormControl mb="20px" mt="32px">
-              <Input
-                type="email"
-                variant="outline"
-                rounded="10"
-                placeholder="Email Address"
-                {...register("email", {
-                  required: true,
-                  pattern: /^\S+@\S+$/i,
-                })}
-              />
-            </FormControl>
+              <Box className="form">
+                <Stack align="center" spacing={4}>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      variant="outline"
+                      rounded="10"
+                      placeholder="Email Address"
+                      {...register("email", {
+                        required: true,
+                        pattern: /^\S+@\S+$/i,
+                      })}
+                    />
+                  </FormControl>
 
-            <FormControl mb="16px">
-              <Input
-                type="password"
-                variant="outline"
-                rounded="10"
-                placeholder="Password"
-                {...register("password", {
-                  required: true,
-                })}
-              />
-            </FormControl>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      variant="outline"
+                      rounded="10"
+                      placeholder="Password"
+                      {...register("password", {
+                        required: true,
+                      })}
+                    />
+                  </FormControl>
+                </Stack>
+              </Box>
 
-            <Button
-              type="submit"
-              w="full"
-              mt="20px"
-              colorScheme="orange"
-              bgColor="orange2"
-              mb="10px"
-            >
-              Login
-            </Button>
+              <Box className="button">
+                <Stack align="center">
+                  <Button
+                    type="submit"
+                    colorScheme="orange"
+                    bgColor="orange2"
+                    mb="10px"
+                    w="full"
+                  >
+                    Login
+                  </Button>
+                  
+                  <Button
+                    color='orange'
+                    onClick={() => navigate("/register")}
+                    variant='link'
+                    fontWeight='normal'
+                  >
+                    Don't have an account?
+                    <Text fontWeight='semibold' as='u' ml='3px'> Register </Text>
+                  </Button>
+                </Stack>
+              </Box>
+            </Stack>
           </form>
-
-          <Button colorScheme="blue" onClick={() => navigate("/register")}>
-            ke halaman register
-          </Button>
         </Box>
       </Box>
     </div>

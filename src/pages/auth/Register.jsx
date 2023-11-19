@@ -5,7 +5,6 @@ import {
   Input,
   Image,
   Text,
-  VStack,
   RadioGroup,
   Radio,
   Stack,
@@ -47,6 +46,17 @@ const Register = () => {
     }
   };
 
+  const Role = () => {
+    if (registrationType === 'user') {
+      return (
+        <Text fontSize="24px" as="b"> User </Text>
+      );
+    }
+    else return (
+      <Text fontSize="24px" as="b"> Psychologist </Text>
+    );
+  };
+
   return (
     <div className="login">
       <Box
@@ -69,74 +79,94 @@ const Register = () => {
         </RadioGroup>
 
         <Box
-          w={["full", "md"]}
-          p="50px 50px"
-          bg="neutralW"
-          borderRadius="20"
-          boxShadow="lg"
+          bg='white'
+          borderRadius='20'
+          boxShadow='md'
+          p='50px'
+          border='1px'
+          borderColor='gray.200'
+          mt={3}
+          className="register"
         >
           <form onSubmit={handleSubmit(onSubmit)}>
-            <VStack spacing={1} align="flex-start" w="full">
-              <VStack spacing={1} align={["flex-start", " center"]} w="full">
-                <Image src={Logo} height="60px" mb="48px" />
-                <Text fontSize="30px" as="b">
-                  Sign Up as {registrationType}
-                </Text>
-                <Text>Halaman register sementara</Text>
-              </VStack>
-            </VStack>
+            <Stack spacing={6}>
+              <Box className="logo">
+                <Stack align="center" spacing={3}>
+                  <Image src={Logo} h="60px" />
+                  <Box textAlign='center'>
+                    <Text fontSize="24px" as="b">
+                      Sign Up as <Role />
+                    </Text>
+                    <Text fontSize="16px"> Create an account</Text>
+                  </Box>
+                </Stack>
+              </Box>
 
-            <FormControl mb="20px" mt="32px">
-              <Input
-                type="text"
-                variant="outline"
-                rounded="10"
-                placeholder="Fullname"
-                {...register("fullName", {
-                  required: true,
-                })}
-              />
-            </FormControl>
+              <Box className="form">
+                <Stack align="center" spacing={3}>
+                  <FormControl>
+                    <Input
+                    type="text"
+                    variant="outline"
+                    rounded="10"
+                    placeholder="Fullname"
+                    {...register("fullName", {
+                      required: true,
+                    })}
+                    />
+                  </FormControl>
 
-            <FormControl mb="20px">
-              <Input
-                type="email"
-                variant="outline"
-                rounded="10"
-                placeholder="Email Address"
-                {...register("email", {
-                  required: true,
-                  pattern: /^\S+@\S+$/i,
-                })}
-              />
-            </FormControl>
+                  <FormControl>
+                    <Input
+                      type="email"
+                      variant="outline"
+                      rounded="10"
+                      placeholder="Email Address"
+                      {...register("email", {
+                        required: true,
+                        pattern: /^\S+@\S+$/i,
+                      })}
+                    />
+                  </FormControl>
 
-            <FormControl mb="16px">
-              <Input
-                type="password"
-                variant="outline"
-                rounded="10"
-                placeholder="Password"
-                {...register("password", {
-                  required: true,
-                })}
-              />
-            </FormControl>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      variant="outline"
+                      rounded="10"
+                      placeholder="Password"
+                      {...register("password", {
+                        required: true,
+                      })}
+                    />
+                  </FormControl>
+                </Stack>
+              </Box>
 
-            <Button
-              type="submit"
-              w="full"
-              mt="20px"
-              colorScheme="orange"
-              bgColor="orange2"
-              mb="10px"
-            >
-              Register
-            </Button>
+              <Box className="button">
+                <Stack align="center">
+                  <Button
+                    type="submit"
+                    colorScheme="orange"
+                    bgColor="orange2"
+                    mb="10px"
+                    w="full"
+                  >
+                    Register
+                  </Button>
+                  
+                  <Button
+                    color="orange"
+                    fontWeight='normal'
+                    onClick={() => navigate("/login")}
+                    variant='link'>
+                    Already have an account?
+                    <Text fontWeight='semibold' as='u' ml='3px'> Log in </Text>
+                  </Button>
+                </Stack>
+              </Box>
+            </Stack>
           </form>
-          <Button colorScheme="blue" onClick={() => navigate("/login")}>
-            ke halaman login
-          </Button>
         </Box>
       </Box>
     </div>
