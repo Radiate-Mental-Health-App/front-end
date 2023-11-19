@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import {
   Container,
   Heading,
@@ -17,8 +18,10 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  useDisclosure,
 } from "@chakra-ui/react";
 
+import { useState } from "react";
 import { Icon } from "@chakra-ui/react";
 import { HiCalendar } from "react-icons/hi2";
 
@@ -27,6 +30,8 @@ import BadIcon from "@/assets/mood-icons/2_bad.png";
 import OkayIcon from "@/assets/mood-icons/3_okay.png";
 import GoodIcon from "@/assets/mood-icons/4_good.png";
 import WonderfulIcon from "@/assets/mood-icons/5_wonderful.png";
+
+import ModalOk from '@/components/modals/ModalOk'
 
 const moodIcon = {
   Terrible: {
@@ -46,7 +51,11 @@ const moodIcon = {
   },
 };
 
-export const MoodCard = ({ item, onOpen, setModalAction, setIdMood }) => {
+export const MoodCard = ({ item, onOpen, setModalAction, setIdMood  }) => {
+  const { isOpen: isModalOkOpen, onOpen: onOpenModalOk, onClose: onCloseModalOk } = useDisclosure();
+const [modalMessage, setModalMessage] = useState("");
+const [modalHeader, setModalHeader] = useState("");
+
   const onClickEdit = () => {
     setModalAction("edit");
     setIdMood(item.id);
@@ -54,7 +63,7 @@ export const MoodCard = ({ item, onOpen, setModalAction, setIdMood }) => {
   };
 
   const onClickDelete = async () => {
-    if (confirm("are you sure delete this item ?") == true) {
+    if (confirm("Are you sure you want to delete this item ?") == true) {
       try {
         const response = await fetch(
           "http://localhost:5000/api/user/moodentries/" + item.id,
@@ -69,8 +78,9 @@ export const MoodCard = ({ item, onOpen, setModalAction, setIdMood }) => {
 
         const data = await response.json();
         if (data.success) {
-          alert(data.message);
-          window.location.reload();
+          setModalHeader("Success");
+          setModalMessage("Mood entry deleted.");
+          onOpenModalOk();
         }
       } catch (error) {
         alert(error.message);
@@ -83,7 +93,7 @@ export const MoodCard = ({ item, onOpen, setModalAction, setIdMood }) => {
       <CardBody>
         <Flex justifyContent="space-between" mb={5}>
           <HStack>
-            <Image src={moodIcon[item.moodValue].icon} boxSize={"60px"} />
+            <Image src={moodIcon[item.moodValue]?.icon} boxSize={"60px"} />
             <VStack align={"left"} ml={4}>
               <Heading size={"md"}>{item.moodValue}</Heading>
               <HStack>
@@ -132,6 +142,7 @@ export const MoodCard = ({ item, onOpen, setModalAction, setIdMood }) => {
           />
         </Container>
       </CardBody>
+      <ModalOk modalHeader={modalHeader} modalMessage={modalMessage} isOpen={isModalOkOpen} onOpen={onOpenModalOk} onClose={onCloseModalOk} />
     </Card>
   );
 };

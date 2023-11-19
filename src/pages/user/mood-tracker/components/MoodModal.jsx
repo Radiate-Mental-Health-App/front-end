@@ -1,9 +1,9 @@
+/* eslint-disable react/prop-types */
 import {
   Container,
   Heading,
   HStack,
   VStack,
-  Image,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -13,8 +13,6 @@ import {
   ModalCloseButton,
   Button,
   Wrap,
-  WrapItem,
-  Tag,
   Text,
   Textarea,
 } from "@chakra-ui/react";
