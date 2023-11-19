@@ -45,6 +45,7 @@ import CounselingPayment from "@/pages/user/counseling/CounselingPayment";
 import AppointmentDetail from "@/pages/psychologist/dataTables/AppointmentDetail";
 import CounselingPaymentDone from "@/pages/user/counseling/CounselingPaymentDone";
 import FormCounselingResult from "@/pages/psychologist/dataTables/components/FormCounselingResult";
+import ArticleBlog from "@/pages/user/wellness-center/ArticleBlog.component";
 
 const ProtectedRoute = ({ children, roles }) => {
   const userRole = localStorage.getItem("roles");
@@ -76,6 +77,7 @@ const routes = createRoutesFromElements(
       <Route path="counseling/:id/payment" element={<CounselingPayment />}></Route>
       <Route path="counseling/:id/payment/done" element={<CounselingPaymentDone />}></Route>
       <Route path="wellness-center" element={<WellnessCenter />}></Route>
+      <Route path="wellness-center/article" element={<ArticleBlog />}></Route>
       <Route path="chatbot" element={<Chatbots />}></Route>
       <Route path="appointments/detail/:id" element={<AppointmentDetailUser />}></Route>
     </Route>
