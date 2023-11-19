@@ -156,14 +156,7 @@ export default function UserAppointmentsTable(props) {
                             <IconButton colorScheme="green" aria-label="Search database" borderRadius="10px" icon={<InfoIcon />} />
                           </Link>
 
-                          <IconButton
-                            onClick={() => handleCanceled(cell.row.original._id)}
-                            colorScheme="red"
-                            aria-label="Search database"
-                            borderRadius="10px"
-                            icon={<SmallCloseIcon />}
-                          />
-
+                          <IconButton onClick={() => handleCanceled(cell.row.original._id)} colorScheme="red" aria-label="Search database" borderRadius="10px" icon={<SmallCloseIcon />} />
                         </HStack>
                       );
                     }

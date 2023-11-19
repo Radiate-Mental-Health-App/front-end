@@ -1,15 +1,13 @@
 import { useEffect, useState } from "react";
 import PsychologistCard from "./psyCard.component";
-import { Grid } from "@chakra-ui/react";
+import { Grid, Heading } from "@chakra-ui/react";
 
 const PsychologistList = () => {
   const [listPsychologists, setListPsychologists] = useState([]);
 
   const getListPsy = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/account/psychologist"
-      );
+      const response = await fetch("http://localhost:5000/api/account/psychologist");
 
       const data = await response.json();
       if (data.data) {
@@ -26,7 +24,8 @@ const PsychologistList = () => {
 
   return (
     <div>
-      <h2>List of Psychologists</h2>
+      <Heading margin="3">List of Psychologists</Heading>
+
       <Grid templateColumns="repeat(3, 1fr)" gap={8} mx={4}>
         {listPsychologists
           .filter((item) => item.isVerified)
