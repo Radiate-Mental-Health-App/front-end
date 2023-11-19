@@ -1,24 +1,4 @@
-import {
-  Box,
-  Center,
-  Flex,
-  Text,
-  Avatar,
-  Stack,
-  TagLabel,
-  Tag,
-  TagLeftIcon,
-  Icon,
-  Select,
-  Button,
-  Card,
-  CardHeader,
-  Heading,
-  CardBody,
-  CardFooter,
-  FormControl,
-  Input,
-} from "@chakra-ui/react";
+import { Box, Center, Flex, Text, Avatar, Stack, TagLabel, Tag, TagLeftIcon, Icon, Select, Button, Card, CardHeader, Heading, CardBody, CardFooter, FormControl, Input } from "@chakra-ui/react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { FaBriefcase } from "react-icons/fa";
@@ -89,11 +69,7 @@ function Booking() {
   const Package = () => {
     return (
       <Flex justify="space-around" px={20} pt={10}>
-        <Card
-          transform={
-            selectedPackage === "Video Call" ? "translateY(-20px)" : ""
-          }
-        >
+        <Card transform={selectedPackage === "Video Call" ? "translateY(-20px)" : ""}>
           <CardHeader>
             <Heading size="md" textAlign="center">
               Video Call
@@ -106,11 +82,7 @@ function Booking() {
           <CardFooter>
             <Box display="flex" justifyContent="center">
               <CardFooter>
-                <Button
-                  bg="#FFAC31"
-                  color="white"
-                  onClick={() => handlePackage("Video Call", 200000)}
-                >
+                <Button bg="#FFAC31" color="white" onClick={() => handlePackage("Video Call", 200000)}>
                   Select
                 </Button>
               </CardFooter>
@@ -118,11 +90,7 @@ function Booking() {
           </CardFooter>
         </Card>
 
-        <Card
-          transform={
-            selectedPackage === "Voice Call" ? "translateY(-40px)" : ""
-          }
-        >
+        <Card transform={selectedPackage === "Voice Call" ? "translateY(-40px)" : ""}>
           <CardHeader>
             <Heading size="md" textAlign="center">
               Voice Call
@@ -135,11 +103,7 @@ function Booking() {
           <CardFooter>
             <Box display="flex" justifyContent="center">
               <CardFooter>
-                <Button
-                  bg="#FFAC31"
-                  color="white"
-                  onClick={() => handlePackage("Voice Call", 100000)}
-                >
+                <Button bg="#FFAC31" color="white" onClick={() => handlePackage("Voice Call", 100000)}>
                   Select
                 </Button>
               </CardFooter>
@@ -156,13 +120,14 @@ function Booking() {
         <Box className="title">
           <Center>
             <Text fontSize="18px" fontWeight="semibold">
-              About this Psychologyst
+              Psychologyst Detail
             </Text>
           </Center>
         </Box>
         <Box mt={6} className="profil-psikolog">
           <Flex gap={6} flexWrap="wrap">
-            <Avatar size="xl" src={data.photo} />
+            {/* <Avatar size="xl" src={data.photo} /> */}
+            <Avatar size="xl" src="https://media.licdn.com/dms/image/C4E03AQGVKK45te1XxA/profile-displayphoto-shrink_800_800/0/1615044002819?e=2147483647&v=beta&t=2uKC6IaCLMrAe1saOF_bNjP7RMhM1eTBRiTeijtvY1w" />
             <Box flexBasis="calc(100% - 140px)">
               <Text fontSize="lg" fontWeight="semibold">
                 {data.fullName}
@@ -177,11 +142,7 @@ function Booking() {
                 </Tag>
               </Flex>
               <Text fontSize="16px" mt={4}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                Cursus mattis molestie a iaculis at. Purus in mollis nunc sed
-                id. Mattis rhoncus urna neque viverra justo nec ultrices. Netus
-                et malesuada fames ac.
+                Specializes in helping individuals overcome depression. Dr. Jane Smith employs evidence-based therapeutic approaches to promote mental well-being and emotional resilience.
               </Text>
             </Box>
           </Flex>
@@ -219,14 +180,7 @@ function Booking() {
                 <Text fontSize="16px" fontWeight="semibold">
                   Areas of Focus
                 </Text>
-                <Tag
-                  size="md"
-                  colorScheme="orange"
-                  variant="subtle"
-                  borderRadius="full"
-                  mt="6px"
-                  mr="6px"
-                >
+                <Tag size="md" colorScheme="orange" variant="subtle" borderRadius="full" mt="6px" mr="6px">
                   <TagLabel>{data.expertiseFields}</TagLabel>
                 </Tag>
               </Box>
@@ -239,30 +193,19 @@ function Booking() {
             <Text fontWeight="semibold" mb={2}>
               Your Problem
             </Text>
-            <Input
-              placeholder="example: badmood about schools"
-              value={problem}
-              onChange={(e) => setProblem(e.target.value)}
-            />
+            <Input placeholder="example: badmood about schools" value={problem} onChange={(e) => setProblem(e.target.value)} />
           </FormControl>
         </Box>
 
         <Box className="jadwal" mt="40px">
           <Stack spacing={3}>
             <Text fontWeight="semibold"> Available Schedules </Text>
-            <Select
-              placeholder="Book an appoinment"
-              size="md"
-              value={selectedSchedule}
-              onChange={(e) => setSelectedSchedule(e.target.value)}
-            >
+            <Select placeholder="Book an appoinment" size="md" value={selectedSchedule} onChange={(e) => setSelectedSchedule(e.target.value)}>
               {listSchedule
                 .filter((item) => !item.isBooked)
                 .map((item) => (
                   <option key={item._id} value={item._id}>
-                    {new Date(item.date).toDateString()} /{" "}
-                    {new Date(item.timeSlots.startTime).toLocaleTimeString()} -{" "}
-                    {new Date(item.timeSlots.endTime).toLocaleTimeString()}
+                    {new Date(item.date).toDateString()} / {new Date(item.timeSlots.startTime).toLocaleTimeString()} - {new Date(item.timeSlots.endTime).toLocaleTimeString()}
                   </option>
                 ))}
             </Select>
