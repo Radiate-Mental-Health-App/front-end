@@ -107,19 +107,19 @@ export default function UserAppointmentsTable(props) {
                     if (cell.column.Header === "NAME") {
                       data = (
                         <Text color={textColor} fontSize="sm">
-                          {cell.row.original.psychologistId.fullName}
+                          {cell.row.original.psychologistId?.fullName}
                         </Text>
                       );
                     } else if (cell.column.Header === "DATE") {
                       data = (
                         <Text color={textColor} fontSize="sm">
-                          {new Date(cell.row.original.scheduleId.date).toDateString()}
+                          {new Date(cell.row.original.scheduleId?.date).toDateString()}
                         </Text>
                       );
                     } else if (cell.column.Header === "TIME") {
                       data = (
                         <Text color={textColor} fontSize="sm">
-                          {new Date(cell.row.original.scheduleId.timeSlots.startTime).toLocaleTimeString()} - {new Date(cell.row.original.scheduleId.timeSlots.endTime).toLocaleTimeString()}
+                          {new Date(cell.row.original.scheduleId?.timeSlots?.startTime).toLocaleTimeString()} - {new Date(cell.row.original.scheduleId?.timeSlots?.endTime).toLocaleTimeString()}
                         </Text>
                       );
                     } else if (cell.column.Header === "PROBLEMS") {
