@@ -20,6 +20,11 @@ function Navbar() {
   console.log("Role:", roles);
   const [dataAccount, setDataAccount] = useState([]);
 
+  const handleLogout = () => {
+    localStorage.clear()
+    window.location.reload()
+  }
+
   const fetchAccount = async () => {
     try {
       if (roles == "user") {
@@ -80,7 +85,7 @@ function Navbar() {
               <Icon as={HiUser} boxSize={5} color="gray.800" mr="3" />
               Profile
             </MenuItem>
-            <MenuItem>
+            <MenuItem onClick={handleLogout}>
               <Icon as={HiLogout} boxSize={5} color="gray.800" mr="3" />
               Logout
             </MenuItem>
