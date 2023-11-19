@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PsychologistCard from "./psyCard.component";
-import { Grid, Heading } from "@chakra-ui/react";
+import { Box, Grid, Heading } from "@chakra-ui/react";
 
 const PsychologistList = () => {
   const [listPsychologists, setListPsychologists] = useState([]);
@@ -23,8 +23,8 @@ const PsychologistList = () => {
   }, []);
 
   return (
-    <div>
-      <Heading margin="3">List of Psychologists</Heading>
+    <Box padding={"32px"}>
+      <Heading size="lg" margin="3">List of Psychologists</Heading>
 
       <Grid templateColumns="repeat(3, 1fr)" gap={8} mx={4}>
         {listPsychologists
@@ -33,7 +33,7 @@ const PsychologistList = () => {
             <PsychologistCard key={item._id} psychologist={item} />
           ))}
       </Grid>
-    </div>
+    </Box>
   );
 };
 
