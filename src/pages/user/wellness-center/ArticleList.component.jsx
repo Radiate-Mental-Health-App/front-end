@@ -33,14 +33,26 @@ const ArticleList = () => {
       <Divider marginTop="5" />
 
       <SimpleGrid columns={[2, null, 3]} spacing="40px">
-        <Box height="400px">
-          <ArticleCard />
+        <Box height="500px">
+          <ArticleCard
+            title="Nurturing Minds: A Journey to Mental Wellness"
+            imageUrl="https://media.licdn.com/dms/image/D4E12AQGZUXfeYdFxCg/article-cover_image-shrink_720_1280/0/1684841363369?e=2147483647&v=beta&t=Sa6S3js7i2GodasBOAQlTOX7gkx2FWune-rHtFNDILY"
+            summary="In our fast-paced and demanding world, taking care of our mental health is more crucial than ever. Mental well-being is not merely the absence of mental illnesses; it encompasses our emotional, psychological, and social health. "
+          />
         </Box>
         <Box height="80px">
-          <ArticleCard />
+          <ArticleCard
+            title="Breaking the Silence: Understanding and Addressing Mental Illness"
+            imageUrl="https://apibhs.com/wp-content/uploads/2022/05/Depositphotos_134029518_L-1.jpg"
+            summary="In a world that often prioritizes physical health, the significance of mental health can be overlooked. Mental illness affects millions of individuals globally, yet misconceptions and stigma persist.  "
+          />
         </Box>
-        <Box height="80px">
-          <ArticleCard />
+        <Box height="500px">
+          <ArticleCard
+            title="Embracing Wellness: A Holistic Approach to Mental Well-Being"
+            imageUrl="https://nhscarevolunteerresponders.org/documents/5-steps-to-mental-wellbeing-1188.jpg"
+            summary="Mental well-being goes beyond momentary happiness, it reflects a state of satisfaction with life and a sense of purpose"
+          />
         </Box>
         <Box height="80px">
           <ArticleCard />
