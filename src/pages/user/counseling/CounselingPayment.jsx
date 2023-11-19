@@ -9,6 +9,14 @@ import {
   Heading,
   SimpleGrid,
   Text,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalFooter,
+  ModalHeader,
+  ModalBody,
+  useDisclosure
 } from "@chakra-ui/react";
 
 import { useLocation, useNavigate } from "react-router-dom";
@@ -19,13 +27,15 @@ function CounselingPayment() {
   const location = useLocation();
   const bookingState = location.state;
 
+  const { isOpen: isSuccessModalOpen, onOpen: onOpenSuccessModal, onClose: onCloseSuccessModal } = useDisclosure();
+
   const createBooking = async () => {
     axios
       .post(`http://localhost:5000/api/appointment`, bookingState.dataBooking, {
         headers: { "x-access-token": localStorage.getItem("accessToken") },
       })
       .then(() => {
-        alert("success");
+        onOpenSuccessModal();
         goTo("done", { state: bookingState.dataBooking.amount });
       })
       .catch((err) => console.log(err));
@@ -102,6 +112,26 @@ function CounselingPayment() {
           </Center>
         </CardBody>
       </Card>
+
+      <Modal
+        isOpen={isSuccessModalOpen}
+        onClose={onCloseSuccessModal}
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Success</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>Payment success</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="brand" onClick={onCloseSuccessModal}>
+              OK
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }

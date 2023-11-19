@@ -1,5 +1,4 @@
 import {
-  Spacer,
   Avatar,
   Box,
   Flex,
@@ -11,35 +10,36 @@ import {
   Icon,
   Stack,
   FormControl,
-  FormLabel,
   Input,
-  InputGroup,
-  InputLeftElement,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  NumberIncrementStepper,
-  NumberDecrementStepper,
-  Select,
   Link,
   Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalFooter,
+  ModalHeader,
+  ModalBody,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { FiClock, FiCheckCircle, FiLock } from "react-icons/fi";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoIosFemale, IoIosMale } from "react-icons/io";
 import { FiMail, FiCalendar, FiPhone } from "react-icons/fi";
 import { BsCheckCircleFill, BsXCircleFill } from "react-icons/bs";
-import { IoLocationOutline } from "react-icons/io5";
 import { LiaCertificateSolid } from "react-icons/lia";
 import { IoSchoolOutline } from "react-icons/io5";
 import axios from "axios";
-import { ExternalLinkIcon, PhoneIcon } from "@chakra-ui/icons";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 
 function Detail() {
   // fetching data
   const { id } = useParams();
   const [data, setData] = useState([]);
+  const { isOpen: isSuccessModalOpen, onOpen: onOpenSuccessModal, onClose: onCloseSuccessModal } = useDisclosure();
+  const [modalMessage, setModalMessage] = useState("");
+
   useEffect(() => {
     const fetchData = async () => {
       axios
@@ -65,7 +65,8 @@ function Detail() {
       axios
         .delete(`http://localhost:5000/api/account/psychologist/${id}`)
         .then((res) => {
-          alert("User deleted.");
+          setModalMessage("User deleted.");
+          onOpenSuccessModal();
           goTo(`/a/psychologist/`);
         })
         .catch((err) => console.log(err));
@@ -136,7 +137,8 @@ function Detail() {
           )
           .then((res) => {
             setData(res.data);
-            alert("User approved");
+            setModalMessage("User approved");
+          onOpenSuccessModal();
           })
           .catch((err) => console.log(err));
       }
@@ -560,6 +562,26 @@ function Detail() {
           </Box>
         </Flex>
       </Box>
+
+      <Modal
+        isOpen={isSuccessModalOpen}
+        onClose={onCloseSuccessModal}
+        isCentered
+      >
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Success</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>{modalMessage}</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="brand" onClick={onCloseSuccessModal}>
+              OK
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </div>
   );
 }

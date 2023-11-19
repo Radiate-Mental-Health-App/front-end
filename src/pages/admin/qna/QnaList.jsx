@@ -5,9 +5,20 @@ import {
   Box,
   Flex,
   Button,
+
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalFooter,
+  ModalHeader,
+  ModalBody,
+  Text,
+  useDisclosure,
+
 } from "@chakra-ui/react";
 import { AddIcon } from "@chakra-ui/icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import { useGetQnaQuery } from "../../../state/api";
@@ -15,6 +26,8 @@ import { useGetQnaQuery } from "../../../state/api";
 function QnaList() {
   const goTo = useNavigate();
   const [sort, setSort] = useState({});
+  const { isOpen: isSuccessModalOpen, onOpen: onOpenSuccessModal, onClose: onCloseSuccessModal } = useDisclosure();
+  const [modalMessage, setModalMessage] = useState("");
 
   const { data, isLoading } = useGetQnaQuery({
     sort: JSON.stringify(sort),
@@ -60,8 +73,11 @@ function QnaList() {
       axios
         .delete(`http://localhost:5000/api/qna/deleteQna/${id}`)
         .then((res) => {
-          alert("User deleted.");
-          window.location.reload();
+          setModalMessage("User deleted.");
+          onOpenSuccessModal();
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
         })
         .catch((err) => console.log(err));
     }
@@ -130,6 +146,25 @@ function QnaList() {
           />
         </Box>
       </Box>
+      <Modal
+          isOpen={isSuccessModalOpen}
+          onClose={onCloseSuccessModal}
+          isCentered
+        >
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>Success</ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <Text>{modalMessage}</Text>
+            </ModalBody>
+            <ModalFooter>
+              <Button colorScheme="brand" onClick={onCloseSuccessModal}>
+                OK
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
     </div>
   );
 }

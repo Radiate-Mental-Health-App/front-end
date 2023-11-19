@@ -21,11 +21,16 @@ import {
   ModalContent,
   ModalHeader,
   ModalCloseButton,
-  ModalBody,
   ModalFooter,
   Button,
   useDisclosure,
-  Select,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogCloseButton,
+  AlertDialogBody,
+  AlertDialogFooter,
 } from "@chakra-ui/react";
 import { useMemo } from "react";
 
@@ -71,6 +76,9 @@ export default function UserAppointmentsTable(props) {
 
   const textColor = useColorModeValue("black.500", "white");
   const borderColor = useColorModeValue("gray.200", "whiteAlpha.100");
+
+  const { isOpen: isAlertOpen, onOpen: onOpenAlert, onClose: onCloseAlert } = useDisclosure();
+
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleCanceled = async (id) => {
@@ -89,6 +97,7 @@ export default function UserAppointmentsTable(props) {
         .catch((err) => console.log(err));
     }
   };
+
 
   return (
     <Card
@@ -226,6 +235,57 @@ export default function UserAppointmentsTable(props) {
                             borderRadius="10px"
                             icon={<SmallCloseIcon />}
                           />
+
+                        </Link>
+                        <IconButton
+                          onClick={onOpenAlert}
+                          colorScheme="orange"
+                          aria-label="Search database"
+                          borderRadius="10px"
+                          icon={<EditIcon />}
+                        />
+                      </HStack>
+                    );
+                  }
+                  return (
+                    <Td
+                      {...cell.getCellProps()}
+                      key={index}
+                      fontSize={{ sm: "14px" }}
+                      maxH="30px !important"
+                      py="8px"
+                      minW={{ sm: "150px", md: "200px", lg: "auto" }}
+                      borderColor="transparent"
+                    >
+                      {data}
+                    </Td>
+                  );
+                })}
+              </Tr>
+            );
+          })}
+        </Tbody>
+      </Table>
+      <AlertDialog isOpen={isAlertOpen} onClose={onCloseAlert}>
+          <AlertDialogOverlay>
+            <AlertDialogContent>
+              <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                Cancel Appointment
+              </AlertDialogHeader>
+              <AlertDialogCloseButton />
+              <AlertDialogBody>
+                Are you sure you want to cancel the appointment?
+              </AlertDialogBody>
+              <AlertDialogFooter>
+                <Button onClick={onCloseAlert} mr={2}>No</Button>
+                <Button colorScheme="red" onClick={onCloseAlert}>
+                  Yes
+                </Button>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialogOverlay>
+        </AlertDialog>
+
                         </HStack>
                       );
                     }
@@ -264,6 +324,7 @@ export default function UserAppointmentsTable(props) {
             </ModalFooter>
           </ModalContent>
         </Modal>
+
       </CardBody>
     </Card>
   );
