@@ -5,7 +5,8 @@ import {
   Input,
   Image,
   Text,
-  Stack
+  Stack,
+  useDisclosure
 } from "@chakra-ui/react";
 
 import Logo from "../../assets/radiate-logo.png";
@@ -16,12 +17,18 @@ import Logo from "../../assets/radiate-logo.png";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { useEffect } from "react";
+import { useState } from "react";
+import ModalOk from "@/components/modals/ModalOk";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const roles = localStorage.getItem("roles");
 
+  const { isOpen: isModalOkOpen, onOpen: onOpenModalOk, onClose: onCloseModalOk } = useDisclosure();
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  
   // const [user, setUser] = useRecoilState(userState);
 
   const onSubmit = async (data) => {
@@ -48,10 +55,14 @@ const Login = () => {
       } else if (data.roles == "admin") {
         navigate("/a");
       } else {
-        alert("gagal login");
+        setModalHeader("Login failed");
+        setModalMessage("Your email or password may be wrong.");
+        onOpenModalOk();
       }
     } catch (error) {
-      alert(error.message);
+      setModalHeader("Login failed");
+      setModalMessage(`${error.message}`);
+      onOpenModalOk();
     }
 
     // setUser({
@@ -161,6 +172,7 @@ const Login = () => {
           </form>
         </Box>
       </Box>
+      <ModalOk modalHeader={modalHeader} modalMessage={modalMessage} isOpen={isModalOkOpen} onOpen={onOpenModalOk} onClose={onCloseModalOk} />
     </div>
   );
 };

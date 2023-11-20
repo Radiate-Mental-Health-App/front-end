@@ -8,19 +8,26 @@ import {
   RadioGroup,
   Radio,
   Stack,
+  useDisclosure,
 } from "@chakra-ui/react";
 
 import Logo from "../../assets/radiate-logo.png";
 
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import ModalOk from "@/components/modals/ModalOk";
 
 const Register = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
   const [registrationType, setRegistrationType] = useState("user");
+
+  const { isOpen: isModalOkOpen, onOpen: onOpenModalOk, onClose: onCloseModalOk } = useDisclosure();
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  
 
   const onSubmit = async (data) => {
     const dataForm = {
@@ -39,10 +46,16 @@ const Register = () => {
 
       const data = await response.json();
       console.log(data);
-      alert("berhasil mendaftar");
-      navigate("/login");
+      setModalHeader("Success");
+      setModalMessage("Registration successful!");
+      onOpenModalOk();
+      setTimeout(() => {
+        navigate("/login");
+      }, 1000);
     } catch (error) {
-      alert(error.message);
+      setModalHeader("Registration failed");
+      setModalMessage(`${error.message}`);
+      onOpenModalOk();
     }
   };
 
@@ -169,6 +182,7 @@ const Register = () => {
           </form>
         </Box>
       </Box>
+      <ModalOk modalHeader={modalHeader} modalMessage={modalMessage} isOpen={isModalOkOpen} onOpen={onOpenModalOk} onClose={onCloseModalOk} />
     </div>
   );
 };
