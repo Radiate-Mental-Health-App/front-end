@@ -9,15 +9,22 @@ import {
   Heading,
   SimpleGrid,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react";
 
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useState } from "react";
+import ModalOk from "@/components/modals/ModalOk";
 
 function CounselingPayment() {
   const goTo = useNavigate();
   const location = useLocation();
   const bookingState = location.state;
+
+  const { isOpen: isModalOkOpen, onOpen: onOpenModalOk, onClose: onCloseModalOk } = useDisclosure();
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
 
   const createBooking = async () => {
     axios
@@ -25,8 +32,12 @@ function CounselingPayment() {
         headers: { "x-access-token": localStorage.getItem("accessToken") },
       })
       .then(() => {
-        alert("success");
-        goTo("done", { state: bookingState.dataBooking.amount });
+        setModalHeader("Success");
+        setModalMessage("Payment success.");
+        onOpenModalOk();
+        setTimeout(() => {
+          goTo("done", { state: bookingState.dataBooking.amount });
+        }, 1000);
       })
       .catch((err) => console.log(err));
   };
@@ -102,6 +113,7 @@ function CounselingPayment() {
           </Center>
         </CardBody>
       </Card>
+      <ModalOk modalHeader={modalHeader} modalMessage={modalMessage} isOpen={isModalOkOpen} onOpen={onOpenModalOk} onClose={onCloseModalOk} />
     </Box>
   );
 }
