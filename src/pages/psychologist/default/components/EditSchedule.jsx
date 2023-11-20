@@ -3,7 +3,6 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   Button,
@@ -11,13 +10,20 @@ import {
   FormLabel,
   Input,
   SimpleGrid,
+  useDisclosure,
 } from "@chakra-ui/react";
 
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import ModalOk from "@/components/modals/ModalOk";
+import { useState } from "react";
 
 function EditSchedule({idSchedule, onClose}) {
   const { register, handleSubmit } = useForm();
+
+  const { isOpen: isModalOkOpen, onOpen: onOpenModalOk, onClose: onCloseModalOk } = useDisclosure();
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
 
   const onSubmit = async (data) => {
     const dataForm = {
@@ -32,8 +38,9 @@ function EditSchedule({idSchedule, onClose}) {
       axios
         .put(`http://localhost:5000/api/psychologist/schedule/${idSchedule}`, dataForm)
         .then((res) => {
-          alert("Schedule updated successfully!");
-          window.location.reload();
+          setModalHeader("Success");
+          setModalMessage("Schedule updated successfully!");
+          onOpenModalOk();
         })
         .catch((err) => console.log(err));
     } catch (error) {
@@ -100,6 +107,7 @@ function EditSchedule({idSchedule, onClose}) {
           </form>
         </ModalBody>
       </ModalContent>
+      <ModalOk modalHeader={modalHeader} modalMessage={modalMessage} isOpen={isModalOkOpen} onOpen={onOpenModalOk} onClose={onCloseModalOk} />
     </div>
   );
 }

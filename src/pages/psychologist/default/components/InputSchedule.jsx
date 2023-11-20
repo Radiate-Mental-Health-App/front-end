@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
+import ModalOk from "@/components/modals/ModalOk";
 import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
   Button,
@@ -11,13 +11,19 @@ import {
   FormLabel,
   Input,
   SimpleGrid,
+  useDisclosure,
 } from "@chakra-ui/react";
 import axios from "axios";
+import { useState } from "react";
 
 import { useForm } from "react-hook-form";
 
 function InputSchedule({ onClose }) {
   const { register, handleSubmit } = useForm();
+
+  const { isOpen: isModalOkOpen, onOpen: onOpenModalOk, onClose: onCloseModalOk } = useDisclosure();
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
 
   const onSubmit = async (data) => {
     const dataForm = {
@@ -34,8 +40,9 @@ function InputSchedule({ onClose }) {
           headers: { "x-access-token": localStorage.getItem("accessToken") },
         })
         .then((res) => {
-          alert("Success create new schedule!");
-          window.location.reload();
+          setModalHeader("Success");
+          setModalMessage("New schedule created successfully!");
+          onOpenModalOk();
         })
         .catch((err) => console.log(err));
     } catch (error) {
@@ -103,6 +110,7 @@ function InputSchedule({ onClose }) {
           </form>
         </ModalBody>
       </ModalContent>
+      <ModalOk modalHeader={modalHeader} modalMessage={modalMessage} isOpen={isModalOkOpen} onOpen={onOpenModalOk} onClose={onCloseModalOk} />
     </div>
   );
 }
