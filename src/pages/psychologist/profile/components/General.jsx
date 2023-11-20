@@ -17,9 +17,11 @@ import {
   Tag,
   TagLeftIcon,
   TagLabel,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ModalOk from "@/components/modals/ModalOk";
 
 // Assets
 export default function GeneralInformation(props) {
@@ -29,6 +31,10 @@ export default function GeneralInformation(props) {
 
   const [profile, setProfile] = useState({});
   const [isEdited, setIsEdited] = useState(false);
+
+  const { isOpen: isModalOkOpen, onOpen: onOpenModalOk, onClose: onCloseModalOk } = useDisclosure();
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
 
   const id = localStorage.getItem("idAccount")
 
@@ -50,9 +56,10 @@ export default function GeneralInformation(props) {
         profile
       )
       .then((res) => {
-        alert(res.data.message);
+        setModalHeader("Success");
+        setModalMessage(res.data.message);
+        onOpenModalOk();
         setIsEdited(!isEdited);
-        window.location.reload()
       })
       .catch((err) => console.log(err));
   };
@@ -373,6 +380,7 @@ export default function GeneralInformation(props) {
           </TabPanels>
         </Tabs>
       </CardBody>
+      <ModalOk modalHeader={modalHeader} modalMessage={modalMessage} isOpen={isModalOkOpen} onOpen={onOpenModalOk} onClose={onCloseModalOk} />
     </Card>
   );
 }
