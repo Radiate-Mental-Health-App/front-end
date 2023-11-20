@@ -15,9 +15,12 @@ import {
   Wrap,
   Text,
   Textarea,
+  useDisclosure
 } from "@chakra-ui/react";
 
 import listmood from "./listmood";
+
+import ModalOk from '@/components/modals/ModalOk'
 
 import { useState } from "react";
 import TagSelect from "./TagSelect";
@@ -48,6 +51,10 @@ export const MoodModal = ({
   const [selectedActivities, setSelectedActivities] = useState([]);
   const [textareaValue, setTextareaValue] = useState("");
 
+  const { isOpen: isModalOkOpen, onOpen: onOpenModalOk, onClose: onCloseModalOk } = useDisclosure();
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
+  
   const handleSubmit = async () => {
     const dataMood = {
       moodValue: moodChoose,
@@ -78,10 +85,13 @@ export const MoodModal = ({
 
       const data = await response.json();
       if (data.success) {
+          setModalHeader("Success");
+          setModalMessage("Mood entry saved.");
+          onOpenModalOk();
         if (methodAction == "PUT") {
           alert(data.message);
         }
-        window.location.reload();
+        // window.location.reload();
       }
     } catch (error) {
       alert(error.message);
@@ -176,6 +186,7 @@ export const MoodModal = ({
           </ModalFooter>
         </ModalContent>
       </Modal>
+      <ModalOk modalHeader={modalHeader} modalMessage={modalMessage} isOpen={isModalOkOpen} onOpen={onOpenModalOk} onClose={onCloseModalOk} />
     </>
   );
 };
