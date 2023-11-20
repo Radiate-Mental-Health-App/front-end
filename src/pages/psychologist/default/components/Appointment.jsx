@@ -5,7 +5,6 @@ import {
   CardBody,
   Flex,
   Icon,
-  Stack,
   HStack,
   Text,
   Box,
@@ -17,10 +16,15 @@ import { useState } from "react";
 // Custom components import Card from "@/components/card/Card.jsx"; Assets
 import { IoCalendarOutline, IoTimeOutline } from "react-icons/io5";
 import EditSchedule from "./EditSchedule";
+import ModalOk from "@/components/modals/ModalOk";
 
 export default function Appointment({ item }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [idSchedule, setIdSchedule] = useState("");
+
+  const { isOpen: isModalOkOpen, onOpen: onOpenModalOk, onClose: onCloseModalOk } = useDisclosure();
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
 
   const handleClickEdit = (id) => {
     setIdSchedule(id);
@@ -35,8 +39,9 @@ export default function Appointment({ item }) {
       axios
         .delete(`http://localhost:5000/api/psychologist/schedule/${id}`)
         .then((res) => {
-          alert("Shcedule deleted.");
-          window.location.reload();
+          setModalHeader("Success");
+          setModalMessage("Schedule deleted.");
+          onOpenModalOk();
         })
         .catch((err) => console.log(err));
     }
@@ -110,6 +115,7 @@ export default function Appointment({ item }) {
       <Modal isOpen={isOpen} onClose={onClose}>
         <EditSchedule idSchedule={idSchedule} onClose={onClose} />
       </Modal>
+      <ModalOk modalHeader={modalHeader} modalMessage={modalMessage} isOpen={isModalOkOpen} onOpen={onOpenModalOk} onClose={onCloseModalOk} />
     </Card>
   );
 }
