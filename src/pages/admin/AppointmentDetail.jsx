@@ -12,6 +12,7 @@ import {
   HStack,
   Input,
   Button,
+  useDisclosure
 } from "@chakra-ui/react";
 import { FiMail, FiCalendar, FiPhone, FiUsers, FiClock } from "react-icons/fi";
 import { BsArrowLeftRight } from "react-icons/bs";
@@ -19,6 +20,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link, useNavigate } from "react-router-dom";
+import ModalOk from "@/components/modals/ModalOk";
 
 function AppointmentDetail() {
   const goTo = useNavigate();
@@ -26,6 +28,10 @@ function AppointmentDetail() {
   const { id } = useParams();
   const [data, setData] = useState();
   const [linkSession, setLinkSession] = useState("");
+
+  const { isOpen: isModalOkOpen, onOpen: onOpenModalOk, onClose: onCloseModalOk } = useDisclosure();
+  const [modalMessage, setModalMessage] = useState("");
+  const [modalHeader, setModalHeader] = useState("");
 
   const fetchData = async () => {
     axios
@@ -42,8 +48,12 @@ function AppointmentDetail() {
         linkSession: linkSession,
       })
       .then((res) => {
-        alert(res.data.message);
-        goTo("/a");
+        setModalHeader("Success");
+        setModalMessage("Link added.");
+        onOpenModalOk();
+        setTimeout(() => {
+          goTo("/a");
+        }, 2000);
       })
       .catch((err) => console.log(err));
   };
@@ -300,6 +310,7 @@ function AppointmentDetail() {
           </Box>
         </Box>
       </form>
+      <ModalOk modalHeader={modalHeader} modalMessage={modalMessage} isOpen={isModalOkOpen} onOpen={onOpenModalOk} onClose={onCloseModalOk} />
     </div>
   );
 }
